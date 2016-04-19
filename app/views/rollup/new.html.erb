@@ -1,0 +1,7 @@
+Select a class for rolling up.
+<div class='form'>
+<%= form_tag('/rollup') do%>
+	<%= collection_select :sclass,:id, @sclasses,:id,:sclass_id %>
+	<%= submit_tag "Select" %>
+	<%end%>
+</div>
