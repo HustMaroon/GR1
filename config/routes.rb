@@ -54,6 +54,7 @@ Rails.application.routes.draw do
   #     resources :products
   #   end
   resources :sclasses
+  resources :mini_works
   get '/rollup' => 'rollup#new'
   post '/rollup' => 'rollup#list'
   post 'submit_rollup' => 'rollup#checklist'

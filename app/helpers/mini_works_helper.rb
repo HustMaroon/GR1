@@ -1,0 +1,2 @@
+module MiniWorksHelper
+end

@@ -1,0 +1,12 @@
+<h1>Edit mini works</h1>
+<%=form_for(@mini_work) do |f| %>
+	<%= f.label :sclass_id, "class"%>
+	<%=f.collection_select :sclass_id,@sclasses,:id,:sclass_id, prompt: true %>
+	<%=f.label :name%>
+	<%=f.text_field :name%>
+
+	<%=f.label :ratio%>
+	<%=f.select :ratio, @ratios,{}%>%
+
+	<%=f.submit "Submit"%>
+<%end%>
