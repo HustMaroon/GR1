@@ -1,8 +1,11 @@
 <%=form_tag('/submit_rollup') do%>
 	<%=hidden_field_tag 'class_id', @sclass.id%>
+	<ol>
 	<%@students.each do |s|%>
-		<%=render s%>
-		<%=radio_button_tag s.id, :attend%>
+		<li><%=render s%>
+		<%= check_box_tag s.id, :attend%>
 		<%end%>
+		</li>
+	</ol>
 	<%=submit_tag "Submit"%>
 <%end%>
