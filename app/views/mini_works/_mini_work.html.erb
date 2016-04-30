@@ -1,4 +1,6 @@
-<li>
-	<%=mini_work.name%> || <%=mini_work.ratio%>
-	<%=link_to "edit", edit_mini_work_path(mini_work)%>
-</li>
+<tr>
+	<td><%=mini_work.sclass.sclass_id%></td>
+	<td><%=mini_work.name%></td>
+	<td><%=mini_work.ratio%></td>
+	<td><%=link_to "edit", edit_mini_work_path(mini_work)%></td>
+<tr>

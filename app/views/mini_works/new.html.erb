@@ -1,5 +1,10 @@
-<h1>Create mini works</h1>
-<%=form_for(@mini_work) do |f| %>
+<div class="container">
+	<ul class="nav nav-tabs" role="tablist">
+  	 <li><%= link_to 'View tasklist', mini_works_path %></li>
+  	 <li class="active"><%= link_to 'New mini_work', new_mini_work_path %></li>
+	</ul>
+	<h1>Create mini works</h1>
+	<%=form_for(@mini_work) do |f| %>
 	<%= f.label :sclass_id%>
 	<%=f.collection_select :sclass_id,@sclasses,:id,:sclass_id, prompt: true %>
 	<%=f.label :name%>
@@ -9,4 +14,5 @@
 	<%=f.select :ratio, @ratios,{}%>%
 
 	<%=f.submit "Create"%>
-<%end%>
+	<%end%>
+</div>
