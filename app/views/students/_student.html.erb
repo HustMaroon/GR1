@@ -1,1 +1,5 @@
-<%= student.name%> || <%=student.std_id%>
+<tr>
+	<td><%=student.name%></td>
+	<td><%=student.std_id%></td>
+	<td><%=link_to "remove", student, method: :delete%></td>
+<tr>

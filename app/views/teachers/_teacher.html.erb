@@ -1,0 +1,10 @@
+<tr>
+	<td><%=teacher.name%></td>
+	<td><%=teacher.email%></td>
+	<td>
+	<%teacher.sclasses.each do |s|%>
+	<%=link_to s.sclass_id, '#'%>
+	<%end%>
+	</td>
+	<td><%=link_to "remove", teacher, method: :delete%></td>
+<tr>

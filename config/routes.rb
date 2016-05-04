@@ -56,7 +56,16 @@ Rails.application.routes.draw do
   root 'static_pages#home'
   resources :sclasses
   resources :mini_works
+  resources :students
+  resources :teachers
+  resources :subjects
   get '/rollup' => 'rollup#new'
   post '/rollup' => 'rollup#list'
   post 'submit_rollup' => 'rollup#checklist'
+  #admin
+  get 'admin/teachers' => 'admin#teacher_index'
+  get 'admin/students' => 'admin#student_index'
+  get 'admin/courses' => 'admin#course_index'
+  get 'admin/classes' => 'admin#class_index'
+  get 'admin/courses' => 'admin#course_index'
 end
