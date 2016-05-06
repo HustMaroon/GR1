@@ -8,7 +8,11 @@
    				Make your learning fun.
     			</h2>
 
-   				 <%= link_to "Login now", '#', class: "btn btn-lg btn-primary" %>
+   				 <button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#teacherLoginModal">Login as teacher</button>
+           or
+           <button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#studentLoginModal">Login as student</button>
+           <%=render 'sessions/teacher_login_form'%>
+           <%=render 'sessions/student_login_form'%>
   			</div>
 		</div>
 	</div>
