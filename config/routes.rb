@@ -59,6 +59,7 @@ Rails.application.routes.draw do
   resources :students
   resources :teachers
   resources :subjects
+  resources :learnings
   get '/rollup' => 'rollup#new'
   post '/rollup' => 'rollup#list'
   post 'submit_rollup' => 'rollup#checklist'

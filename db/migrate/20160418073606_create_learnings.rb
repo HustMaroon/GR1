@@ -1,4 +1,4 @@
-class Learning < ActiveRecord::Migration
+class CreateLearnings < ActiveRecord::Migration
   def change
   	create_table :learnings do |t|
   		t.references :student, index: true, foreign_key: true

@@ -1,0 +1,16 @@
+<div class="container">
+	<h2>Results</h2><span class="glyphicon glyphicon-heart"></span>
+		<table class="table table-hover" style="width:100%" border="1" margin="center">
+		 <tr>
+ 		  <td><b>Student</b></td>
+ 		  <td><b>Student_id</b></td>
+		  <td><b>Process_point</b></td>
+ 		  <td><b>Term_point</b></td>
+ 		  <td><b>Avg_point</b></td>
+ 		  <td><b>Tools</b></td>
+ 		</tr>
+	<%@learnings.each do |l|%>
+	 <%=render l%>
+	<%end%>
+		</table>
+</div>
