@@ -1,12 +1,13 @@
 class RollupController < ApplicationController
 	def new
 		@sclasses = Sclass.all
-	end
-
-	def list
-		@sclass = Sclass.find(params[:sclass][:id])
+		if params[:sclass].nil?
+			@sclass = Sclass.first
+		else
+			@sclass = Sclass.find(params[:sclass][:id])
+		end
 		@students = @sclass.students.all
-	end 
+	end
 
 	def checklist
 		sclass = Sclass.find(params[:class_id])

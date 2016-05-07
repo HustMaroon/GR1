@@ -1,7 +1,11 @@
-Select a class for rolling up.
-<div class='form'>
-<%= form_tag('/rollup') do%>
-	<%= collection_select :sclass,:id, @sclasses,:id,:sclass_id %>
-	<%= submit_tag "Select" %>
-	<%end%>
+<div class="container">
+	<h1>Attendance</h1>
+	<p>Select a class for rolling up.</p>
+	<div class='form'>
+		<%= form_tag('/rollup') do%>
+		<%= collection_select :sclass,:id, @sclasses,:id,:sclass_id%>
+		<%= submit_tag "refresh" %>
+		<%end%>
+	</div>
+	<%=render 'list'%>
 </div>

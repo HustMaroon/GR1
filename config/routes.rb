@@ -63,7 +63,7 @@ Rails.application.routes.draw do
   resources :subjects
   resources :learnings
   get '/rollup' => 'rollup#new'
-  post '/rollup' => 'rollup#list'
+  post '/rollup' => 'rollup#new'
   post 'submit_rollup' => 'rollup#checklist'
   #admin
   get 'admin/teachers' => 'admin#teacher_index'
