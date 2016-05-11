@@ -1,5 +1,12 @@
 <div class="container">
-	<h2>Results</h2><span class="glyphicon glyphicon-heart"></span>
+	<h1>Results</h1><span class="glyphicon glyphicon-heart"></span>
+	<p>Select a class for checking up.</p>
+	<div class='form'>
+		<%= form_tag('/learnings/getclass', method:'post') do%>
+		<%= collection_select :sclass,:id, @sclasses,:id,:sclass_id%>
+		<%= submit_tag "refresh" %>
+		<%end%>
+	</div>
 		<table class="table table-hover" style="width:100%" border="1" margin="center">
 		 <tr>
  		  <td><b>Student</b></td>

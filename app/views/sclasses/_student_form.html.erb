@@ -1,0 +1,17 @@
+<tr>
+	<td><%=sclass.sclass_id%></td>
+	<td><%=sclass.subject.name%></td>
+	<td><%=sclass.teacher.name%></td>
+	<td><%=link_to 'student list', '#'%></td>
+	<td>
+	<%if !current_user.sclasses.exists?(sclass.id)%>
+		<%=form_for Learning.new do |f|%>
+			<%= f.hidden_field :sclass_id, value: sclass.id%>
+			<%= f.hidden_field :student_id, value: current_user.id%>
+			<%= f.submit 'join', class:'btn btn-primary'%>
+		<%end%>
+	<%else%>
+		<%=button_to 'joined', '#', disabled: true, class:'btn btn-primary'%>
+	<%end%>
+	</td>
+<tr>

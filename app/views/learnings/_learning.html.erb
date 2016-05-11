@@ -2,8 +2,8 @@
 	<%=form_for(learning) do |f|%>
 	<td><%=learning.student.name%></td>
 	<td><%=learning.student.std_id%></td>
-	<td><%=learning.process_point%></td>
-	<td><%=f.text_field :term_point, value: learning.term_point%></td>
+	<td><%=f.text_field :process_point, value: learning.process_point, class:'form-control'%></td>
+	<td><%=f.text_field :term_point, value: learning.term_point, class:'form-control'%></td>
 	<td><%=learning.avg_point%></td>
 	<td><%=f.submit "update", class:"btn btn-primary"%></td>
 	<%end%>

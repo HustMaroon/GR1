@@ -62,9 +62,14 @@ Rails.application.routes.draw do
   resources :teachers
   resources :subjects
   resources :learnings
+
+  post '/learnings/getclass' => 'learnings#index'
+
   get '/rollup' => 'rollup#new'
   post '/rollup' => 'rollup#new'
   post 'submit_rollup' => 'rollup#checklist'
+  get '/assignment' => 'mini_works#student_index'
+  get '/student/classes' => 'sclasses#student_index'
   #admin
   get 'admin/teachers' => 'admin#teacher_index'
   get 'admin/students' => 'admin#student_index'

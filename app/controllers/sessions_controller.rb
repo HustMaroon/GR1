@@ -7,7 +7,7 @@ class SessionsController < ApplicationController
 	    teacher = Teacher.find_by(email: params[:session][:email].downcase)
 	    if teacher && teacher.authenticate(params[:session][:password])
 	      log_in teacher
-	      redirect_to '/rollup'
+	      redirect_to root_url
 	    else
 	      flash[:danger] = 'Invalid email/password combination'
 	      redirect_to request.referer

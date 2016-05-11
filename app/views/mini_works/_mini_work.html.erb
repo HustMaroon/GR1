@@ -2,5 +2,9 @@
 	<td><%=mini_work.sclass.sclass_id%></td>
 	<td><%=mini_work.name%></td>
 	<td><%=mini_work.ratio%></td>
-	<td><%=link_to "edit", edit_mini_work_path(mini_work)%></td>
+	<td><%=mini_work.content%></td>
+	<td><%=mini_work.deadline%></td>
+	<td><%=link_to 'Edit assignment', '#', 'data-toggle'=>"modal" ,'data-target'=> '#editTaskModal'%> | <%= link_to "Remove", mini_work_path(mini_work), method: :delete,
+                                       data: { confirm: "You sure?" } %></td>
 <tr>
+<%=render 'edit_form', mini_work: mini_work%>

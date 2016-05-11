@@ -16,6 +16,12 @@ class SclassesController < ApplicationController
 		end
 	end
 
+	def student_index
+		@classes = Sclass.search(params[:search])
+		@sclass = Sclass.new
+		@learning = Learning.new
+	end
+
 	private
 	def sclass_params
 		params.require(:sclass).permit(:subject_id,:teacher_id, :sclass_id)

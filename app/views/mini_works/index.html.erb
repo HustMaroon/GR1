@@ -1,18 +1,20 @@
 <div class="container">
-<ul class="nav nav-tabs" role="tablist">
-  <li class="active"><%= link_to 'View tasklist', mini_works_path %></li>
-  <li><%= link_to 'New mini_work', new_mini_work_path %></li>
-</ul>
-	<h2>Tasks management</h2><span class="glyphicon glyphicon-heart"></span>
-		<table class="table table-hover" style="width:50%" border="1" margin="center">
+<h1>Assignments management</h1><span class="glyphicon glyphicon-heart"></span>
+		<table class="table table-hover" style="width:100%" border="1" margin="center">
 		 <tr>
  		  <td><b>Class</b></td>
 		  <td><b>Title</b></td>
  		  <td><b>Ratio</b></td>
+ 		  <td><b>Content</b></td>
+ 		  <td><b>Deadline</b></td>
  		  <td><b>Tools</b></td>
  		</tr>
 	<%@mini_works.each do |m|%>
-	 <%=render m%>
+	 <%=render 'mini_work', mini_work: m%>
 	<%end%>
 		</table>
+		<button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#taskModal">
+  Create assignment
+</button>
 </div>
+<%=render 'form'%>

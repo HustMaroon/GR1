@@ -1,0 +1,21 @@
+<div class="container">
+  	<h1>Don't miss any classes!</h1><span class="glyphicon glyphicon-heart" style="
+    color: white;"></span>
+  	<%= form_tag student_classes_path, :method => 'get' do %>
+    	<%= text_field_tag :search, params[:search]%>
+    	<%= submit_tag "Search", :name => nil, class:'btn btn-primary' %>
+	<% end %>
+  <br>
+		<table class="table table-hover" style="width:100%" border="1" margin="center">
+		<tr>
+		  <td><b>Class_id</b></td>
+		  <td><b>Course</b></td>
+ 		  <td><b>Teacher</b></td>
+ 		  <td><b>Students</b></td>
+ 		  <td><b>Tools</b></td>
+ 		</tr>
+	<%@classes.each do |s|%>
+	 <%=render 'student_form', sclass: s%>
+	<%end%>
+		</table>
+</div>

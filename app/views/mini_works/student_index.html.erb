@@ -1,0 +1,15 @@
+<div class="container">
+<h1>Assignments</h1>
+	<table class="table table-hover" style="width:100%" border="1" margin="center">
+			<tr>
+			  <td><b>Title</b></td>
+			  <td><b>Class</b></td>
+	 		  <td><b>Content</b></td>
+	 		  <td><b>Deadline</b></td>
+	 		  <td><b>Submittal</b></td>
+	 		</tr>
+		<%@mini_works.each do |m|%>
+		 <%=render 'student_miniwork', mini_work: m%>
+		<%end%>
+	</table>
+</div>

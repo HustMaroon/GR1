@@ -1,6 +1,7 @@
 class Student < ActiveRecord::Base
 	has_many :learnings
 	has_many :sclasses, through: :learnings
+	has_many :mini_works, through: :sclasses
 	has_secure_password
 
 	def self.search(search)
