@@ -1,0 +1,29 @@
+<div class="container">
+<%=render 'shared/horizontal_nav', sclass: @sclass%>
+<%=render 'form',sclass: @sclass %>
+<button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#documentModal">Upload document</button>
+	<h1>Documents</h1><span class="glyphicon glyphicon-heart"></span>
+	<%if @sclass.nil? %>
+		<p> You have no class </p>
+	<%else%>
+		<p>Please select a class.</p>
+		<div class='form'>
+			<%= form_tag sclass_documents_path, method: 'get' do%>
+				<%= collection_select :sclass,:id, @sclasses,:id,:sclass_id%>
+			<%= submit_tag "refresh" %>
+			<%end%>
+		</div>
+			<table class="table table-hover" style="width:100%" border="1" margin="center">
+			 <tr>
+	 		  <td><b>No.</b></td>
+	 		  <td><b>Title</b></td>
+			  <td><b>Description</b></td>
+	 		  <td><b>Link</b></td>
+	 		  <td><b>Tools</b></td>
+	 		</tr>
+		<%@documents.each_with_index do |doc,index|%>
+		 <%=render 'document', document: doc, index: index%>
+		<%end%>
+			</table>
+	<%end%>
+</div>

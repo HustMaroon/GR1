@@ -54,6 +54,13 @@ class MiniWorksController < ApplicationController
 		end
 	end
 
+	def test_submit
+		byebug
+		correct_answer =0
+		total = 0
+
+	end
+
 	private
 	def mini_work_params
 		params.require(:mini_work).permit(:sclass_id, :name, :ratio, :content, :deadline)

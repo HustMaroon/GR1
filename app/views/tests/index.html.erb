@@ -1,0 +1,17 @@
+<% provide(:title, 'All test') %>
+<table class="table table-bordered">
+	<thead>
+    <tr>
+      <th>#</th>
+      <th>Test title</th>
+      <th>Time</th>
+      <th>Tools</th>
+    </tr>
+	</thead>
+  <tbody>
+  	<%@tests.each_with_index do |test, index|%>
+  		<%=render 'test',test: test, index: index %>
+  	<%end%>
+ </table> 
+ <%=render 'form'%>
+ 	<button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#testModal">Create test</button>

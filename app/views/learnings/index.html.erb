@@ -1,23 +1,28 @@
 <div class="container">
+<%=render 'shared/horizontal_nav', sclass: @sclasses.first%>
 	<h1>Results</h1><span class="glyphicon glyphicon-heart"></span>
-	<p>Select a class for checking up.</p>
-	<div class='form'>
-		<%= form_tag('/learnings/getclass', method:'post') do%>
-		<%= collection_select :sclass,:id, @sclasses,:id,:sclass_id%>
-		<%= submit_tag "refresh" %>
+	<%if @sclass.nil? %>
+		<p> You have no class </p>
+	<%else%>
+		<p>Select a class for checking up.</p>
+		<div class='form'>
+			<%= form_tag('/learnings/getclass', method:'post') do%>
+			<%= collection_select :sclass,:id, @sclasses,:id,:sclass_id%>
+			<%= submit_tag "refresh" %>
+			<%end%>
+		</div>
+			<table class="table table-hover" style="width:100%" border="1" margin="center">
+			 <tr>
+	 		  <td><b>Student</b></td>
+	 		  <td><b>Student_id</b></td>
+			  <td><b>Process_point</b></td>
+	 		  <td><b>Term_point</b></td>
+	 		  <td><b>Avg_point</b></td>
+	 		  <td><b>Tools</b></td>
+	 		</tr>
+		<%@learnings.each do |l|%>
+		 <%=render l%>
 		<%end%>
-	</div>
-		<table class="table table-hover" style="width:100%" border="1" margin="center">
-		 <tr>
- 		  <td><b>Student</b></td>
- 		  <td><b>Student_id</b></td>
-		  <td><b>Process_point</b></td>
- 		  <td><b>Term_point</b></td>
- 		  <td><b>Avg_point</b></td>
- 		  <td><b>Tools</b></td>
- 		</tr>
-	<%@learnings.each do |l|%>
-	 <%=render l%>
+			</table>
 	<%end%>
-		</table>
 </div>

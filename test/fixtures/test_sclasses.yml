@@ -1,0 +1,11 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  test_id: 
+  sclass_id: 
+  opened: false
+
+two:
+  test_id: 
+  sclass_id: 
+  opened: false

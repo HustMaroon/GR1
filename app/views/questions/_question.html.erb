@@ -1,0 +1,14 @@
+<tr id="question-<%=question.id%>">
+	<td><%=index +1 %></td>
+	<td><%=question.content%></td>
+	<td><%= link_to "delete", test, method: :delete, remote: true,
+                                       data: { confirm: "You sure?" } %>
+        || <button data-toggle="collapse" data-target="#answers">Details</button>
+                               	
+                                       </td>
+</tr>
+<tr id="answers" class="collapse">
+	<%question.answers.each do |answer|%>
+	<%=render 'answer', answer: answer%>
+	<%end%>
+</tr>

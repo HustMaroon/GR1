@@ -1,10 +1,10 @@
 class RollupController < ApplicationController
 	def new
-		@sclasses = Sclass.all
+		@sclasses = current_user.sclasses
 		if params[:sclass].nil?
-			@sclass = Sclass.first
+			@sclass = @sclasses.first
 		else
-			@sclass = Sclass.find(params[:sclass][:id])
+			@sclass = @sclasses.find(params[:sclass][:id])
 		end
 		@students = @sclass.students.all
 	end
@@ -19,6 +19,6 @@ class RollupController < ApplicationController
 			learning.save
 			end
 		end
-		render 'done_rollup'
+		redirect_to :back
 	end
 end

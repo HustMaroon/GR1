@@ -11,12 +11,29 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160510050427) do
+ActiveRecord::Schema.define(version: 20161111041452) do
 
-  create_table "assignments", force: :cascade do |t|
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+  create_table "answers", force: :cascade do |t|
+    t.integer  "question_id"
+    t.text     "content"
+    t.boolean  "correct",     default: false
+    t.string   "image"
+    t.datetime "created_at",                  null: false
+    t.datetime "updated_at",                  null: false
   end
+
+  add_index "answers", ["question_id"], name: "index_answers_on_question_id"
+
+  create_table "documents", force: :cascade do |t|
+    t.integer  "sclass_id"
+    t.string   "title"
+    t.string   "file"
+    t.text     "description"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+  end
+
+  add_index "documents", ["sclass_id"], name: "index_documents_on_sclass_id"
 
   create_table "learnings", force: :cascade do |t|
     t.integer  "student_id"
@@ -43,6 +60,17 @@ ActiveRecord::Schema.define(version: 20160510050427) do
   end
 
   add_index "mini_works", ["sclass_id"], name: "index_mini_works_on_sclass_id"
+
+  create_table "questions", force: :cascade do |t|
+    t.integer  "test_id"
+    t.text     "content"
+    t.integer  "type"
+    t.string   "image"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  add_index "questions", ["test_id"], name: "index_questions_on_test_id"
 
   create_table "sclasses", force: :cascade do |t|
     t.integer  "subject_id"
@@ -77,5 +105,26 @@ ActiveRecord::Schema.define(version: 20160510050427) do
     t.datetime "updated_at",      null: false
     t.string   "password_digest"
   end
+
+  create_table "test_sclasses", force: :cascade do |t|
+    t.integer  "test_id"
+    t.integer  "sclass_id"
+    t.boolean  "opened",     default: false
+    t.datetime "created_at",                 null: false
+    t.datetime "updated_at",                 null: false
+  end
+
+  add_index "test_sclasses", ["sclass_id"], name: "index_test_sclasses_on_sclass_id"
+  add_index "test_sclasses", ["test_id"], name: "index_test_sclasses_on_test_id"
+
+  create_table "tests", force: :cascade do |t|
+    t.integer  "teacher_id"
+    t.string   "name"
+    t.integer  "time"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  add_index "tests", ["teacher_id"], name: "index_tests_on_teacher_id"
 
 end

@@ -1,0 +1,16 @@
+<h1><%=@test.name%></h1>
+<table class="table table-bordered">
+	<thead>
+    <tr>
+      <th>#</th>
+      <th>Content</th>
+      <th>Tools</th>
+    </tr>
+	</thead>
+  <tbody>
+  	<%@test.questions.each_with_index do |question, index|%>
+  		<%=render 'questions/question',question: question, index: index %>
+  	<%end%>
+ </table> 
+ <button data-toggle="collapse" data-target="#question-form">Details</button>
+ <%=render 'questions/form'%>

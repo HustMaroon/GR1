@@ -1,5 +1,6 @@
 class Teacher < ActiveRecord::Base
 	has_many :sclasses
+	has_many :tests
 	has_secure_password
 
 	def self.search(search)

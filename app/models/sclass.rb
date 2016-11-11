@@ -4,6 +4,8 @@ class Sclass < ActiveRecord::Base
   has_many :learnings
   has_many :students, through: :learnings
   has_many :mini_works
+  has_many :tests, through: :test_sclasses
+  has_many :documents
 
 	def self.search(search)
   		if search
