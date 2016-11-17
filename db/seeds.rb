@@ -14,7 +14,7 @@ end
               )
 end
 
-100.times do |n|
+1000.times do |n|
   name  = Student.generate("male")
   std_id = "#{n+20122410}"
   Student.create!(name:  name,
@@ -25,7 +25,7 @@ end
   puts "created male student #{std_id} with name #{name}"
 end
 
-100.times do |n|
+1000.times do |n|
   name  = Student.generate("female")
   std_id = "#{n+20122610}"
   Student.create!(name:  name,
