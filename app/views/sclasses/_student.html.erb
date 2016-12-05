@@ -1,0 +1,6 @@
+<tr>
+	<td><%=student.name%></td>
+	<td><%=student.std_id%></td>
+	<td><%=student.learnings.find_by(sclass: @sclass).attendance %>
+	<td><%= check_box_tag student.id, :attend%></td>
+<tr>

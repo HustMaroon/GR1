@@ -1,0 +1,25 @@
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-sm-3 col-md-2 sidebar">
+          <%= render 'teachers/sidebar' %>
+        </div>
+        <div class="col-sm-9 main">
+        <h1>Your classes</h1>
+          <table class="table table-hover" style="width:100%" border="1" margin="center">
+            <tr>
+              <td><b>Name</b></td>
+              <td><b>Student_id</b></td>
+              <td><b>Missed</b></td>
+              <td><b>Missing</b></td>
+            </tr>
+        <%=form_tag sclass_rollup_path(@sclass) do%>
+            <%@students.each do |s|%>
+                <%=render 'student', student: s%>
+            <%end%>
+        </table>
+        <%=submit_tag "Submit", class: "btn btn-primary"%>
+        <%end%>
+
+        </div>
+    </div>
+</div>

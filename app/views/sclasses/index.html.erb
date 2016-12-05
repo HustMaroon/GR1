@@ -1,0 +1,21 @@
+<div class="container-fluid">
+<h1>Your classes</h1>
+    <div class="row">
+        <div class="col-sm-3 col-md-2 sidebar">
+          <%= render 'teachers/home_sidebar' %>
+        </div>
+        <div class="col-sm-9 main">
+        	<table class="table table-hover" style="width:100%" border="1" margin="center">
+					<tr>
+					  <td><b>Class_id</b></td>
+					  <td><b>Course</b></td>
+			 		  <td><b>Sessions</b></td>
+			 		  <td><b>Tools</b></td>
+			 		</tr>
+			 		<% @sclasses.each do |sclass|%>
+        		<%=render sclass %>
+        	<% end %>
+					</table>
+        </div>
+    </div>
+</div>

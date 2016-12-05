@@ -1,7 +1,16 @@
-<tr>
-	<td><%=sclass.sclass_id%></td>
-	<td><%=sclass.subject.name%></td>
-	<td><%=sclass.teacher.name%></td>
-	<td><%=link_to 'student list', '#'%></td>
-	<td><%=link_to "remove", sclass, method: :delete%></td>
-<tr>
+<%if current_user.class == Teacher %>
+	<tr>
+		<td><%=sclass.sclass_id%></td>
+		<td><%=sclass.subject.name%></td>
+		<td>--number of sessions--</td>
+		<td><%=link_to 'View details', sclass %>
+	</tr>
+<% else %>
+	<tr>
+		<td><%=sclass.sclass_id%></td>
+		<td><%=sclass.subject.name%></td>
+		<td><%=sclass.teacher.name%></td>
+		<td><%=link_to 'student list', '#'%></td>
+		<td><%=link_to "remove", sclass, method: :delete%></td>
+	<tr>
+<% end %>

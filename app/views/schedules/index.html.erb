@@ -1,0 +1,24 @@
+<div class="container-fluid">
+<h1>Lịch dạy</h1>
+	<div class="row">
+		<div class="col-sm-3 col-sm-2 sidebar">
+			<%=render 'teachers/sidebar' %>
+		</div>
+		<div class="col-sm-9 main">
+			<table class="table table-hover" style="width:100%" border="1" margin="center">
+			 <tr>
+				  <td><b>Ngày</b></td>
+				  <td><b>Bắt đầu</b></td>
+			  	<td><b>Kết thúc</b></td>
+				  <td><b>Nội dung</b></td>
+				</tr>
+				<%=form_tag sclass_update_schedules_path(@sclass), method: 'POST' do%>
+					<%@schedules.each do |schedule|%>
+				 		<%=render schedule%>
+					<%end%>
+			</table>
+					<%=submit_tag 'Update', class: 'btn btn-primary'%>
+				<%end%>
+		</div>
+	</div>
+</div>

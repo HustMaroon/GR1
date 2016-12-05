@@ -1,0 +1,7 @@
+[Desktop Entry]
+Name=Adobe Dreamweaver CS5
+Exec=env WINEPREFIX="/home/hustmaroon/.wine" wine C:\\\\windows\\\\command\\\\start.exe /Unix /home/hustmaroon/.wine/dosdevices/c:/users/Public/Desktop/Adobe\\ Dreamweaver\\ CS5.lnk
+Type=Application
+StartupNotify=true
+Path=/home/hustmaroon/.wine/dosdevices/z:/home/hustmaroon/DW_cs5/Adobe Dreamweaver CS5
+Icon=70FC_Dreamweaver.0

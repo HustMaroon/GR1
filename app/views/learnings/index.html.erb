@@ -1,28 +1,25 @@
-<div class="container">
-<%=render 'shared/horizontal_nav', sclass: @sclasses.first%>
-	<h1>Results</h1><span class="glyphicon glyphicon-heart"></span>
-	<%if @sclass.nil? %>
-		<p> You have no class </p>
-	<%else%>
-		<p>Select a class for checking up.</p>
-		<div class='form'>
-			<%= form_tag('/learnings/getclass', method:'post') do%>
-			<%= collection_select :sclass,:id, @sclasses,:id,:sclass_id%>
-			<%= submit_tag "refresh" %>
-			<%end%>
+<div class="container-fluid">
+<h1>Nhập điểm</h1>
+	<div class="row">
+		<div class="col-sm-3 col-sm-2 sidebar">
+			<%=render 'teachers/sidebar' %>
 		</div>
+		<div class="col-sm-9 main">
 			<table class="table table-hover" style="width:100%" border="1" margin="center">
 			 <tr>
-	 		  <td><b>Student</b></td>
-	 		  <td><b>Student_id</b></td>
-			  <td><b>Process_point</b></td>
-	 		  <td><b>Term_point</b></td>
-	 		  <td><b>Avg_point</b></td>
-	 		  <td><b>Tools</b></td>
-	 		</tr>
-		<%@learnings.each do |l|%>
-		 <%=render l%>
-		<%end%>
+				  <td><b>Sinh viên</b></td>
+				  <td><b>MSSV</b></td>
+			  	<td><b>Điểm quá trình</b></td>
+				  <td><b>Điểm cuối kì</b></td>
+				  <td><b>Điểm trung bình</b></td>
+				</tr>
+				<%=form_tag sclass_update_point_path(@sclass), method: 'POST' do%>
+					<%@learnings.each do |learning|%>
+				 		<%=render learning%>
+					<%end%>
 			</table>
-	<%end%>
+					<%=submit_tag 'Update', class: 'btn btn-primary'%>
+				<%end%>
+		</div>
+	</div>
 </div>

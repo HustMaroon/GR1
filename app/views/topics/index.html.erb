@@ -1,0 +1,22 @@
+<div class="container-fluid">
+<h1>Quản lý đề tài</h1>
+    <div class="row">
+        <div class="col-sm-3 col-md-2 sidebar">
+          <%= render 'teachers/sidebar' %>
+        </div>
+        <div class="col-sm-9 main">
+        	<table class="table table-hover" style="width:100%" border="1" margin="center">
+  					<tr>
+  					  <td><b>Tên</b></td>
+  					  <td><b>Nội dung</b></td>
+  			 		  <td><b>Tools</b></td>
+  			 		</tr>
+  			 		<% @topics.each do |topic|%>
+          		<%=render topic %>
+          	<% end %>
+			   </table>
+         <%=render 'form', topic: Group.new%>
+         <button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#topicModal">Thêm đề tài</button>
+        </div>
+    </div>
+</div>

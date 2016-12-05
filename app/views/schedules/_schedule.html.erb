@@ -1,0 +1,6 @@
+<tr>
+	<td><%=schedule.date%></td>
+	<td><%=schedule.start_time%></td>
+	<td><%=schedule.ending_time %></td>
+	<td><%=text_field_tag "schedule[#{schedule.id}", schedule.content, class:'form-control'%></td>
+<tr>

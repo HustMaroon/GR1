@@ -1,0 +1,11 @@
+<ul class="nav nav-sidebar">
+	<li><%=link_to 'Tổng quan', @sclass %></li>
+  <li><%=link_to 'Cập nhật lịch dạy', sclass_schedules_path(@sclass) %></li>
+  <li><%=link_to 'Tài liệu', sclass_documents_path(@sclass) %></li>
+  <li><%=link_to 'Nhóm', sclass_groups_path(@sclass) %></li>
+  <li><%=link_to 'Đề tài /Bài tập lớn', sclass_topics_path(@sclass)%></li>
+  <li><%=link_to 'Điểm danh',sclass_rollup_path(@sclass) %></li>
+  <li><%=link_to 'Kiểm tra', '#' %></li>
+  <li><%=link_to 'Thay đổi trọng số điểm', sclass_point_component_index_path(@sclass)%></li>
+  <li><%=link_to 'Nhập điểm', sclass_learnings_path(@sclass)%></li>
+</ul>

@@ -6,6 +6,10 @@ class Sclass < ActiveRecord::Base
   has_many :mini_works
   has_many :tests, through: :test_sclasses
   has_many :documents
+  has_many :groups
+  has_many :topics
+  has_many :schedules
+  has_one :point_component
 
 	def self.search(search)
   		if search

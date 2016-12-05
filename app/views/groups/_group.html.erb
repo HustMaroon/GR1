@@ -1,0 +1,7 @@
+	<tr>
+		<td><%=group.name%></td>
+		<td><%=group.students.count%></td>
+		<td><%= link_to group.topic.name, '#' unless group.topic.nil?%></td>
+		<td><%= group.point%></td>
+		<td><%=link_to 'View details', sclass_group_path(@sclass, group) %>
+	</tr>

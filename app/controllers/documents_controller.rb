@@ -1,7 +1,7 @@
 class DocumentsController < ApplicationController
 
 	def create
-		sclass = Sclass.find_by(params[:sclass_id])
+		sclass = Sclass.find(params[:sclass_id])
 		doc = sclass.documents.build(doc_params)
 		if doc.save
 			redirect_to :back
@@ -18,12 +18,7 @@ class DocumentsController < ApplicationController
 	end
 
 	def index
-		@sclasses = current_user.sclasses
-		if params[:sclass_id].nil?
-			@sclass = @sclasses.first
-		else
-			@sclass = Sclass.find(params[:sclass_id])
-		end
+		@sclass= Sclass.find(params[:sclass_id])
 		@documents = @sclass.documents
 	end
 private

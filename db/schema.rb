@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161111041452) do
+ActiveRecord::Schema.define(version: 20161202075849) do
 
   create_table "answers", force: :cascade do |t|
     t.integer  "question_id"
@@ -35,15 +35,25 @@ ActiveRecord::Schema.define(version: 20161111041452) do
 
   add_index "documents", ["sclass_id"], name: "index_documents_on_sclass_id"
 
+  create_table "groups", force: :cascade do |t|
+    t.integer  "sclass_id"
+    t.string   "name"
+    t.integer  "topic_id"
+    t.datetime "created_at",             null: false
+    t.datetime "updated_at",             null: false
+    t.integer  "point",      default: 0
+  end
+
+  add_index "groups", ["sclass_id"], name: "index_groups_on_sclass_id"
+  add_index "groups", ["topic_id"], name: "index_groups_on_topic_id"
+
   create_table "learnings", force: :cascade do |t|
     t.integer  "student_id"
     t.integer  "sclass_id"
-    t.datetime "created_at",                  null: false
-    t.datetime "updated_at",                  null: false
-    t.integer  "attendance",    default: 0
-    t.float    "process_point", default: 0.0
-    t.float    "term_point",    default: 0.0
-    t.float    "avg_point",     default: 0.0
+    t.datetime "created_at",               null: false
+    t.datetime "updated_at",               null: false
+    t.integer  "attendance", default: 0
+    t.float    "term_point", default: 0.0
   end
 
   add_index "learnings", ["sclass_id"], name: "index_learnings_on_sclass_id"
@@ -61,6 +71,17 @@ ActiveRecord::Schema.define(version: 20161111041452) do
 
   add_index "mini_works", ["sclass_id"], name: "index_mini_works_on_sclass_id"
 
+  create_table "point_components", force: :cascade do |t|
+    t.integer  "sclass_id"
+    t.integer  "mid_term_test", default: 0
+    t.integer  "short_test",    default: 0
+    t.integer  "apperance",     default: 0
+    t.datetime "created_at",                null: false
+    t.datetime "updated_at",                null: false
+  end
+
+  add_index "point_components", ["sclass_id"], name: "index_point_components_on_sclass_id"
+
   create_table "questions", force: :cascade do |t|
     t.integer  "test_id"
     t.text     "content"
@@ -71,6 +92,18 @@ ActiveRecord::Schema.define(version: 20161111041452) do
   end
 
   add_index "questions", ["test_id"], name: "index_questions_on_test_id"
+
+  create_table "schedules", force: :cascade do |t|
+    t.integer  "sclass_id"
+    t.date     "date"
+    t.text     "content"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+    t.string   "start_time"
+    t.string   "ending_time"
+  end
+
+  add_index "schedules", ["sclass_id"], name: "index_schedules_on_sclass_id"
 
   create_table "sclasses", force: :cascade do |t|
     t.integer  "subject_id"
@@ -83,6 +116,16 @@ ActiveRecord::Schema.define(version: 20161111041452) do
   add_index "sclasses", ["subject_id"], name: "index_sclasses_on_subject_id"
   add_index "sclasses", ["teacher_id"], name: "index_sclasses_on_teacher_id"
 
+  create_table "student_groups", force: :cascade do |t|
+    t.integer  "student_id"
+    t.integer  "group_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  add_index "student_groups", ["group_id"], name: "index_student_groups_on_group_id"
+  add_index "student_groups", ["student_id"], name: "index_student_groups_on_student_id"
+
   create_table "students", force: :cascade do |t|
     t.string   "std_id"
     t.string   "name"
@@ -94,8 +137,9 @@ ActiveRecord::Schema.define(version: 20161111041452) do
   create_table "subjects", force: :cascade do |t|
     t.string   "name"
     t.string   "sbj_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at",               null: false
+    t.datetime "updated_at",               null: false
+    t.float    "term_ratio", default: 0.7
   end
 
   create_table "teachers", force: :cascade do |t|
@@ -126,5 +170,15 @@ ActiveRecord::Schema.define(version: 20161111041452) do
   end
 
   add_index "tests", ["teacher_id"], name: "index_tests_on_teacher_id"
+
+  create_table "topics", force: :cascade do |t|
+    t.integer  "sclass_id"
+    t.text     "content"
+    t.string   "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  add_index "topics", ["sclass_id"], name: "index_topics_on_sclass_id"
 
 end

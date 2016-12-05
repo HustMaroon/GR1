@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  sclass_id: 
+  mid_term_test: 1.5
+  short_test: 1.5
+  apperance: 1.5
+
+two:
+  sclass_id: 
+  mid_term_test: 1.5
+  short_test: 1.5
+  apperance: 1.5

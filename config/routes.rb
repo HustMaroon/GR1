@@ -58,12 +58,20 @@ Rails.application.routes.draw do
   root 'static_pages#home'
   resources :sclasses do
     resources :documents
+    resources :groups
+    resources :topics
+    resources :learnings
+    resources :point_component
+    resources :schedules
+    get '/rollup' => 'sclasses#rollup'
+    post '/rollup' => 'sclasses#process_rollup'
+    post '/update_point' => 'sclasses#update_point'
+    post '/update_schedules' => 'schedules#update_schedules'
   end
   resources :mini_works
   resources :students
   resources :teachers
   resources :subjects
-  resources :learnings
   resources :questions
   resources :tests do
     resources :questions do
@@ -73,8 +81,6 @@ Rails.application.routes.draw do
 
   post '/learnings/getclass' => 'learnings#index'
 
-  get '/rollup' => 'rollup#new'
-  post '/rollup' => 'rollup#new'
   post 'submit_rollup' => 'rollup#checklist'
   get '/assignment' => 'mini_works#student_index'
   get '/student/classes' => 'sclasses#student_index'

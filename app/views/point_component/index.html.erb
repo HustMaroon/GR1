@@ -1,0 +1,27 @@
+<div class="container-fluid">
+<h1>Trọng số đánh giá điểm quá trình</h1>
+    <div class="row">
+        <div class="col-sm-3 col-md-2 sidebar">
+          <%= render 'teachers/sidebar' %>
+        </div>
+        <div class="col-sm-9 main">
+          <table class="table table-hover" style="width:100%" border="1" margin="center">
+          <tr>
+            <td><b>Điểm thi giữa kì</b></td>
+            <td><b>Bài kiểm tra ngắn</b></td>
+            <td><b>Điểm danh</b></td>
+          </tr>
+          <%=form_tag do %>
+          <tr>
+              <td><%=text_field_tag :mid_term_test, @point_component.mid_term_test, class: 'form-control' %></td>
+
+              <td><%=text_field_tag :short_test, @point_component.short_test, class: 'form-control' %></td>
+
+              <td><%=text_field_tag :apperance, @point_component.apperance, class: 'form-control' %></td>               
+          </tr>
+          </table>
+              <%=submit_tag 'update', class: 'btn btn-primary' %>
+          <%end%>
+        </div>
+    </div>
+</div>

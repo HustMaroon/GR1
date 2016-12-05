@@ -1,20 +1,11 @@
 class LearningsController < ApplicationController
 	def index
-		@sclasses = current_user.sclasses
-		if params[:sclass].nil?
-			@sclass = current_user.sclasses.first
-		else
-			@sclass = current_user.sclasses.find(params[:sclass][:id])
-		end
+		@sclass = Sclass.find(params[:sclass_id])
 		@learnings = @sclass.learnings
 	end
 
 	def update
-		learning = Learning.find(params[:id])
-		learning.update_attributes(learning_params)
-		avg_point = learning.process_point*0.3 + learning.term_point*0.7
-		learning.update_attributes(avg_point: avg_point)
-		redirect_to request.referer
+		byebug
 	end
 
 	def create

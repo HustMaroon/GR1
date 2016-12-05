@@ -7,7 +7,7 @@
         <h4 class="modal-title" id="myModalLabel">Upload document</h4>
       </div>
       <div class="modal-body">
-        <%=form_for sclass.documents.build, url: sclass_documents_path(sclass: sclass)  do |f|%>
+        <%=form_for @sclass.documents.build, url: sclass_documents_path do |f|%>
           <%=f.label :title, "Title"%>
           <%= f.text_field :title, class: 'form-control' %>
 
@@ -15,7 +15,7 @@
           <%=f.text_area :description, class: 'form-control' %>
 
           <%= f.label :file, "attached file" %>  
-          <%=f.file_field :file %>
+          <%=f.file_field :file %> 
 
           <%=f.submit "Upload", class:"btn btn-primary"%>
         <%end%>
