@@ -1,0 +1,9 @@
+<%= form_tag login_path do %>
+	<%= label_tag 'Name',nil %>
+	<%= text_field_tag "session[name]",nil,  class: 'form-control' %>
+
+	<%= label_tag 'Password'%>
+	<%= text_field_tag "session[password]", nil,  class: 'form-control' %>
+
+	<%= submit_tag 'Submit', class: 'btn btn-primary' %>
+<%end%>

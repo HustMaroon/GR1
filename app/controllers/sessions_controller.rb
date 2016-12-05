@@ -21,6 +21,15 @@ class SessionsController < ApplicationController
 	      flash[:danger] = 'Invalid email/password combination'
 	      redirect_to request.referer
 	    end
+	elsif params[:session][:name]
+		admin = Admin.find_by(name: params[:session][:name])
+			if admin && admin.authenticate(params[:session][:password])
+				log_in admin
+				redirect_to admin_students_path
+			else
+				flash[:danger] = 'Invalid email/password combination'
+				redirect_to request.referer
+			end
 	end
   end
 

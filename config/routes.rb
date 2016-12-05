@@ -91,6 +91,9 @@ Rails.application.routes.draw do
   get 'admin/courses' => 'admin#course_index'
   get 'admin/classes' => 'admin#class_index'
   get 'admin/courses' => 'admin#course_index'
+  get 'admin/sign-in' => 'admin#sign_in'
+  #--admin--
+
   get    'login'   => 'sessions#new'
   post   'login'   => 'sessions#create'
   delete 'logout'  => 'sessions#destroy'

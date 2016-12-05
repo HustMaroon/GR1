@@ -24,4 +24,11 @@ class ApplicationController < ActionController::Base
 			flash[:danger] = "You don't have permission to access this"
   	end
   end
+
+  def login_as_admin
+    unless current_user.class == Admin
+      redirect_to admin_sign_in_path
+      flash[:danger] = "You don't have permission to access this"
+    end
+  end
 end
