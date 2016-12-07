@@ -92,6 +92,7 @@ Rails.application.routes.draw do
   get 'admin/classes' => 'admin#class_index'
   get 'admin/courses' => 'admin#course_index'
   get 'admin/sign-in' => 'admin#sign_in'
+  post 'admin/upload_courses' => 'admin#upload_courses'
   #--admin--
 
   get    'login'   => 'sessions#new'
