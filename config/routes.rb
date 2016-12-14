@@ -61,12 +61,15 @@ Rails.application.routes.draw do
     resources :groups
     resources :topics
     resources :learnings
-    resources :point_component
+    resources :point_components
     resources :schedules
+    resources :score_tables
     get '/rollup' => 'sclasses#rollup'
     post '/rollup' => 'sclasses#process_rollup'
     post '/update_point' => 'sclasses#update_point'
     post '/update_schedules' => 'schedules#update_schedules'
+    post 'update_ratio' => 'sclasses#update_ratio'
+    post '/update_score_table' => 'score_tables#update_score_table'
   end
   resources :mini_works
   resources :students
@@ -79,7 +82,6 @@ Rails.application.routes.draw do
     end
   end
 
-  post '/learnings/getclass' => 'learnings#index'
 
   post 'submit_rollup' => 'rollup#checklist'
   get '/assignment' => 'mini_works#student_index'

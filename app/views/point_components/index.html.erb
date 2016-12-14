@@ -1,0 +1,26 @@
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-sm-3 col-md-2 sidebar">
+          <%= render 'teachers/sidebar' %>
+        </div>
+        <div class="col-sm-9 main">
+        <h1>Trọng số đánh giá điểm quá trình</h1>
+          <table class="table table-hover" style="width:100%" border="1" margin="center">
+          <%=render 'form'%>
+          <button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#pcModal">Thêm thành phần điểm</button>
+          <tr>
+            <td><b>#</b></td>
+            <td><b>Nội dung</b></td>
+            <td><b>Trọng số</b></td>
+            <td><b>Công cụ</b></td>
+          </tr>
+          <%=form_tag sclass_update_ratio_path(@sclass) do %>
+            <%@point_components.each_with_index do |pc, index| %>
+              <%=render pc, index: index%>
+            <%end%>
+          </table>
+              <%=submit_tag 'update', class: 'btn btn-primary' %>
+          <%end%>
+        </div>
+    </div>
+</div>

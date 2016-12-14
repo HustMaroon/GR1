@@ -11,14 +11,14 @@ class ApplicationController < ActionController::Base
   	end
   end
 
-  def loggin_as_teacher
+  def login_as_teacher
   	unless current_user.class == Teacher
   		redirect_to :back
   		flash[:danger] = "You don't have permission to access this"
   	end
   end
 
-  def loggin_as_student
+  def login_as_student
   	unless current_user.class == Student
 			redirect_to :back
 			flash[:danger] = "You don't have permission to access this"

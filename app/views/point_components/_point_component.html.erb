@@ -1,0 +1,7 @@
+<tr>
+	<td><%=index+1%></td>
+  <td><%=text_field_tag "pc[#{point_component.id}[content]]", point_component.content, class: 'form-control' %></td>
+
+  <td><%=text_field_tag "pc[#{point_component.id}[ratio]]", point_component.ratio, class: 'form-control' %></td>
+  <td><%= link_to "xóa", sclass_point_component_path(@sclass,point_component), method: :delete,data: { confirm: "Bạn chắc chứ?" } %></td>           
+</tr>

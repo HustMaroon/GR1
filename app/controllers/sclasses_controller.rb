@@ -1,4 +1,5 @@
 class SclassesController < ApplicationController
+	before_action :ratio_validate, only:[:update_ratio]
 	def destroy
 		Sclass.find(params[:id]).destroy
 		flash[:success] = "class removed"
@@ -48,10 +49,10 @@ class SclassesController < ApplicationController
 		redirect_to :back
 	end
 
-	def update_point
-		params[:term_point].each do |k,v|
-			learning = Learning.find(k)
-			learning.update_attributes(term_point: v)
+	def update_ratio
+		params[:pc].each do |k,v|
+			pc = PointComponent.find(k)
+			pc.update_attributes(content: v[:content], ratio: v[:ratio])
 		end
 		redirect_to :back
 	end
@@ -59,5 +60,21 @@ class SclassesController < ApplicationController
 	private
 	def sclass_params
 		params.require(:sclass).permit(:subject_id,:teacher_id, :sclass_id)
+	end
+
+	def ratio_validate
+		sclass = Sclass.find(params[:sclass_id])
+		unless caculate_ratio_sum(params) <= 100
+			flash[:warning] = "tổng các chỉ tiêu không được > 100%"
+			redirect_to :back
+		end
+	end
+
+	def caculate_ratio_sum(params)
+		sum = 0
+		params[:pc].each do |k,v|
+			sum += v[:ratio].to_i
+		end
+		return sum
 	end
 end

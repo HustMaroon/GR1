@@ -1,0 +1,27 @@
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-sm-3 col-md-2 sidebar">
+          <%= render 'teachers/sidebar' %>
+        </div>
+        <div class="col-sm-9 main">
+        <%=render 'nav_bar' %>
+        <h1>Bảng điểm</h1>
+        <%if @score_tables.empty? %>
+          <p>Chưa có bảng điểm nào</p>
+        <%else%>
+          	<table class="table table-hover" style="width:100%" border="1" margin="center">
+    					<tr>
+    					  <td><b>Tiêu đề</b></td>
+    					  <td><b>Loại điểm</b></td>
+    			 		  <td><b>Công cụ</b></td>
+    			 		</tr>
+    			 		<% @score_tables.each do |st|%>
+            		<%=render st %>
+            	<% end %>
+  			    </table>
+        <%end%>
+        <%=render 'form' %>
+        <button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#scoreModal">Tạo bảng điểm</button>
+        </div>
+    </div>
+</div>

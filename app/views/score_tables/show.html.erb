@@ -4,19 +4,17 @@
 			<%=render 'teachers/sidebar' %>
 		</div>
 		<div class="col-sm-9 main">
-		<%= render 'score_tables/nav_bar' %>
-		<h1>Nhập điểm</h1>
+		<h1><%=@score_table.title%></h1>
 			<table class="table table-hover" style="width:100%" border="1" margin="center">
 			 <tr>
 				  <td><b>Sinh viên</b></td>
 				  <td><b>MSSV</b></td>
-			  	<td><b>Điểm quá trình</b></td>
-				  <td><b>Điểm cuối kì</b></td>
-				  <td><b>Điểm trung bình</b></td>
+				  <td><b>Điểm</b></td>
+				  <td><b>Ghi chú</b></td>
 				</tr>
-				<%=form_tag sclass_update_point_path(@sclass), method: 'POST' do%>
-					<%@learnings.each do |learning|%>
-				 		<%=render learning%>
+				<%=form_tag sclass_update_score_table_path(@sclass),authenticity_token: true do%>
+					<%@score_table.points.each do |p|%>
+				 		<%=render 'point', point: p%>
 					<%end%>
 			</table>
 					<%=submit_tag 'Update', class: 'btn btn-primary'%>

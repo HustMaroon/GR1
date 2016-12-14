@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161205092648) do
+ActiveRecord::Schema.define(version: 20161213162242) do
 
   create_table "admins", force: :cascade do |t|
     t.string   "name"
@@ -80,14 +80,23 @@ ActiveRecord::Schema.define(version: 20161205092648) do
 
   create_table "point_components", force: :cascade do |t|
     t.integer  "sclass_id"
-    t.integer  "mid_term_test", default: 0
-    t.integer  "short_test",    default: 0
-    t.integer  "apperance",     default: 0
-    t.datetime "created_at",                null: false
-    t.datetime "updated_at",                null: false
+    t.string   "content"
+    t.integer  "ratio",      default: 0
+    t.datetime "created_at",             null: false
+    t.datetime "updated_at",             null: false
   end
 
-  add_index "point_components", ["sclass_id"], name: "index_point_components_on_sclass_id"
+  create_table "points", force: :cascade do |t|
+    t.integer  "score_table_id"
+    t.integer  "learning_id"
+    t.integer  "value",          default: 0
+    t.datetime "created_at",                 null: false
+    t.datetime "updated_at",                 null: false
+    t.string   "note"
+  end
+
+  add_index "points", ["learning_id"], name: "index_points_on_learning_id"
+  add_index "points", ["score_table_id"], name: "index_points_on_score_table_id"
 
   create_table "questions", force: :cascade do |t|
     t.integer  "test_id"
@@ -122,6 +131,17 @@ ActiveRecord::Schema.define(version: 20161205092648) do
 
   add_index "sclasses", ["subject_id"], name: "index_sclasses_on_subject_id"
   add_index "sclasses", ["teacher_id"], name: "index_sclasses_on_teacher_id"
+
+  create_table "score_tables", force: :cascade do |t|
+    t.integer  "sclass_id"
+    t.integer  "point_component_id"
+    t.datetime "created_at",         null: false
+    t.datetime "updated_at",         null: false
+    t.string   "title"
+  end
+
+  add_index "score_tables", ["point_component_id"], name: "index_score_tables_on_point_component_id"
+  add_index "score_tables", ["sclass_id"], name: "index_score_tables_on_sclass_id"
 
   create_table "student_groups", force: :cascade do |t|
     t.integer  "student_id"

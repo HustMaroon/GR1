@@ -9,7 +9,8 @@ class Sclass < ActiveRecord::Base
   has_many :groups
   has_many :topics
   has_many :schedules
-  has_one :point_component
+  has_many :point_components
+  has_many :score_tables
 
 	def self.search(search)
   		if search
