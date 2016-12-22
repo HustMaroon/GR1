@@ -3,14 +3,13 @@
 		<td><%=sclass.sclass_id%></td>
 		<td><%=sclass.subject.name%></td>
 		<td>--number of sessions--</td>
-		<td><%=link_to 'View details', sclass %>
+		<td><%=link_to 'Chi tiết', sclass %>
 	</tr>
 <% else %>
 	<tr>
 		<td><%=sclass.sclass_id%></td>
 		<td><%=sclass.subject.name%></td>
 		<td><%=sclass.teacher.name%></td>
-		<td><%=link_to 'student list', '#'%></td>
-		<td><%=link_to "remove", sclass, method: :delete%></td>
+		<td><%=link_to "Chi tiết", sclass%></td>
 	<tr>
 <% end %>

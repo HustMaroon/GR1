@@ -1,5 +1,5 @@
 class GroupsController < ApplicationController
-	before_action :loggin_as_teacher, only:[:new, :create, :destroy]
+	before_action :login_as_teacher, only:[:new, :create, :destroy]
 
 	def new
 	end
@@ -7,9 +7,13 @@ class GroupsController < ApplicationController
 	def create
 		sclass = Sclass.find(params[:sclass_id])
 		group = sclass.groups.build(group_params)
-		group.topic = Topic.find(params[:group][:topic])
-		unless group.save
-			flash[:warning] = "Error creating group"
+		if group.save
+			params[:group][:students].each do |st|
+				student = Student.find_by(std_id: st.split('-')[1]) unless st.empty?
+				group.student_groups.create(student: student)
+			end
+		else
+			flash[:warning] = "can't create new group"
 		end
 		redirect_to :back
 	end
@@ -17,9 +21,18 @@ class GroupsController < ApplicationController
 	def index
 		@sclass = Sclass.find(params[:sclass_id])
 		@groups = @sclass.groups
+		grouped_students = []
+		@sclass.groups.each do |g|
+			g.students.each do |s|
+				grouped_students << s
+			end
+		end
+		@students = @sclass.students - grouped_students
 	end
 
 	def show
+		@sclass = Sclass.find(params[:sclass_id])
+		@group = Group.find(params[:id])
 	end
 
 	def edit
@@ -33,6 +46,7 @@ class GroupsController < ApplicationController
 
 private
 	def group_params
-		params.require(:group).permit(:name)
+		params.require(:group).permit(:name, :topic)
 	end
+
 end

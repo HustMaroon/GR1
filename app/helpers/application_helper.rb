@@ -1,7 +1,11 @@
 module ApplicationHelper
 
 	def get_process_point(learning)
-		0
+		process_point = 0
+		learning.points.each do |p|
+			process_point += (p.value * p.score_table.point_component.ratio) /100
+		end
+		return process_point
 	end
 
 	def get_avg_point(learning)

@@ -32,6 +32,10 @@ class ScoreTablesController < ApplicationController
 	end
 
 	def update_score_table
-		byebug
+		params[:point].each do |k,v|
+			point = Point.find(k)
+			point.update_attributes(value: v[:val], note: v[:note])
+		end
+		redirect_to :back
 	end
 end

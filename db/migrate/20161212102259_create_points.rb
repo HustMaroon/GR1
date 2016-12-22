@@ -4,6 +4,7 @@ class CreatePoints < ActiveRecord::Migration
       t.references :score_table, index: true, foreign_key: true
       t.references :learning, index: true, foreign_key: true
       t.integer :value, default: 0
+      t.string :note
 
       t.timestamps null: false
     end

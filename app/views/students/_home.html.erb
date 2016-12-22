@@ -1,29 +1,18 @@
 <div class="container-fluid">
     <div class="row">
-        <div class="col-sm-4 col-md-2 sidebar">
-          <ul class="nav nav-sidebar">
-            <li><a href="#">discard</a></li>
-            <li><a href="/assignment">Assignments <span class="badge"><%=@asm_num%></span></a></li>
-            <li><a href="/student/classes">Classes</a></li>
-            <li><a href="">Test results</a></li>
-            <li><a href="">Time table</a></li>
-            <li><a href="">Documents</a></li>
-          </ul>
+        <div class="col-sm-3 col-md-2 sidebar">
+          <%= render 'students/home_sidebar' %>
         </div>
-        <div class="col-sm-8 col-sm-offset-3 col-md-10 col-md-offset-2 main">
-        	<div class="center jumbotron">
-    			<h1>Hey, feeling good today? <span class="glyphicon glyphicon-heart"></span></h1>
+        <div class="col-sm-9 main">
+          <div class="center jumbotron">
+          <h1>Chào ngày mới!<span class="glyphicon glyphicon-heart"></span></h1>
 
-    			<h2>
-      				<font color="black">
-              <%if @asm_num == 0%>
-                Nothing to do here, let's get out and play! <span class="glyphicon glyphicon-sunglasses"></span>
-                <%else%>
-                <h1><span class="glyphicon glyphicon-hand-left"></span></h1> Check on the left for assignments!
-              <%end%>
+          <h2>
+              <font color="black">
+                <h1><span class="glyphicon glyphicon-hand-left"></span></h1> Let's check it out!
               </font>
-    			</h2>
-  			</div>
+          </h2>
+        </div>
         </div>
     </div>
 </div>

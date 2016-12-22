@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161213162242) do
+ActiveRecord::Schema.define(version: 20161212102259) do
 
   create_table "admins", force: :cascade do |t|
     t.string   "name"
@@ -45,22 +45,21 @@ ActiveRecord::Schema.define(version: 20161213162242) do
   create_table "groups", force: :cascade do |t|
     t.integer  "sclass_id"
     t.string   "name"
-    t.integer  "topic_id"
-    t.datetime "created_at",             null: false
-    t.datetime "updated_at",             null: false
-    t.integer  "point",      default: 0
+    t.text     "topic"
+    t.float    "point",      default: 0.0
+    t.datetime "created_at",               null: false
+    t.datetime "updated_at",               null: false
   end
 
   add_index "groups", ["sclass_id"], name: "index_groups_on_sclass_id"
-  add_index "groups", ["topic_id"], name: "index_groups_on_topic_id"
 
   create_table "learnings", force: :cascade do |t|
     t.integer  "student_id"
     t.integer  "sclass_id"
-    t.datetime "created_at",               null: false
-    t.datetime "updated_at",               null: false
     t.integer  "attendance", default: 0
     t.float    "term_point", default: 0.0
+    t.datetime "created_at",               null: false
+    t.datetime "updated_at",               null: false
   end
 
   add_index "learnings", ["sclass_id"], name: "index_learnings_on_sclass_id"
@@ -90,9 +89,9 @@ ActiveRecord::Schema.define(version: 20161213162242) do
     t.integer  "score_table_id"
     t.integer  "learning_id"
     t.integer  "value",          default: 0
+    t.string   "note"
     t.datetime "created_at",                 null: false
     t.datetime "updated_at",                 null: false
-    t.string   "note"
   end
 
   add_index "points", ["learning_id"], name: "index_points_on_learning_id"
@@ -113,10 +112,10 @@ ActiveRecord::Schema.define(version: 20161213162242) do
     t.integer  "sclass_id"
     t.date     "date"
     t.text     "content"
-    t.datetime "created_at",  null: false
-    t.datetime "updated_at",  null: false
     t.string   "start_time"
     t.string   "ending_time"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
   end
 
   add_index "schedules", ["sclass_id"], name: "index_schedules_on_sclass_id"
@@ -124,9 +123,9 @@ ActiveRecord::Schema.define(version: 20161213162242) do
   create_table "sclasses", force: :cascade do |t|
     t.integer  "subject_id"
     t.integer  "teacher_id"
+    t.string   "sclass_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.string   "sclass_id"
   end
 
   add_index "sclasses", ["subject_id"], name: "index_sclasses_on_subject_id"
@@ -135,9 +134,9 @@ ActiveRecord::Schema.define(version: 20161213162242) do
   create_table "score_tables", force: :cascade do |t|
     t.integer  "sclass_id"
     t.integer  "point_component_id"
+    t.string   "title"
     t.datetime "created_at",         null: false
     t.datetime "updated_at",         null: false
-    t.string   "title"
   end
 
   add_index "score_tables", ["point_component_id"], name: "index_score_tables_on_point_component_id"
@@ -164,9 +163,9 @@ ActiveRecord::Schema.define(version: 20161213162242) do
   create_table "subjects", force: :cascade do |t|
     t.string   "name"
     t.string   "sbj_id"
+    t.float    "term_ratio", default: 0.7
     t.datetime "created_at",               null: false
     t.datetime "updated_at",               null: false
-    t.float    "term_ratio", default: 0.7
   end
 
   create_table "teachers", force: :cascade do |t|
@@ -197,15 +196,5 @@ ActiveRecord::Schema.define(version: 20161213162242) do
   end
 
   add_index "tests", ["teacher_id"], name: "index_tests_on_teacher_id"
-
-  create_table "topics", force: :cascade do |t|
-    t.integer  "sclass_id"
-    t.text     "content"
-    t.string   "name"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
-
-  add_index "topics", ["sclass_id"], name: "index_topics_on_sclass_id"
 
 end

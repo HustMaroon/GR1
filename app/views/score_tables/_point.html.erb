@@ -1,6 +1,6 @@
 <tr>
 	<td><%=point.learning.student.name%></td>
 	<td><%=point.learning.student.std_id%></td>
-	<td><%=text_field_tag "point[#{point.id}[#{point.value}]]", point.value, class: 'form-control'%></td>
-	<td><%=text_field_tag "point[#{point.id}[#{point.note}]]", point.note, class: 'form-control' %></td>
+	<td><%=text_field_tag "point[#{point.id}[val]]", point.value, class: 'form-control'%></td>
+	<td><%=text_field_tag "point[#{point.id}[note]]", point.note, class: 'form-control' %></td>
 </tr>

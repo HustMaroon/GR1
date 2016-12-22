@@ -58,15 +58,16 @@ Rails.application.routes.draw do
   root 'static_pages#home'
   resources :sclasses do
     resources :documents
-    resources :groups
-    resources :topics
+    resources :groups do
+      delete 'remove_group_member' => 'groups#remove_member'
+    end
     resources :learnings
     resources :point_components
     resources :schedules
     resources :score_tables
     get '/rollup' => 'sclasses#rollup'
     post '/rollup' => 'sclasses#process_rollup'
-    post '/update_point' => 'sclasses#update_point'
+    post '/update_point' => 'sclasses#update_avg_point'
     post '/update_schedules' => 'schedules#update_schedules'
     post 'update_ratio' => 'sclasses#update_ratio'
     post '/update_score_table' => 'score_tables#update_score_table'

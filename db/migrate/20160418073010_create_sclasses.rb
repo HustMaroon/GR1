@@ -3,6 +3,7 @@ class CreateSclasses < ActiveRecord::Migration
     create_table :sclasses do |t|
       t.references :subject, index: true, foreign_key: true
       t.references :teacher, index: true, foreign_key: true
+      t.string :sclass_id
 
       t.timestamps null: false
     end

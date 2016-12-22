@@ -14,7 +14,7 @@ end
               )
 end
 
-1000.times do |n|
+10.times do |n|
   name  = Student.generate("male")
   std_id = "#{n+20122410}"
   Student.create!(name:  name,
@@ -25,7 +25,7 @@ end
   puts "created male student #{std_id} with name #{name}"
 end
 
-1000.times do |n|
+10.times do |n|
   name  = Student.generate("female")
   std_id = "#{n+20122610}"
   Student.create!(name:  name,
@@ -51,7 +51,7 @@ Subject.all.each do |s|
   end
 end
 
-MAX_STUDENTS_OF_CLASS = 50
+MAX_STUDENTS_OF_CLASS = 15
 Sclass.all.each do |sc|
   rand(MAX_STUDENTS_OF_CLASS).times do |n|
     sc.learnings.create(student: Student.all[rand(200)] )

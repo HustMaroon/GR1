@@ -12,7 +12,11 @@
           <%= f.text_field :name, class: 'form-control' %>
 
           <%=f.label :topic, "Đề tài:"%>
-          <%=f.collection_select :topic, @sclass.topics,:id,:name, {include_blank: false}, {class: 'form-control'} %>
+          <%=f.text_area :topic, class: 'form-control' %>
+
+          <%=f.label :students, 'Sinh viên' %>
+          <%=f.select(:students, @students.map{|f| "#{f.name}-#{f.std_id}"},
+           {}, {multiple: true, class: 'selectpicker'})%>
 
           <%=f.submit "Tạo nhóm", class:"btn btn-primary"%>
         <%end%>
@@ -23,3 +27,9 @@
     </div>
   </div>
 </div>
+
+  <script>
+    $('.selectpicker').chosen({
+      width: '100%',
+      allow_multiple_select: 'true'})
+  </script>

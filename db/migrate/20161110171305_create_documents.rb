@@ -3,7 +3,7 @@ class CreateDocuments < ActiveRecord::Migration
     create_table :documents do |t|
       t.references :sclass, index: true, foreign_key: true
       t.string :title
-      t.string :link
+      t.string :file
       t.text :description
 
       t.timestamps null: false

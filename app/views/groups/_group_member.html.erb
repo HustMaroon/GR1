@@ -1,0 +1,3 @@
+<div id="student-<%=student.id%>">
+	<%=index+1%>. <%=link_to student.name, student %> <%=link_to '', sclass_group_remove_group_member_path(@sclass, @group), class: 'glyphicon glyphicon-remove' %>
+</div>

@@ -57,6 +57,15 @@ class SclassesController < ApplicationController
 		redirect_to :back
 	end
 
+	def update_avg_point
+		params[:term_point].each do |k,v|
+			learning = Learning.find(k)
+			learning.update_attributes(term_point: v)
+			learning.save
+		end
+		redirect_to :back
+	end
+
 	private
 	def sclass_params
 		params.require(:sclass).permit(:subject_id,:teacher_id, :sclass_id)
