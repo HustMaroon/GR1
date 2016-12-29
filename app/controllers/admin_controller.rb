@@ -48,13 +48,43 @@ class AdminController < ApplicationController
 			row_number = xlsx.last_row - xlsx.first_row + 1
 			row_number.times do |i|
 				#create new sclass
-				course = Subject.find(xlsx.row(i+1)[1])
+				course = Subject.find_by(sbj_id: xlsx.row(i+1)[1])
 				sclass = course.sclasses.build(sclass_id: xlsx.row(i+1)[0], teacher: Teacher.find(xlsx.row(i+1)[2])) unless course.nil?
-				if sclass.save
+				if !(sclass.nil?) && sclass.save
 				#cretae new schedule
-				sclass.make_schedules(xlsx.row(i+1)[3], xlsx.row(i+1)[4], xlsx.row(i+1)[5], xlsx.row(i+1)[6])
+				sclass.make_schedules(xlsx.row(i+1)[3], xlsx.row(i+1)[4], xlsx.row(i+1)[5], xlsx.row(i+1)[6], xlsx.row(i+1)[7])
 				end
 			end
 		end
+		redirect_to admin_classes_path
 	end
+
+	def upload_students
+		if params[:file].nil?
+			flash[:waring] = 'no file chosen'
+		else
+			xlsx = Roo::Spreadsheet.open(params[:file])
+			row_number = xlsx.last_row - xlsx.first_row + 1
+			row_number.times do |i|
+				student = Student.new(std_id: xlsx.row(i+1)[0], name: xlsx.row(i+1)[1], password: '123456', password_confirmation: '123456')
+				student.save
+			end
+		end
+		redirect_to admin_students_path
+	end
+
+	def upload_teachers
+		if params[:file].nil?
+			flash[:warning] = 'no file chosen'
+		else
+			xlsx = Roo::Spreadsheet.open(params[:file])
+			row_number = xlsx.last_row - xlsx.first_row + 1
+			row_number.times do |i|
+				teacher = Teacher.new(name: xlsx.row(i+1)[0], email: xlsx.row(i+1)[1], password: '123456', password_confirmation: '123456')
+				teacher.save
+			end
+		end
+		redirect_to admin_teachers_path
+	end
+
 end

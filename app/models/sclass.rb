@@ -21,20 +21,15 @@ class Sclass < ActiveRecord::Base
   		end
 	end
 
-  def make_schedule(weekday, lession, start_date, end_date)
+  def make_schedules(weekday, first_lession,last_lession, start_date, end_date)
     start_date = Date.strptime(start_date, '%d/%m/%Y')
     end_date = Date.strptime(end_date, '%d/%m/%Y')
     wdays = weekday.split(',').map{|i| i.to_i}
     days = (start_date..end_date).to_a.select{|k| wdays.include?(k.wday)}
     days.each do |day|
-      schedule = this.schedules.build(date: day, start_time: get_start_time(lession), end_time: get_end_time(lession))
+      schedule = self.schedules.build(date: day, first_lession: first_lession.to_i, last_lession: last_lession.to_i) 
       schedule.save
     end
   end
 
-  def get_start_time(lession)
-  end
-
-  def get_end_time(lession)
-  end
 end

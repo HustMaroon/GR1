@@ -2,6 +2,6 @@
 	<li><%=link_to 'Tổng quan', @sclass %></li>
   <li><%=link_to 'Lịch học', sclass_schedules_path(@sclass) %></li>
   <li><%=link_to 'Tài liệu', sclass_documents_path(@sclass) %></li>
-  <li><%=link_to 'Nhóm', sclass_groups_path(@sclass) %></li>
-  <li><%= link_to 'Xem điểm' '#'%></li>
+  <li><%=link_to 'Nhóm', sclass_group_path(@sclass, current_user.groups.find_by(sclass_id: @sclass.id)) %></li>
+  <li><%= link_to 'Xem điểm', sclass_points_path(@sclass)%></li>
 </ul>

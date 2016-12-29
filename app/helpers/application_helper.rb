@@ -1,7 +1,12 @@
 module ApplicationHelper
+	MORNING_CLASSES_START_TIME = "6:45"
+	AFTERNOON_CLASSES_START_TIME = "12:30"
 
 	def get_process_point(learning)
-		process_point = 0
+		group = learning.student.groups.find_by(sclass_id: learning.sclass.id)
+		group_pc = learning.sclass.point_components.find_by(content: 'Điểm nhóm')
+		group_ratio = group_pc.nil? ? 0 : group_pc.ratio
+		process_point = group.nil? ? 0 : group.point * group_ratio /100
 		learning.points.each do |p|
 			process_point += (p.value * p.score_table.point_component.ratio) /100
 		end
@@ -20,5 +25,21 @@ module ApplicationHelper
 			sum += pc.ratio
 		end
 		return sum
+	end
+
+	def start_lesson_to_time(lesson)
+		if lesson <= 6
+			return (Time.parse(MORNING_CLASSES_START_TIME) + (lesson -1)*55*60).to_formatted_s(:time)
+		else
+			return (Time.parse(AFTERNOON_CLASSES_START_TIME) + (lesson -7)*55*60).to_formatted_s(:time)
+		end
+	end
+
+	def end_lesson_to_time(lesson)
+		if lesson <= 6
+			return (Time.parse(MORNING_CLASSES_START_TIME) + lesson*55*60).to_formatted_s(:time)
+		else
+			return (Time.parse(AFTERNOON_CLASSES_START_TIME) + (lesson-6)*55*60).to_formatted_s(:time)
+		end
 	end
 end

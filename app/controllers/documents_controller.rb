@@ -20,6 +20,11 @@ class DocumentsController < ApplicationController
 	def index
 		@sclass= Sclass.find(params[:sclass_id])
 		@documents = @sclass.documents
+		if current_user.class == Teacher
+			render 'index'
+		elsif current_user.class == Student
+			render 'student_index'
+		end 
 	end
 private
 	def doc_params

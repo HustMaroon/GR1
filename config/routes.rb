@@ -59,12 +59,15 @@ Rails.application.routes.draw do
   resources :sclasses do
     resources :documents
     resources :groups do
-      delete 'remove_group_member' => 'groups#remove_member'
+      post 'remove_group_member' => 'groups#remove_member'
+      post 'update_group_point' => 'groups#update_group_point'
+      patch 'upload_report' => 'groups#upload_report'
     end
     resources :learnings
     resources :point_components
     resources :schedules
     resources :score_tables
+    resources :points
     get '/rollup' => 'sclasses#rollup'
     post '/rollup' => 'sclasses#process_rollup'
     post '/update_point' => 'sclasses#update_avg_point'
@@ -96,6 +99,9 @@ Rails.application.routes.draw do
   get 'admin/courses' => 'admin#course_index'
   get 'admin/sign-in' => 'admin#sign_in'
   post 'admin/upload_courses' => 'admin#upload_courses'
+  post 'admin/upload_sclasses' => 'admin#upload_sclasses'
+  post 'admin/upload_students' => 'admin#upload_students'
+  post 'admin/upload_teachers' => 'admin#upload_teachers'
   #--admin--
 
   get    'login'   => 'sessions#new'

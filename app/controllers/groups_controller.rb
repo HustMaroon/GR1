@@ -33,6 +33,11 @@ class GroupsController < ApplicationController
 	def show
 		@sclass = Sclass.find(params[:sclass_id])
 		@group = Group.find(params[:id])
+		if current_user.class == Teacher
+			render 'show'
+		elsif current_user.class == Student
+			render 'student_show'
+		end
 	end
 
 	def edit
@@ -42,6 +47,25 @@ class GroupsController < ApplicationController
 	end
 
 	def destroy
+	end
+
+	def remove_member
+		sg = StudentGroup.find_by(student_id: params[:format], group_id: params[:group_id])
+		sg.destroy unless sg.nil?
+		redirect_to :back
+	end
+
+	def update_group_point
+		group = Group.find(params[:group_id])
+		group.update_attributes(point: params[:point]) unless group.nil?
+		redirect_to :back
+	end
+
+	def upload_report
+		group = Group.find(params[:group_id])
+		group.update_attributes(report: params[:group][:report])
+		group.save
+		redirect_to :back
 	end
 
 private

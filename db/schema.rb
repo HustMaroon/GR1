@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161212102259) do
+ActiveRecord::Schema.define(version: 20161222190629) do
 
   create_table "admins", force: :cascade do |t|
     t.string   "name"
@@ -49,6 +49,7 @@ ActiveRecord::Schema.define(version: 20161212102259) do
     t.float    "point",      default: 0.0
     t.datetime "created_at",               null: false
     t.datetime "updated_at",               null: false
+    t.string   "report"
   end
 
   add_index "groups", ["sclass_id"], name: "index_groups_on_sclass_id"
@@ -112,10 +113,10 @@ ActiveRecord::Schema.define(version: 20161212102259) do
     t.integer  "sclass_id"
     t.date     "date"
     t.text     "content"
-    t.string   "start_time"
-    t.string   "ending_time"
-    t.datetime "created_at",  null: false
-    t.datetime "updated_at",  null: false
+    t.integer  "first_lession"
+    t.integer  "last_lession"
+    t.datetime "created_at",    null: false
+    t.datetime "updated_at",    null: false
   end
 
   add_index "schedules", ["sclass_id"], name: "index_schedules_on_sclass_id"

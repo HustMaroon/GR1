@@ -1,0 +1,6 @@
+<tr>
+	<td><%=index +1%></td>
+	<td><%=document.title%></td>
+	<td><%=document.description%></td>
+	<td><%= link_to File.basename(document.file.url), document.file.url unless document.file.file.nil? %></td>
+<tr>

@@ -1,0 +1,22 @@
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-sm-3 col-md-2 sidebar">
+          <%= render 'students/sidebar' %>
+        </div>
+        <div class="col-sm-9 main">
+						<h1>Documents</h1><span class="glyphicon glyphicon-heart"></span>
+								
+						<table class="table table-hover" style="width:100%" border="1" margin="center">
+						 <tr>
+				 		  <td><b>No.</b></td>
+				 		  <td><b>Title</b></td>
+						  <td><b>Description</b></td>
+				 		  <td><b>Link</b></td>
+				 		</tr>
+						<%@documents.each_with_index do |doc,index|%>
+						 <%=render 'student_document', document: doc, index: index unless doc.id.nil?%>
+						<%end%>
+						</table>
+        </div>
+    </div>
+</div>

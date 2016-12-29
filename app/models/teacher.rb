@@ -1,4 +1,5 @@
 class Teacher < ActiveRecord::Base
+	validates :email, uniqueness: true
 	has_many :sclasses
 	has_many :tests
 	has_secure_password

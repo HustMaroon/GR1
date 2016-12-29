@@ -1,4 +1,5 @@
 class Student < ActiveRecord::Base
+	validates :std_id, uniqueness: true
 	has_many :learnings
 	has_many :sclasses, through: :learnings
 	has_many :mini_works, through: :sclasses

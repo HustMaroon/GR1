@@ -1,5 +1,4 @@
 <ul class="nav nav-tabs" role="tablist">
   <li><%= link_to 'Bảng điểm cuối kì', sclass_learnings_path(@sclass), class: (controller_name=="learnings" ? "active-tab" : "" )%></li>
-  <li><%= link_to 'Bảng điểm nhóm', '#', class: (controller_name == "groups" ? "active-tab" : "") %></li>
   <li><%= link_to 'Bảng điểm thành phần', sclass_score_tables_path(@sclass), class: (controller_name == "score_tables" ? "active-tab" : "")%></li>
 </ul>
