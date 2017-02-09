@@ -1,5 +1,29 @@
-<ul class="nav nav-sidebar">
-  <li><%=link_to 'Trang chủ', root_path %></li>
-  <li><%=link_to 'Lịch dạy', '#' %></li>
-  <li><%=link_to 'Các lớp học',sclasses_path %></li>
-</ul>
+<div class="sidebar">
+	<div class="brand">
+		<%=image_tag 'logo.png',url: root_path, class: 'img-responsive logo'%>
+	</div>
+	<div class="slimScrollDiv" style="overflow: hidden; width: auto; height: 85%;">
+		<div class="sidebar-scroll" style="overflow: hidden; width: auto; height: 85%">
+			<nav>
+				<ul class="nav">
+					<li>
+						<%=link_to root_path do%>
+							<i class="lnr lnr-home"></i>
+							<span>Trang chủ</span>
+						<%end%>
+					</li>
+					<li>
+						<%=link_to 'Lịch dạy', '#'%>
+					</li>
+					<li>
+						<%=link_to 'Các lớp học', sclasses_path%>
+					</li>
+				</ul>
+			</nav>
+		</div>
+		<div class="slimScrollBar" style="background: rgb(0, 0, 0); width: 7px; position: absolute; top: 0px; opacity: 0.4; border-radius: 7px; z-index: 99; right: 1px; height: 568px; display: none;">
+			</div>
+		<div class="slimScrollRail" style="width: 7px; height: 100%; position: absolute; top: 0px; display: none; border-radius: 7px; background: rgb(51, 51, 51); opacity: 0.2; z-index: 90; right: 1px;">
+		</div>
+	</div>
+</div>

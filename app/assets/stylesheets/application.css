@@ -14,4 +14,7 @@
  *= require_self
  *= require simple_calendar
  *= require chosen
+ *= require bootstrap.min
+ *= require vendor/icon-sets
+ *= require main.min
  */

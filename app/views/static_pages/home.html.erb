@@ -1,17 +1,30 @@
 <%if !logged_in?%>
-  <div class="container home-container">
-    <div class="col-sm-12">
-        <div class="center jumbotron">
-          <h1>Welcome to Wow! academy</h1>
-          <h2><font color="black">Don't learn hard, learn funny!</font></h2>
-          <div col-md-12 id="login-buttons">
-           <button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#teacherLoginModal">Login as teacher</button>
-           or
-           <button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#studentLoginModal">Login as student</button>
-           <%=render 'sessions/teacher_login_form'%>
-           <%=render 'sessions/student_login_form'%>
+  <div class="vertical-align-wrap">
+    <div class="vertical-align-middle">
+      <div class="auth-box">
+        <div class="left">
+          <div class="content">
+            <div class="logo text-center">
+              <%=image_tag 'logo-dark.png'%>
+            </div>
+            <div col-md-12 id="login-buttons">
+             <button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#teacherLoginModal">Login as teacher</button>
+             or
+             <button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#studentLoginModal">Login as student</button>
+             <%=render 'sessions/teacher_login_form'%>
+             <%=render 'sessions/student_login_form'%>
            </div>
+          </div>
         </div>
+        <div class="right">
+          <div class="overlay"></div>
+          <div class="content text">
+            <h1 class="heading">WOW LMS</h1>
+            <p>Don't learn hard, learn funny</p>
+          </div>
+        </div>
+        <div class="clearfix"></div>
+      </div>
     </div>
   </div>
 <%elsif current_user.class == Student%>
@@ -19,5 +32,3 @@
 <%else%>
   <%=render 'teachers/home'%>
 <%end%>
-
-
