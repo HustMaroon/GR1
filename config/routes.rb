@@ -91,6 +91,8 @@ Rails.application.routes.draw do
   get '/assignment' => 'mini_works#student_index'
   get '/student/classes' => 'sclasses#student_index'
   post '/test_submit' => 'mini_works#test_submit'
+  get 'month_view' => 'static_pages#month_view'
+  get 'week_view' => 'static_pages#week_view'
   #admin
   get 'admin/teachers' => 'admin#teacher_index'
   get 'admin/students' => 'admin#student_index'
@@ -107,4 +109,5 @@ Rails.application.routes.draw do
   get    'login'   => 'sessions#new'
   post   'login'   => 'sessions#create'
   delete 'logout'  => 'sessions#destroy'
+
 end

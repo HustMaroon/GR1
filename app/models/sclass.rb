@@ -32,4 +32,13 @@ class Sclass < ActiveRecord::Base
     end
   end
 
+  def get_remaining_lessons
+    remaining_lessons = 0;
+    self.schedules.each do |sc|
+      if (Date.today <=> sc.date) == 1
+        remaining_lessons += 1
+      end        
+    end
+    return remaining_lessons
+  end
 end

@@ -1,0 +1,6 @@
+<%= week_calendar(attribute: :date, events: @schedules) do |date, schedules| %>
+	<%= date %></br>
+	<% schedules.each do |schedule|%>
+		<%=start_lesson_to_time schedule.first_lession%>-<%=end_lesson_to_time schedule.last_lession%>  <%= schedule.sclass.subject.name%></br>
+	<%end%>
+<% end %>

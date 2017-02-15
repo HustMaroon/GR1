@@ -2,9 +2,36 @@
 <div class="main">
   <%=render 'layouts/header'%>
   <div class="main-content">
-    
+    <%= link_to '#',id:'month-view-icon', title:'lịch tháng' do%>
+      <i class="fa fa-calendar" aria-hidden="true"></i>
+    <%end%>
+    <%= link_to '#',id: 'week-view-icon', title:'lịch tuần' do%>
+      <i class="fa fa-calendar-minus-o" aria-hidden="true"></i>
+    <%end%>
+    <div id="month-view-area">
+      <%= render 'teachers/time_month_view'%>
+    </div>
+    <div class="hidden" id="week-view-area">
+      <%= render 'teachers/time_week_view'%>
+    </div>
   </div>
   <footer>
     
   </footer>
 </div>
+<script type="text/javascript">
+  $('#month-view-icon').on('click', function(){
+    if($('#month-view-area').hasClass('hidden')){
+      $('#week-view-area').addClass('hidden');
+      $('#month-view-area').removeClass('hidden');
+    }
+  });
+</script>
+<script type="text/javascript">
+  $('#week-view-icon').on('click', function(){
+    if($('#week-view-area').hasClass('hidden')){
+      $('#month-view-area').addClass('hidden');
+      $('#week-view-area').removeClass('hidden');
+    }
+  });
+</script>

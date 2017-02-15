@@ -23,6 +23,7 @@ class SclassesController < ApplicationController
 
 	def show
 		@sclass = Sclass.find(params[:id])
+		@lessons_in_percentage = @sclass.get_remaining_lessons / @sclass.schedules.count.to_f * 100
 	end
 
 	def student_index

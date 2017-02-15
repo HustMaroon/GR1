@@ -1,0 +1,6 @@
+<%= month_calendar(attribute: :date, events: @schedules) do |date, schedules| %>
+	<%= date %></br>
+	<% schedules.each do |schedule|%>
+		<i class="fa fa-list-alt" aria-hidden="true"></i></br>
+	<%end%>
+<% end %>

@@ -1,8 +1,8 @@
 <div class="simple-calendar">
   <div class="calendar-heading">
-    <%= link_to t('simple_calendar.previous', default: 'Previous'), calendar.url_for_previous_view %>
+    <%= link_to t('simple_calendar.previous', default: '<<Trước'), calendar.url_for_previous_view %>
     <span class="calendar-title"><%= t('date.month_names')[start_date.month] %> <%= start_date.year %></span>
-    <%= link_to t('simple_calendar.next', default: 'Next'), calendar.url_for_next_view %>
+    <%= link_to t('simple_calendar.next', default: 'Sau>>'), calendar.url_for_next_view %>
   </div>
 
   <table class="table table-striped">
@@ -20,9 +20,9 @@
           <% week.each do |day| %>
             <%= content_tag :td, class: calendar.td_classes_for(day) do %>
               <% if defined?(Haml) && respond_to?(:block_is_haml?) && block_is_haml?(block) %>
-                <% capture_haml(day, sorted_events.fetch(day, []), &block) %>
+                <% capture_haml(day.to_s.split('-')[2], sorted_events.fetch(day, []), &block) %>
               <% else %>
-                <% block.call day, sorted_events.fetch(day, []) %>
+                <% block.call day.to_s.split('-')[2], sorted_events.fetch(day, []) %>
               <% end %>
             <% end %>
           <% end %>
