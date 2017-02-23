@@ -1,25 +1,28 @@
-<div class="container-fluid">
-    <div class="row">
-        <div class="col-sm-3 col-md-2 sidebar">
-          <%= render 'teachers/sidebar' %>
-        </div>
-        <div class="col-sm-9 main">
-					<button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#documentModal">Upload document</button>
-					<%=render 'form'%>
-						<h1>Documents</h1><span class="glyphicon glyphicon-heart"></span>
-								
-						<table class="table table-hover" style="width:100%" border="1" margin="center">
-						 <tr>
-				 		  <td><b>No.</b></td>
-				 		  <td><b>Title</b></td>
-						  <td><b>Description</b></td>
-				 		  <td><b>Link</b></td>
-				 		  <td><b>Tools</b></td>
-				 		</tr>
-						<%@documents.each_with_index do |doc,index|%>
-						 <%=render 'document', document: doc, index: index unless doc.id.nil?%>
-						<%end%>
-						</table>
-        </div>
-    </div>
+<%= render current_user.class == Teacher ? 'teachers/sidebar' : 'students/sidebar' %>
+<div class="main">
+  <%=render 'layouts/header'%>
+  <div class="main-content">
+  <% if current_user.class == Teacher%>
+		<button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#documentModal">Upload document</button>
+			<%=render 'form'%>
+	<%end%>
+			<h1>Tài liệu</h1><span class="glyphicon glyphicon-heart"></span>
+					
+			<table class="table table-hover" style="width:100%" border="1" margin="center">
+			 <tr>
+	 		  <td><b>No.</b></td>
+	 		  <td><b>Title</b></td>
+			  <td><b>Description</b></td>
+	 		  <td><b>Link</b></td>
+	 		  <%if current_user.class == Teacher%>
+	 		  	<td><b>Tools</b></td>
+	 		  <%end%>
+	 		</tr>
+			<%@documents.each_with_index do |doc,index|%>
+			 <%=render 'document', document: doc, index: index unless doc.id.nil?%>
+			<%end%>
+			</table>
+  </div>
+  <footer>
+  </footer>
 </div>

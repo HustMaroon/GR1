@@ -1,0 +1,2 @@
+class MissedLogsController < ApplicationController
+end

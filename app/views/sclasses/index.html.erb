@@ -1,30 +1,31 @@
-<div class="container-fluid">
-    <div class="row">
-        <div class="col-sm-3 col-md-2 sidebar">
-          <%= render current_user.class == Teacher ? 'teachers/home_sidebar' : 'students/home_sidebar' %>
-        </div>
-        <div class="col-sm-9 main">
-        <h1>Các lớp học</h1>
-        	<table class="table table-hover" style="width:100%" border="1" margin="center">
-            <%if current_user.class == Teacher %>
-    					<tr>
-    					  <td><b>Mã lớp học</b></td>
-    					  <td><b>Học phần</b></td>
-    			 		  <td><b>Số buổi đã học</b></td>
-    			 		  <td><b>Công cụ</b></td>
-    			 		</tr>
-            <%else %>
-              <tr>
-                <td><b>Mã lớp học</b></td>
-                <td><b>Học phần</b></td>
-                <td><b>Giảng viên</b></td>
-                <td><b>Công cụ</b></td>
-              </tr>
-            <%end%>
-			 		<% @sclasses.each do |sclass|%>
-        		<%=render sclass %>
-        	<% end %>
-					</table>
-        </div>
-    </div>
+
+<%= render current_user.class == Teacher ? 'teachers/home_sidebar' : 'students/home_sidebar' %>
+
+<div class="main">
+  <%=render 'layouts/header'%>
+  <div class="main-content">
+      <h1>Các lớp học</h1>
+      <table class="table table-hover" style="width:100%" border="1" margin="center">
+        <%if current_user.class == Teacher %>
+          <tr>
+            <td><b>Mã lớp học</b></td>
+            <td><b>Học phần</b></td>
+            <td><b>Số buổi đã học</b></td>
+            <td><b>Công cụ</b></td>
+          </tr>
+        <%else %>
+          <tr>
+            <td><b>Mã lớp học</b></td>
+            <td><b>Học phần</b></td>
+            <td><b>Giảng viên</b></td>
+            <td><b>Công cụ</b></td>
+          </tr>
+        <%end%>
+      <% @sclasses.each do |sclass|%>
+        <%=render sclass %>
+      <% end %>
+      </table>
+  </div>
+  <footer>
+  </footer>
 </div>

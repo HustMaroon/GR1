@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161222190629) do
+ActiveRecord::Schema.define(version: 20170221102552) do
 
   create_table "admins", force: :cascade do |t|
     t.string   "name"
@@ -47,9 +47,10 @@ ActiveRecord::Schema.define(version: 20161222190629) do
     t.string   "name"
     t.text     "topic"
     t.float    "point",      default: 0.0
+    t.date     "deadline"
+    t.string   "report"
     t.datetime "created_at",               null: false
     t.datetime "updated_at",               null: false
-    t.string   "report"
   end
 
   add_index "groups", ["sclass_id"], name: "index_groups_on_sclass_id"
@@ -77,6 +78,26 @@ ActiveRecord::Schema.define(version: 20161222190629) do
   end
 
   add_index "mini_works", ["sclass_id"], name: "index_mini_works_on_sclass_id"
+
+  create_table "missed_logs", force: :cascade do |t|
+    t.integer  "learning_id"
+    t.integer  "schedule_id"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+  end
+
+  add_index "missed_logs", ["learning_id"], name: "index_missed_logs_on_learning_id"
+  add_index "missed_logs", ["schedule_id"], name: "index_missed_logs_on_schedule_id"
+
+  create_table "notifications", force: :cascade do |t|
+    t.integer  "user_id"
+    t.integer  "user_type"
+    t.string   "content"
+    t.string   "link"
+    t.boolean  "read",       default: false
+    t.datetime "created_at",                 null: false
+    t.datetime "updated_at",                 null: false
+  end
 
   create_table "point_components", force: :cascade do |t|
     t.integer  "sclass_id"
@@ -125,6 +146,7 @@ ActiveRecord::Schema.define(version: 20161222190629) do
     t.integer  "subject_id"
     t.integer  "teacher_id"
     t.string   "sclass_id"
+    t.string   "room"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -159,6 +181,7 @@ ActiveRecord::Schema.define(version: 20161222190629) do
     t.datetime "created_at",      null: false
     t.datetime "updated_at",      null: false
     t.string   "password_digest"
+    t.date     "last_reminded"
   end
 
   create_table "subjects", force: :cascade do |t|
@@ -175,6 +198,7 @@ ActiveRecord::Schema.define(version: 20161222190629) do
     t.datetime "created_at",      null: false
     t.datetime "updated_at",      null: false
     t.string   "password_digest"
+    t.date     "last_reminded"
   end
 
   create_table "test_sclasses", force: :cascade do |t|

@@ -1,24 +1,27 @@
-<div class="container-fluid">
-    <div class="row">
-        <div class="col-sm-3 col-md-2 sidebar">
-          <%= render 'teachers/sidebar' %>
-        </div>
-        <div class="col-sm-9 main">
-        <h1>Quản lý nhóm</h1>
-        	<table class="table table-hover" style="width:100%" border="1" margin="center">
-  					<tr>
-  					  <td><b>Tên nhóm</b></td>
-  					  <td><b>Số thành viên</b></td>
-  			 		  <td><b>Đề tài/Bài tập lớn</b></td>
-                        <td><b>Điểm</b></td>
-  			 		  <td><b>Tools</b></td>
-  			 		</tr>
-  			 		<% @groups.each do |group|%>
-          		<%=render group %>
-          	<% end %>
-			   </table>
-         <%=render 'form', group: Group.new%>
-         <button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#groupModal">Tạo nhóm</button>
-        </div>
-    </div>
+<%= render current_user.class == Teacher ? 'teachers/sidebar' : 'students/sidebar' %>
+<div class="main">
+  <%=render 'layouts/header'%>
+  <div class="main-content">
+    <%if @groups.empty? && current_user.class == Student%>
+      <h1>Bạn chưa được phân nhóm</h1>
+    <%else%>
+    <h1>Quản lý nhóm</h1>
+      <table class="table table-hover" style="width:100%" border="1" margin="center">
+        <tr>
+          <td><b>Tên nhóm</b></td>
+          <td><b>Số thành viên</b></td>
+          <td><b>Đề tài/Bài tập lớn</b></td>
+                    <td><b>Điểm</b></td>
+          <td><b>Tools</b></td>
+        </tr>
+        <% @groups.each do |group|%>
+          <%=render group %>
+        <% end %>
+     </table>
+   <%=render 'form', group: Group.new%>
+   <button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#groupModal">Tạo nhóm</button>
+    <%end%>
+  </div>
+  <footer>
+  </footer>
 </div>

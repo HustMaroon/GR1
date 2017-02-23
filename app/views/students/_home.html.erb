@@ -1,19 +1,37 @@
-<div class="container-fluid">
-    <div class="row">
-        <div class="col-sm-3 col-md-2 sidebar">
-          <%= render 'students/home_sidebar' %>
-        </div>
-        <div class="col-sm-9 main">
-          <div class="center jumbotron">
-          <h1>Chào ngày mới!<span class="glyphicon glyphicon-heart"></span></h1>
-
-          <h2>
-              <font color="black">
-                <h1><span class="glyphicon glyphicon-hand-left"></span></h1> Let's check it out!
-              </font>
-          </h2>
-        </div>
-        </div>
+<%=render 'students/home_sidebar'%>
+<div class="main">
+  <%=render 'layouts/header'%>
+  <div class="main-content">
+    <%= link_to '#',id:'month-view-icon', title:'lịch tháng' do%>
+      <i class="fa fa-calendar" aria-hidden="true"></i>
+    <%end%>
+    <%= link_to '#',id: 'week-view-icon', title:'lịch tuần' do%>
+      <i class="fa fa-calendar-minus-o" aria-hidden="true"></i>
+    <%end%>
+    <div id="month-view-area">
+      <%= render 'teachers/time_month_view', schedules: @schedules%>
     </div>
+    <div class="hidden" id="week-view-area">
+      <%= render 'teachers/time_week_view', schedules: @schedules%>
+    </div>
+  </div>
+  <footer>
+    
+  </footer>
 </div>
-         
+<script type="text/javascript">
+  $('#month-view-icon').on('click', function(){
+    if($('#month-view-area').hasClass('hidden')){
+      $('#week-view-area').addClass('hidden');
+      $('#month-view-area').removeClass('hidden');
+    }
+  });
+</script>
+<script type="text/javascript">
+  $('#week-view-icon').on('click', function(){
+    if($('#week-view-area').hasClass('hidden')){
+      $('#month-view-area').addClass('hidden');
+      $('#week-view-area').removeClass('hidden');
+    }
+  });
+</script>

@@ -63,6 +63,7 @@ class SclassesController < ApplicationController
 			learning = Learning.find(k)
 			learning.update_attributes(term_point: v)
 			learning.save
+			new_point_update_noti learning.student, learning.sclass
 		end
 		redirect_to :back
 	end

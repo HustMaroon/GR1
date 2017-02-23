@@ -1,9 +1,10 @@
 # master_klass = [Student, Teacher, Sclass, Subject, Learning]
+master_klass = [Student]
 
-# master_klass.each do |klass|
-#   klass.destroy_all
-#   puts "Deleted all #{klass} data"
-# end
+master_klass.each do |klass|
+  klass.destroy_all
+  puts "Deleted all #{klass} data"
+end
 # 10.times do |n|
 #   name  = Faker::Name.name
 #   email = "teacher#{n+1}@wow.com"
@@ -54,6 +55,7 @@ end
 MAX_STUDENTS_OF_CLASS = 40
 Sclass.all.each do |sc|
   rand(MAX_STUDENTS_OF_CLASS).times do |n|
-    sc.learnings.create(student: Student.all[rand(200)] )
+    learning = sc.learnings.create(student: Student.all[rand(100)] )
+    puts "student #{learning.student.name} joined #{learning.sclass.sclass_id}"
   end
 end

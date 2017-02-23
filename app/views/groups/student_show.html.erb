@@ -1,34 +1,37 @@
-<div class="container-fluid">
-    <div class="row">
-        <div class="col-sm-3 col-md-2 sidebar">
-          <%= render 'students/sidebar' %>
-        </div>
-        <div class="col-sm-9 main">
-        <h1><%=@group.name%></h1>
-        	<table class="table table-hover" style="width:100%" border="1" margin="center">
-  					<tr>
-  					  <td><b>Sinh viên</b></td>
-  			 		  <td><b>Đề tài/Bài tập lớn</b></td>
-              <td><b>Báo cáo</b></td>
-  			 		  <td><b>Điểm</b></td>
-  			 		</tr>
-            <tr>
-              <td>
-                  <%@group.students.each_with_index do |student,index| %>
-                    <%= render 'group_member', student: student, index: index %>
-                  <%end%>
-              </td>
-              <td><%= @group.topic%></td>
-              <td>
-              <%= link_to File.basename(@group.report.url), @group.report.url unless @group.report.file.nil? %>
-                <%=form_for @group,url: sclass_group_upload_report_path(@sclass, @group), authenticity_token: true, remote: true do |f|%>
-                  <%= f.file_field :report%>
-                  <%= f.submit 'Tải lên báo cáo', class: 'btn btn-primary' %>
-                <%end%>
-              </td>
-              <td><%= @group.point%></td>
-            </tr>
-			   </table>
-        </div>
-    </div>
+<%=render 'students/sidebar'%>
+<div class="main">
+  <%=render 'layouts/header'%>
+  <div class="main-content">
+  <%if @group.nil?%>
+    <h1>Bạn chưa được phân nhóm</h1>
+  <%else%>
+    <h1><%=@group.name%></h1>
+    <table class="table table-hover" style="width:100%" border="1" margin="center">
+      <tr>
+        <td><b>Sinh viên</b></td>
+        <td><b>Đề tài/Bài tập lớn</b></td>
+        <td><b>Báo cáo</b></td>
+        <td><b>Điểm</b></td>
+      </tr>
+      <tr>
+        <td>
+            <%@group.students.each_with_index do |student,index| %>
+              <%= render 'group_member', student: student, index: index %>
+            <%end%>
+        </td>
+        <td><%= @group.topic%></td>
+        <td>
+        <%= link_to File.basename(@group.report.url), @group.report.url unless @group.report.file.nil? %>
+          <%=form_for @group,url: sclass_group_upload_report_path(@sclass, @group), authenticity_token: true, remote: true do |f|%>
+            <%= f.file_field :report%>
+            <%= f.submit 'Tải lên báo cáo', class: 'btn btn-primary' %>
+          <%end%>
+        </td>
+        <td><%= @group.point%></td>
+      </tr>
+   </table>
+  <%end%>
+  </div>
+  <footer>
+  </footer>
 </div>

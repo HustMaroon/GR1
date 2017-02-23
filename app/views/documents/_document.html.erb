@@ -3,5 +3,7 @@
 	<td><%=document.title%></td>
 	<td><%=document.description%></td>
 	<td><%= link_to File.basename(document.file.url), document.file.url unless document.file.file.nil? %></td>
-	<td><%=link_to 'Delete', '#'%></td>
+	<%=if current_user.class = Teacher%>
+		<td><%=link_to 'Xóa', '#'%></td>
+	<%end%>
 <tr>

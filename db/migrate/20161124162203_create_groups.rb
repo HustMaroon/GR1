@@ -5,6 +5,8 @@ class CreateGroups < ActiveRecord::Migration
       t.string :name
       t.text :topic
       t.float :point, default: 0
+      t.date :deadline
+      t.string :report
       t.timestamps null: false
     end
   end

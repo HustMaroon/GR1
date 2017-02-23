@@ -31,4 +31,23 @@ class Student < ActiveRecord::Base
 				" "+ female_last_name[rand(female_last_name.length)]
 		end
 	end
+
+	def get_schedules date
+		self.schedules.select do |sc|
+			sc[:date] == date
+		end
+	end
+
+	def schedules
+		schedules = []
+		self.sclasses.each do |sc|
+			schedules += sc.schedules
+		end
+		schedules
+	end
+
+	def notifications
+		Notifications.where(user_id: self.id, user_type: 2)
+	end
+	
 end

@@ -16,7 +16,7 @@
 //= require chosen-jquery
 //= require jquery/jquery-2.1.0.min
 //= require bootstrap/bootstrap.min
-//= require plugins/jquery-slimscroll/jquery.slimscroll.min
 //= require plugins/jquery-easypiechart/jquery.easypiechart.min
 //= require plugins/chartist/chartist.min
-//= require klorofil.min
+//= require plugins/jquery-slimscroll/jquery.slimscroll
+//= require klorofil

@@ -12,6 +12,7 @@ class GroupsController < ApplicationController
 				student = Student.find_by(std_id: st.split('-')[1]) unless st.empty?
 				group.student_groups.create(student: student)
 			end
+			new_group_assign_noti group
 		else
 			flash[:warning] = "can't create new group"
 		end
@@ -19,15 +20,20 @@ class GroupsController < ApplicationController
 	end
 
 	def index
+
 		@sclass = Sclass.find(params[:sclass_id])
-		@groups = @sclass.groups
-		grouped_students = []
-		@sclass.groups.each do |g|
-			g.students.each do |s|
-				grouped_students << s
+		if current_user.class == Student && !(current_user.groups.find_by(sclass_id: @sclass.id).nil?)
+			redirect_to sclass_group_path(@sclass, current_user.groups.find_by(sclass_id: @sclass.id))
+		else
+			@groups = @sclass.groups
+			grouped_students = []
+			@sclass.groups.each do |g|
+				g.students.each do |s|
+					grouped_students << s
+				end
 			end
+			@students = @sclass.students - grouped_students
 		end
-		@students = @sclass.students - grouped_students
 	end
 
 	def show

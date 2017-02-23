@@ -31,9 +31,9 @@ class AdminController < ApplicationController
 			flash[:waring] = "no file chosen"
 		else
 			xlsx = Roo::Spreadsheet.open(params[:file]) unless params[:file].nil?
-			row_number = xlsx.last_row - xlsx.first_row + 1
+			row_number = xlsx.last_row - xlsx.first_row
 			row_number.times do |i|
-				subject = Subject.new(sbj_id: xlsx.row(i+1)[0], name: xlsx.row(i+1)[1], term_ratio: xlsx.row(i+1)[2])
+				subject = Subject.new(sbj_id: xlsx.row(i+2)[0], name: xlsx.row(i+2)[1], term_ratio: xlsx.row(i+2)[2])
 				subject.save
 			end
 		end
@@ -45,14 +45,14 @@ class AdminController < ApplicationController
 			flash[:waring] = 'no file chosen'
 		else
 			xlsx = Roo::Spreadsheet.open(params[:file])
-			row_number = xlsx.last_row - xlsx.first_row + 1
+			row_number = xlsx.last_row - xlsx.first_row
 			row_number.times do |i|
 				#create new sclass
-				course = Subject.find_by(sbj_id: xlsx.row(i+1)[1])
-				sclass = course.sclasses.build(sclass_id: xlsx.row(i+1)[0], teacher: Teacher.find(xlsx.row(i+1)[2])) unless course.nil?
+				course = Subject.find_by(sbj_id: xlsx.row(i+2)[1])
+				sclass = course.sclasses.build(sclass_id: xlsx.row(i+2)[0], teacher: Teacher.find(xlsx.row(i+2)[2]), room: xlsx.row(i+2)[3]) unless course.nil?
 				if !(sclass.nil?) && sclass.save
 				#cretae new schedule
-				sclass.make_schedules(xlsx.row(i+1)[3], xlsx.row(i+1)[4], xlsx.row(i+1)[5], xlsx.row(i+1)[6], xlsx.row(i+1)[7])
+				sclass.make_schedules(xlsx.row(i+2)[4], xlsx.row(i+2)[5], xlsx.row(i+2)[6], xlsx.row(i+2)[7], xlsx.row(i+2)[8])
 				end
 			end
 		end
@@ -78,9 +78,9 @@ class AdminController < ApplicationController
 			flash[:warning] = 'no file chosen'
 		else
 			xlsx = Roo::Spreadsheet.open(params[:file])
-			row_number = xlsx.last_row - xlsx.first_row + 1
+			row_number = xlsx.last_row - xlsx.first_row
 			row_number.times do |i|
-				teacher = Teacher.new(name: xlsx.row(i+1)[0], email: xlsx.row(i+1)[1], password: '123456', password_confirmation: '123456')
+				teacher = Teacher.new(name: xlsx.row(i+2)[0], email: xlsx.row(i+2)[1], password: '123456', password_confirmation: '123456')
 				teacher.save
 			end
 		end

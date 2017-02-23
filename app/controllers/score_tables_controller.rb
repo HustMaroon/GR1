@@ -12,6 +12,9 @@ class ScoreTablesController < ApplicationController
 																						point_component: PointComponent.find(
 																							params[:score_table][:point_component]))
 		if score_table.save
+			sclass.students.each do |st|
+				new_point_update_noti st, sclass
+			end
 			sclass.learnings.each do |l|
 				point = score_table.points.build(learning: l)
 				point.save

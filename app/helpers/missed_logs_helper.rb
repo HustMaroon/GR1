@@ -1,0 +1,2 @@
+module MissedLogsHelper
+end

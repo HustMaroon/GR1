@@ -1,3 +1,8 @@
 <div id="student-<%=student.id%>">
-	<%=index+1%>. <%=link_to student.name, student %> <%=(link_to '', sclass_group_remove_group_member_path(@sclass, @group, student),method: 'post', class: 'glyphicon glyphicon-remove') if current_user.class == Teacher%>
+	<%=index+1%>. <%=link_to student.name, student %> 
+	<%if current_user.class == Teacher %>
+		<%=link_to sclass_group_remove_group_member_path(@sclass, @group, student),method: 'post' do%>
+			<i class="fa fa-times" aria-hidden="true"></i>
+		<%end%>
+	<%end%>
 </div>

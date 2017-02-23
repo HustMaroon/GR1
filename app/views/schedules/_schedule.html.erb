@@ -2,5 +2,22 @@
 	<td><%=schedule.date%></td>
 	<td><%=start_lesson_to_time(schedule.first_lession)%></td>
 	<td><%=end_lesson_to_time(schedule.last_lession)%></td>
-	<td><%=text_field_tag "schedule[#{schedule.id}", schedule.content, class:'form-control'%></td>
+	<td>
+	<div id="schedule-cell-<%=schedule.id%>">
+		<span id="schedule-content-<%=schedule.id%>"><%=schedule.content%></span>
+		<%if(current_user.class == Teacher)%>
+			<%=link_to '#' do%>
+				<i class="fa fa-pencil-square-o" id= "schedule-content-<%=schedule.id%>" aria-hidden="true" style="float: right;"></i>
+			<%end%>
+		<%end%>
+	</div>
+	<%if(current_user.class == Teacher)%>
+		<div id="schedule-form-<%=schedule.id%>" class="hidden">
+			<%=form_for schedule, url: sclass_schedule_path(schedule.sclass, schedule), remote: true do |f|%>
+				<%=f.text_area :content, class: 'form-control'%>
+				<%=f.submit 'Update', class: 'btn btn-primary'%>
+			<%end%>
+		</div>
+	<%end%>
+	</td>
 <tr>

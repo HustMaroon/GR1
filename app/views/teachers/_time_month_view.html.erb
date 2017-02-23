@@ -1,6 +1,8 @@
 <%= month_calendar(attribute: :date, events: @schedules) do |date, schedules| %>
-	<%= date %></br>
-	<% schedules.each do |schedule|%>
-		<i class="fa fa-list-alt" aria-hidden="true"></i></br>
+	<%= link_to "date_time_table/#{date}" do%>
+		<h4><%= date.to_s.split('-')[2] %></h4></br>
+		<% schedules.each do |schedule|%>
+			<i class="fa fa-list-alt" aria-hidden="true"></i></br>
+		<%end%>
 	<%end%>
 <% end %>

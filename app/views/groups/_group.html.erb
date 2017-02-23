@@ -3,5 +3,5 @@
 		<td><%=group.students.count%></td>
 		<td><%= link_to File.basename(group.report.url), group.report.url unless group.report.file.nil? %></td>
 		<td><%= group.point%></td>
-		<td><%=link_to 'View details', sclass_group_path(@sclass, group) %>
+		<td><%=link_to 'chi tiết', sclass_group_path(@sclass, group) %>
 	</tr>

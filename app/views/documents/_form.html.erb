@@ -8,16 +8,16 @@
       </div>
       <div class="modal-body">
         <%=form_for @sclass.documents.build, url: sclass_documents_path do |f|%>
-          <%=f.label :title, "Title"%>
+          <%=f.label :title, "Tiêu đề"%>
           <%= f.text_field :title, class: 'form-control' %>
 
-          <%=f.label :description, "description"%>
+          <%=f.label :description, "Mô tả"%>
           <%=f.text_area :description, class: 'form-control' %>
 
-          <%= f.label :file, "attached file" %>  
+          <%= f.label :file, "File đính kèm" %>  
           <%=f.file_field :file %> 
 
-          <%=f.submit "Upload", class:"btn btn-primary"%>
+          <%=f.submit "Tải lên", class:"btn btn-primary"%>
         <%end%>
       </div>
       <div class="modal-footer">

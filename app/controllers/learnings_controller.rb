@@ -1,7 +1,7 @@
 class LearningsController < ApplicationController
 	def index
 		@sclass = Sclass.find(params[:sclass_id])
-		@learnings = @sclass.learnings
+		@learnings = @sclass.learnings.paginate(page: params[:page], per_page: 10)
 	end
 
 	def update

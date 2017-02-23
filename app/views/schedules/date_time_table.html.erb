@@ -1,0 +1,64 @@
+<%= render current_user.class == Teacher ? 'teachers/home_sidebar' : 'students/home_sidebar' %>
+<div class="main">
+  <%=render 'layouts/header'%>
+  <div class="main-content">
+		<div class="panel">
+			<div class="panel-heading">
+				<h3 class="panel-title"> Thời khóa biểu ngày <%=@date%></h3>
+			</div>
+			<div class="panel-body">
+				<table class="table table-condensed">
+					<thead>
+						<tr>
+							<th>Thời gian</th>
+							<th>Lớp</th>
+							<th>Nội dung</th>
+							<th>Địa điểm</th>
+						</tr>
+					</thead>
+					<tbody>
+					<% @schedules.each do |sc|%>
+						<tr>
+							<td><%= start_lesson_to_time sc.first_lession%> - <%= end_lesson_to_time sc.last_lession%></td>
+							<td><%= sc.sclass.sclass_id%> - <%= sc.sclass.subject.name%></td>
+							<td>
+								<div id="schedule-cell-<%=sc.id%>">
+									<span id="schedule-content-<%=sc.id%>"><%= sc.content%></span>
+									<%if(current_user.class == Teacher)%>
+										<%=link_to '#' do%>
+											<i class="fa fa-pencil-square-o" id= "schedule-content-<%=sc.id%>" aria-hidden="true" style="float: right;"></i>
+										<%end%>
+									<%end%>
+								</div>
+								<%if(current_user.class == Teacher)%>
+									<div id="schedule-form-<%=sc.id%>" class="hidden">
+										<%=form_for sc, url: sclass_schedule_path(sc.sclass, sc), remote: true do |f|%>
+											<%=f.text_area :content, class: 'form-control'%>
+											<%=f.submit 'Update', class: 'btn btn-primary'%>
+										<%end%>
+									</div>
+								<%end%>
+							</td>
+							<td><%= sc.sclass.room%></td>
+						</tr>
+					<%end%>
+					</tbody>
+				</table>
+			</div>
+		</div>
+  </div>
+  <footer>
+    
+  </footer>
+</div>
+<script>
+$(document).ready(function(){
+		var i;
+	$("i[id^='schedule-content']").on('click', function(){
+		i = $(this).attr('id').split('-')[2];
+		console.log(i);
+		$("#schedule-cell-"+ i).addClass('hidden');
+		$("#schedule-form-"+ i).removeClass('hidden');
+	});
+});
+</script>

@@ -109,5 +109,6 @@ Rails.application.routes.draw do
   get    'login'   => 'sessions#new'
   post   'login'   => 'sessions#create'
   delete 'logout'  => 'sessions#destroy'
+  get 'date_time_table/:date' => 'schedules#date_time_table'
 
 end
