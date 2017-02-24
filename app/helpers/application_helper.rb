@@ -8,9 +8,15 @@ module ApplicationHelper
 		group_ratio = group_pc.nil? ? 0 : group_pc.ratio
 		process_point = group.nil? ? 0 : group.point * group_ratio /100
 		learning.points.each do |p|
-			process_point += (p.value * p.score_table.point_component.ratio) /100
+			freq = get_freq p
+			process_point += (p.value * p.score_table.point_component.ratio/freq) /100
 		end
 		return process_point
+	end
+
+	def get_freq point
+		freq = 0
+		point.score_table.point_component.score_tables.count
 	end
 
 	def get_avg_point(learning)

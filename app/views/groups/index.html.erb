@@ -1,6 +1,6 @@
 <%= render current_user.class == Teacher ? 'teachers/sidebar' : 'students/sidebar' %>
 <div class="main">
-  <%=render 'layouts/header'%>
+  <%=render 'layouts/header', notifications: current_user.notifications.where(read: false)%>
   <div class="main-content">
     <%if @groups.empty? && current_user.class == Student%>
       <h1>Bạn chưa được phân nhóm</h1>

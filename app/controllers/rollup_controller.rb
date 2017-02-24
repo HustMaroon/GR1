@@ -7,6 +7,10 @@ class RollupController < ApplicationController
 			@sclass = @sclasses.find(params[:sclass][:id])
 		end
 		@students = @sclass.students.all
+		respond_to do |format|
+			format.html
+			format.json {render json: @student}
+		end
 	end
 
 	def checklist

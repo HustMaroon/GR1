@@ -1,6 +1,6 @@
 <%= render current_user.class == Teacher ? 'teachers/home_sidebar' : 'students/home_sidebar' %>
 <div class="main">
-  <%=render 'layouts/header'%>
+  <%=render 'layouts/header', notifications: current_user.notifications.where(read: false)%>
   <div class="main-content">
 		<div class="panel">
 			<div class="panel-heading">

@@ -1,6 +1,6 @@
 <%=render 'students/sidebar'%>
 <div class="main">
-  <%=render 'layouts/header'%>
+  <%=render 'layouts/header', notifications: current_user.notifications.where(read: false)%>
   <div class="main-content">
   <%if @group.nil?%>
     <h1>Bạn chưa được phân nhóm</h1>

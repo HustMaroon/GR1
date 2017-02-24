@@ -1,9 +1,13 @@
 <%=render 'teachers/sidebar'%>
 <div class="main">
-  <%=render 'layouts/header'%>
+  <%=render 'layouts/header', notifications: current_user.notifications.where(read: false)%>
   <div class="main-content">
     <%= render 'score_tables/nav_bar' %>
-		<h1>Nhập điểm</h1>
+		<h1>Nhập điểm
+		<%= link_to sclass_learnings_path(@sclass, format: "xls"), title: "Xuất ra file excel" do%>
+			<i class="fa fa-file-excel-o" aria-hidden="true"></i>
+		<%end%>
+		</h1>
 			<table class="table table-hover" style="width:100%" border="1" margin="center">
 			 <tr>
 				  <td><b>Sinh viên</b></td>

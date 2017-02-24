@@ -1,6 +1,6 @@
 <%=render 'teachers/sidebar'%>
 <div class="main">
-  <%=render 'layouts/header'%>
+  <%=render 'layouts/header', notifications: current_user.notifications.where(read: false)%>
   <div class="main-content">
     <%=render 'nav_bar' %>
     <h1>Bảng điểm</h1>
@@ -18,7 +18,7 @@
           <% end %>
         </table>
     <%end%>
-    <%=render 'form' %>
+    <%=render 'form', point_components: @point_components %>
     <button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#scoreModal">Tạo bảng điểm</button>
   </div>
   <footer>

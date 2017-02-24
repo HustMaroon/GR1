@@ -1,6 +1,6 @@
 <%= render current_user.class == Teacher ? 'teachers/sidebar' : 'students/sidebar' %>
 <div class="main">
-  <%=render 'layouts/header'%>
+  <%=render 'layouts/header', notifications: current_user.notifications.where(read: false)%>
   <div class="main-content">
   <% if current_user.class == Teacher%>
 		<button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#documentModal">Upload document</button>

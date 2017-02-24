@@ -47,7 +47,7 @@ class Student < ActiveRecord::Base
 	end
 
 	def notifications
-		Notifications.where(user_id: self.id, user_type: 2)
+		Notification.where(user_id: self.id, user_type: 2)
 	end
 	
 end

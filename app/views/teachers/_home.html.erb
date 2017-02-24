@@ -1,6 +1,6 @@
 <%=render 'teachers/home_sidebar'%>
 <div class="main">
-  <%=render 'layouts/header'%>
+  <%=render 'layouts/header', notifications: current_user.notifications.where(read: false)%>
   <div class="main-content">
     <%= link_to '#',id:'month-view-icon', title:'lịch tháng' do%>
       <i class="fa fa-calendar" aria-hidden="true"></i>

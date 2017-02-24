@@ -12,7 +12,7 @@
     <div id="navbar-menu" class="navbar-collapse collapse">
       <form class="navbar-form navbar-left hidden-xs">
         <div class="input-group">
-          <input type="text" value="" class="form-control" placeholder="Search dashboard...">
+          <input type="text" value="" class="form-control" placeholder="Tìm kiếm...">
           <span class="input-group-btn"><button type="button" class="btn btn-primary">Go</button></span>
         </div>
       </form>
@@ -20,15 +20,13 @@
         <li class="dropdown">
           <a href="#" class="dropdown-toggle icon-menu" data-toggle="dropdown">
             <i class="lnr lnr-alarm"></i>
-            <span class="badge bg-danger">5</span>
+            <span class="badge bg-danger"><%=notifications.count%></span>
           </a>
           <ul class="dropdown-menu notifications">
-            <li><a href="#" class="notification-item"><span class="dot bg-warning"></span>System space is almost full</a></li>
-            <li><a href="#" class="notification-item"><span class="dot bg-danger"></span>You have 9 unfinished tasks</a></li>
-            <li><a href="#" class="notification-item"><span class="dot bg-success"></span>Monthly report is available</a></li>
-            <li><a href="#" class="notification-item"><span class="dot bg-warning"></span>Weekly meeting in 1 hour</a></li>
-            <li><a href="#" class="notification-item"><span class="dot bg-success"></span>Your request has been approved</a></li>
-            <li><a href="#" class="more">See all notifications</a></li>
+          <%notifications.order(created_at: :desc).each do |noti|%>
+            <li><%= link_to noti.content, noti.link%></li>
+          <%end%>
+            <li><a href="#" class="more">Xem tất cả</a></li>
           </ul>
         </li>
         <li class="dropdown">
@@ -43,7 +41,7 @@
         <li class="dropdown">
           <%=link_to '#', {class: 'data-toggle', 'data-toggle' => 'dropdown'} do%>
             <%=image_tag 'user.png', class: 'img-circle'%>
-            <span>Samuel</span>
+            <span><%= current_user.name%></span>
             <i class="icon-submenu lnr lnr-chevron-down"></i>
           <%end%>
           <ul class="dropdown-menu">

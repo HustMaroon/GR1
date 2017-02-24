@@ -53,6 +53,7 @@ class AdminController < ApplicationController
 				if !(sclass.nil?) && sclass.save
 				#cretae new schedule
 				sclass.make_schedules(xlsx.row(i+2)[4], xlsx.row(i+2)[5], xlsx.row(i+2)[6], xlsx.row(i+2)[7], xlsx.row(i+2)[8])
+				sclass.point_components.create(content: 'Điểm nhóm', ratio: 0)
 				end
 			end
 		end

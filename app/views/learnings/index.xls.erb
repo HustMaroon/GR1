@@ -1,0 +1,27 @@
+<?xml version="1.0"?>
+<Workbook xmlns="urn:schemas-microsoft-com:office:spreadsheet"
+  xmlns:o="urn:schemas-microsoft-com:office:office"
+  xmlns:x="urn:schemas-microsoft-com:office:excel"
+  xmlns:ss="urn:schemas-microsoft-com:office:spreadsheet"
+  xmlns:html="http://www.w3.org/TR/REC-html40">
+  <Worksheet ss:Name="Sheet1">
+    <Table>
+      <Row>
+        <Cell><Data ss:Type="String">Họ tên</Data></Cell>
+        <Cell><Data ss:Type="String">MSSV</Data></Cell>
+        <Cell><Data ss:Type="String">Điểm quá trình</Data></Cell>
+        <Cell><Data ss:Type="String">Điểm cuối kì</Data></Cell>
+        <Cell><Data ss:Type="String">Điểm trung bình</Data></Cell>
+      </Row>
+    <% @learnings.each do |learning| %>
+      <Row>
+        <Cell><Data ss:Type="String"><%= learning.student.name %></Data></Cell>
+        <Cell><Data ss:Type="String"><%= learning.student.std_id %></Data></Cell>
+        <Cell><Data ss:Type="Number"><%= get_process_point learning %></Data></Cell>
+        <Cell><Data ss:Type="Number"><%= learning.term_point %></Data></Cell>
+        <Cell><Data ss:Type="Number"><%= get_avg_point learning %></Data></Cell>
+      </Row>
+    <% end %>
+    </Table>
+  </Worksheet>
+</Workbook>

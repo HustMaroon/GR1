@@ -5,7 +5,7 @@ module NotificationsHelper
 	end
 
 	def new_reminder user 
-		if user.get_schedules(Date.tomorrow).count >0 && user.last_reminded < Date.today
+		if user.get_schedules(Date.tomorrow).count >0 && (user.last_reminded.nil? || user.last_reminded < Date.today)
 			if user.class == Teacher
 				user_type = 1
 			elsif user.class == Student
@@ -38,7 +38,7 @@ module NotificationsHelper
 	# end
 
 	def new_point_update_noti student, sclass
-		Notification.create(user_id: student.id, user_type: 2, link: "sclasses/#{sclasses.id}/points",
+		Notification.create(user_id: student.id, user_type: 2, link: "sclasses/#{sclass.id}/points",
 												content: "Điểm môn #{sclass.subject.name} đã được cập nhật")
 	end
 
