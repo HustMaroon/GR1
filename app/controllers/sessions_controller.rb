@@ -37,4 +37,9 @@ class SessionsController < ApplicationController
     log_out
     redirect_to root_url
   end
+
+  def change_password
+  	byebug
+  end
+
 end

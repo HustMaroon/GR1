@@ -20,6 +20,21 @@ class StudentsController < ApplicationController
 		end
 	end
 
+	def show
+		@student = Student.find(params[:id])
+	end
+
+	def update
+		@student = Student.find(params[:id])
+		if @student.authenticate(params[:student][:old_password]) && params[:student][:password] == params[:student][:password_confirmation]
+			@student.update_attributes(password: params[:student][:password], password_confirmation: params[:student][:password_confirmation])
+			flash[:success] = "Cập nhật mật khẩu thành công!"
+		else
+			flash[:warning] = "Vui lòng kiểm tra lại!"
+		end
+		redirect_to student_path @student
+	end
+
 	private
 	def student_params
 		params.require(:student).permit(:name,:std_id)

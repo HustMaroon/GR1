@@ -22,5 +22,6 @@ module WowLMS
 
     # Do not swallow errors in after_commit/after_rollback callbacks.
     config.active_record.raise_in_transactional_callbacks = true
+    config.root_path = Rails.env == "development" ? 'localhost:3000' : 'app.heroku.com'
   end
 end

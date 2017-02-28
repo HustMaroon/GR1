@@ -49,7 +49,8 @@ class AdminController < ApplicationController
 			row_number.times do |i|
 				#create new sclass
 				course = Subject.find_by(sbj_id: xlsx.row(i+2)[1])
-				sclass = course.sclasses.build(sclass_id: xlsx.row(i+2)[0], teacher: Teacher.find(xlsx.row(i+2)[2]), room: xlsx.row(i+2)[3]) unless course.nil?
+				sclass = course.sclasses.build(sclass_id: xlsx.row(i+2)[0], teacher: Teacher.find(xlsx.row(i+2)[2]), room: xlsx.row(i+2)[3], 
+												start_date: xlsx.row(i+2)[7], end_date: xlsx.row(i+2)[8]) unless course.nil?
 				if !(sclass.nil?) && sclass.save
 				#cretae new schedule
 				sclass.make_schedules(xlsx.row(i+2)[4], xlsx.row(i+2)[5], xlsx.row(i+2)[6], xlsx.row(i+2)[7], xlsx.row(i+2)[8])

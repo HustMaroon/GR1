@@ -6,7 +6,7 @@ class TeachersController < ApplicationController
 	end
 
 	def create
-		teacher = Teacher.new(sclass_params)
+		teacher = Teacher.new(teacher_params)
 		if teacher.save
 			flash.now[:success] = "teacher #{params[:teacher][:name]} added successfully!"
 			redirect_to admin_teachers_path
@@ -16,8 +16,23 @@ class TeachersController < ApplicationController
 		end
 	end
 
+	def update
+		@teacher = Teacher.find(params[:id])
+		if @teacher.authenticate(params[:teacher][:old_password]) && params[:teacher][:password] == params[:teacher][:password_confirmation]
+			@teacher.update_attributes(password: params[:teacher][:password], password_confirmation: params[:teacher][:password_confirmation])
+			flash[:success] = "Cập nhật mật khẩu thành công!"
+		else
+			flash[:warning] = "Vui lòng kiểm tra lại!"
+		end
+		redirect_to teacher_path @teacher
+	end
+
+	def show
+		@teacher = Teacher.find(params[:id])
+	end
+
 	private
-	def sclass_params
+	def teacher_params
 		params.require(:teacher).permit(:name,:email)
 	end
 end

@@ -45,8 +45,11 @@
             <i class="icon-submenu lnr lnr-chevron-down"></i>
           <%end%>
           <ul class="dropdown-menu">
-            <li><a href="#"><i class="lnr lnr-user"></i> <span>My Profile</span></a></li>
-            <li><a href="#"><i class="lnr lnr-envelope"></i> <span>Message</span></a></li>
+            <li><%= link_to current_user.class == Teacher ? teacher_path(current_user) : student_path(current_user) do%>
+                <i class="lnr lnr-user"></i>
+                <span>Trang cá nhân</span>
+              <%end%>
+            </li>
             <li><a href="#"><i class="lnr lnr-cog"></i> <span>Settings</span></a></li>
             <li><%=link_to logout_path, method: 'delete' do%>
               <i class="lnr lnr-exit"></i>

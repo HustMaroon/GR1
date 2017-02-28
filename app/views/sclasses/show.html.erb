@@ -49,28 +49,46 @@
     </div>
   </div>
 <%else%>
-    <div class="container-fluid">
-      <div class="row">
-          <div class="col-sm-3 col-md-2 sidebar">
-            <%= render 'students/sidebar' %>
-          </div>
-          <div class="col-sm-9 main">
-          <h1>Dashboard</h1>
-          <ul>
-            <li> <b>Progress</b>
-              <div class="progress">
-                <div class="progress-bar progress-bar-striped active" role="progressbar" aria-valuenow="45" aria-valuemin="0" aria-valuemax="100" style="width: 45%">
-                  <span class="">45% Complete</span>
+  <%=render 'students/sidebar'%>
+  <div class="main">
+    <%=render 'layouts/header', notifications: current_user.notifications.where(read: false)%>
+    <div class="main-content">
+      <div class="container-fluid">
+        <div class="row">
+          <div class="col-md-6">
+            <div class="panel">
+                <div class="panel-heading">
+                  <h3 class="panel-title">Class overview</h3>
+                  <div class="right">
+                    <button type="button" class="btn-toggle-collapse"><i class="lnr lnr-chevron-up"></i></button>
+                    <button type="button" class="btn-remove"><i class="lnr lnr-cross"></i></button>
+                  </div>
+                </div>
+                <div class="panel-body">
+                  <ul class="list-unstyled task-list">
+                    <li>
+                      <p>Số buổi đã học <span class="label-percent"><%=@sclass.get_remaining_lessons%>/<%=@sclass.schedules.count%></span></p>
+                      <div class="progress progress-xs">
+                        <div class="progress-bar progress-bar-danger" role="progressbar" aria-valuenow="<%=@lessons_in_percentage%>" aria-valuemin="0" aria-valuemax="100" style="width: <%=@lessons_in_percentage%>%">
+                          <span class="sr-only"><%=@lessons_in_percentage%> Complete</span>
+                        </div>
+                      </div>
+                    </li>
+                    <li>
+                      <p>Số buổi nghỉ<span class="label-percent"><%=current_user.get_missed_lessons(@sclass)%></span></p>
+                      <div class="progress progress-xs">
+                        <div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="<%=@missed_lessons_in_percetage%>" aria-valuemin="0" aria-valuemax="100" style="width: <%=@missed_lessons_in_percetage%>%">
+                          <span class="sr-only"><%=@missed_lessons_in_percetage%> Complete</span>
+                        </div>
+                      </div>
+                    </li>
+                  </ul>
                 </div>
               </div>
-            </li>
-
-            <li> <b>Next class: </b><br>
-              <span class="glyphicon glyphicon-calendar"></span>27/11/2016
-            </li>
-          </ul>
           </div>
+        </div>
       </div>
+    </div>
   </div>
 <%end%>
            

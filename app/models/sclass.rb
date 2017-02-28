@@ -13,6 +13,8 @@ class Sclass < ActiveRecord::Base
   has_many :point_components
   has_many :score_tables
 
+  scope :opening_classes, -> {where("start_date <= ? AND end_date >= ?", Date.today, Date.today)}
+
 	def self.search(search)
   		if search
     	where("sclass_id LIKE ?", "%#{search}%")

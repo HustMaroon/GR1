@@ -49,5 +49,10 @@ class Student < ActiveRecord::Base
 	def notifications
 		Notification.where(user_id: self.id, user_type: 2)
 	end
+
+	def get_missed_lessons sclass
+		learning = Learning.find_by(student: self, sclass: sclass)
+		learning.missed_logs.count
+	end
 	
 end

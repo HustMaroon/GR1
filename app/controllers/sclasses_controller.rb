@@ -18,12 +18,15 @@ class SclassesController < ApplicationController
 	end
 
 	def index
-		@sclasses = current_user.sclasses
+		@sclasses = current_user.sclasses.opening_classes
 	end
 
 	def show
 		@sclass = Sclass.find(params[:id])
 		@lessons_in_percentage = @sclass.get_remaining_lessons / @sclass.schedules.count.to_f * 100
+		if current_user.class == Student
+			@missed_lessons_in_percentage = current_user.get_missed_lessons(@sclass) / @sclass.schedules.count.to_f * 100
+		end
 	end
 
 	def student_index

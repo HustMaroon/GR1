@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170221102552) do
+ActiveRecord::Schema.define(version: 20170224075828) do
 
   create_table "admins", force: :cascade do |t|
     t.string   "name"
@@ -149,6 +149,8 @@ ActiveRecord::Schema.define(version: 20170221102552) do
     t.string   "room"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.date     "start_date"
+    t.date     "end_date"
   end
 
   add_index "sclasses", ["subject_id"], name: "index_sclasses_on_subject_id"
