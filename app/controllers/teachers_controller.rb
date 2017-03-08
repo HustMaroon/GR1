@@ -1,4 +1,6 @@
 class TeachersController < ApplicationController
+	before_action :login_as_admin, only: [:create, :destroy]
+	before_action :login_as_teacher, only: [:update, :show]
 	def destroy
 		Teacher.find(params[:id]).destroy
 		flash[:success] = "teacher removed"

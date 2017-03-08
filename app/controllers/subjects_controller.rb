@@ -1,4 +1,5 @@
 class SubjectsController < ApplicationController
+	before_action :loggin_as_admin
 	def destroy
 		Subject.find(params[:id]).destroy
 		flash[:success] = "course removed"

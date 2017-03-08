@@ -1,4 +1,5 @@
 class Learning < ActiveRecord::Base
+  validates :sclass_id, uniqueness: {scope: :student_id}
   belongs_to :student
   belongs_to :sclass
   has_many :points

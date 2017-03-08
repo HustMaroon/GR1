@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170224075828) do
+ActiveRecord::Schema.define(version: 20170302024658) do
 
   create_table "admins", force: :cascade do |t|
     t.string   "name"
@@ -110,10 +110,10 @@ ActiveRecord::Schema.define(version: 20170224075828) do
   create_table "points", force: :cascade do |t|
     t.integer  "score_table_id"
     t.integer  "learning_id"
-    t.integer  "value",          default: 0
+    t.float    "value",          default: 0.0
     t.string   "note"
-    t.datetime "created_at",                 null: false
-    t.datetime "updated_at",                 null: false
+    t.datetime "created_at",                   null: false
+    t.datetime "updated_at",                   null: false
   end
 
   add_index "points", ["learning_id"], name: "index_points_on_learning_id"

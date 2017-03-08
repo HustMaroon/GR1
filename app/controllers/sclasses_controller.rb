@@ -1,5 +1,7 @@
 class SclassesController < ApplicationController
 	before_action :ratio_validate, only:[:update_ratio]
+	before_action :logged_in_user
+	before_action :login_as_admin, only: [:destroy, :create]
 	def destroy
 		Sclass.find(params[:id]).destroy
 		flash[:success] = "class removed"

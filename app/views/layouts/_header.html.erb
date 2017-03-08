@@ -24,7 +24,7 @@
           </a>
           <ul class="dropdown-menu notifications">
           <%notifications.order(created_at: :desc).each do |noti|%>
-            <li><%= link_to noti.content, noti.link%></li>
+            <li><%= link_to noti.content, noti.link+"?noti_id=#{noti.id}"%></li>
           <%end%>
             <li><a href="#" class="more">Xem tất cả</a></li>
           </ul>

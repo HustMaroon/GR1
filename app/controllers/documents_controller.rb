@@ -1,4 +1,6 @@
 class DocumentsController < ApplicationController
+	before_action :logged_in_user
+	before_action :login_as_teacher, only: [:create, :destroy]
 
 	def create
 		sclass = Sclass.find(params[:sclass_id])

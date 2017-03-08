@@ -1,5 +1,6 @@
 class GroupsController < ApplicationController
-	before_action :login_as_teacher, only:[:new, :create, :destroy]
+	before_action :logged_in_user
+	before_action :login_as_teacher, only:[:new, :create, :destroy, :remove_member, :update_group_point]
 
 	def new
 	end

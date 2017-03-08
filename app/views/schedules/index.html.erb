@@ -13,9 +13,10 @@
 				  <td><b>Bắt đầu</b></td>
 			  	<td><b>Kết thúc</b></td>
 				  <td><b>Nội dung</b></td>
+				  <td><b>Công cụ</b></td>
 				</tr>
 					<%@schedules.each do |schedule|%>
-				 		<%=render schedule%>
+				 		<%=render schedule, sclass: @sclass%>
 					<%end%>
 			</table>
 					<%=will_paginate @schedules%>

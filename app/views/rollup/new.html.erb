@@ -1,11 +1,23 @@
-<div class="container">
-	<h1>Attendance</h1>
-	<p>Select a class for rolling up.</p>
-	<div class='form'>
-		<%= form_tag('/rollup') do%>
-		<%= collection_select :sclass,:id, @sclasses,:id,:sclass_id%>
-		<%= submit_tag "refresh" %>
-		<%end%>
-	</div>
-	<%=render 'list'%>
+<%=render 'teachers/sidebar'%>
+<div class="main">
+  <%=render 'layouts/header', notifications: current_user.notifications.where(read: false)%>
+  <div class="main-content">
+    <h1><%=@sclass.subject.name%> - <%=@sclass.sclass_id%> ngày <%=@schedule.date %></h1>
+    <table class="table table-hover" style="width:100%" border="1" margin="center">
+      <tr>
+        <td><b>Họ tên</b></td>
+        <td><b>MSSV</b></td>
+        <td><b>Vắng mặt</b></td>
+      </tr>
+  <%=form_tag sclass_schedule_rollup_path(@sclass, @schedule) do%>
+    <%@students.each do |student|%>
+    		<%learning = @sclass.learnings.find_by(student: student)%>
+        <%=render 'student', student: student, check: @schedule.missed_logs.find_by(learning: learning).nil? ? false : true%>
+    <%end%>
+  </table>
+  <%=submit_tag "Submit", class: "btn btn-primary"%>
+  <%end%>
+  </div>
+  <footer>
+  </footer>
 </div>

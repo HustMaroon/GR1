@@ -48,4 +48,12 @@ module ApplicationHelper
 			return (Time.parse(AFTERNOON_CLASSES_START_TIME) + (lesson-6)*55*60).to_formatted_s(:time)
 		end
 	end
+
+	def routed_from_noti?
+		byebug
+		unless params[:noti_id].nil?
+			noti = Notification.find(params[:noti_id])
+			noti.update_attributes(read: true)
+		end
+	end
 end

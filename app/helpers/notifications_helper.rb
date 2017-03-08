@@ -5,6 +5,7 @@ module NotificationsHelper
 	end
 
 	def new_reminder user 
+		byebug
 		if user.get_schedules(Date.tomorrow).count >0 && (user.last_reminded.nil? || user.last_reminded < Date.today)
 			if user.class == Teacher
 				user_type = 1
@@ -17,9 +18,9 @@ module NotificationsHelper
 					end
 				end
 			end
-				Notification.create(user_id: user.id, user_type: user_type, link: "#{Rails.application.config.root_path}/date_time_table/#{Date.tomorrow}",
-														content: "Bạn có #{user.get_schedules(Date.tomorrow).count} giờ lên lớp ngày mai")
-				user.update_attributes(last_reminded: Date.today)				
+			Notification.create(user_id: user.id, user_type: user_type, link: "/date_time_table/#{Date.tomorrow}",
+													content: "Bạn có #{user.get_schedules(Date.tomorrow).count} giờ lên lớp ngày mai")
+			user.update_attributes(last_reminded: Date.today)
 		end
 	end
 

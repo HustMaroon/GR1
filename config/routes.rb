@@ -57,6 +57,7 @@ Rails.application.routes.draw do
   #   end
   root 'static_pages#home'
   resources :sclasses do
+    get 'missed_logs' => 'missed_logs#class_index'
     resources :documents
     resources :groups do
       post 'remove_group_member' => 'groups#remove_member'
@@ -65,11 +66,15 @@ Rails.application.routes.draw do
     end
     resources :learnings
     resources :point_components
-    resources :schedules
+    resources :schedules do
+      get 'missed_logs' => 'missed_logs#index'
+      get '/rollup' => 'rollup#new'
+      post 'rollup' => 'rollup#logging'
+    end
     resources :score_tables
     resources :points
-    get '/rollup' => 'sclasses#rollup'
-    post '/rollup' => 'sclasses#process_rollup'
+    # get '/rollup' => 'sclasses#rollup'
+    # post '/rollup' => 'sclasses#process_rollup'
     post '/update_point' => 'sclasses#update_avg_point'
     post '/update_schedules' => 'schedules#update_schedules'
     post 'update_ratio' => 'sclasses#update_ratio'
@@ -87,7 +92,7 @@ Rails.application.routes.draw do
   end
 
 
-  post 'submit_rollup' => 'rollup#checklist'
+  # post 'submit_rollup' => 'rollup#checklist'
   get '/assignment' => 'mini_works#student_index'
   get '/student/classes' => 'sclasses#student_index'
   post '/test_submit' => 'mini_works#test_submit'

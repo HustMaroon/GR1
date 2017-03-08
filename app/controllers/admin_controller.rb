@@ -1,7 +1,7 @@
 require 'roo'
 
 class AdminController < ApplicationController
-	before_action :login_as_admin, only:[:student_index, :teacher_index, :course_index, :class_index]
+	before_action :login_as_admin
 
 	def student_index
 		@students = Student.search(params[:search])

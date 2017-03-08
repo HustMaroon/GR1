@@ -13,10 +13,10 @@
 						<%end%>
 					</li>
 					<li><%=link_to 'Tổng quan', @sclass %></li>
-				  <li><%=link_to 'Cập nhật lịch dạy', sclass_schedules_path(@sclass) %></li>
+				  <li><%=link_to 'Lịch dạy', sclass_schedules_path(@sclass) %></li>
 				  <li><%=link_to 'Tài liệu', sclass_documents_path(@sclass) %></li>
 				  <li><%=link_to 'Nhóm', sclass_groups_path(@sclass) %></li>
-				  <li><%=link_to 'Điểm danh',sclass_rollup_path(@sclass) %></li>
+				  <li><%=link_to 'Danh sách vắng mặt',sclass_missed_logs_path(@sclass) %></li>
 				  <li><%=link_to 'Thay đổi trọng số điểm', sclass_point_components_path(@sclass)%></li>
 				  <li><%=link_to 'Nhập điểm', sclass_learnings_path(@sclass)%></li>
 				</ul>

@@ -1,4 +1,5 @@
 class LearningsController < ApplicationController
+	before_action :logged_in_user
 	def index
 		@sclass = Sclass.find(params[:sclass_id])
 		@learnings = @sclass.learnings

@@ -1,4 +1,4 @@
-<tr>
+<tr class=<%=schedule.date == Date.today ? "today-row" : "" %>>
 	<td><%=schedule.date%></td>
 	<td><%=start_lesson_to_time(schedule.first_lession)%></td>
 	<td><%=end_lesson_to_time(schedule.last_lession)%></td>
@@ -20,4 +20,5 @@
 		</div>
 	<%end%>
 	</td>
+	<td><%= link_to 'Điểm danh', sclass_schedule_rollup_path(sclass, schedule_id: schedule.id), class: 'btn btn-primary'%></td>
 <tr>

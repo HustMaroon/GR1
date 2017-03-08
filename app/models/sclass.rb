@@ -12,6 +12,7 @@ class Sclass < ActiveRecord::Base
   has_many :schedules
   has_many :point_components
   has_many :score_tables
+  has_many :missed_logs, through: :learnings
 
   scope :opening_classes, -> {where("start_date <= ? AND end_date >= ?", Date.today, Date.today)}
 

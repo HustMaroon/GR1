@@ -1,4 +1,5 @@
 class StudentsController < ApplicationController
+	before_action :login_as_admin
 	def destroy
 		Student.find(params[:id]).destroy
 		flash[:success] = "student removed"

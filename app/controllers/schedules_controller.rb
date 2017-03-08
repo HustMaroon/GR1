@@ -1,4 +1,8 @@
+include ApplicationHelper
 class SchedulesController < ApplicationController
+	before_action :logged_in_user
+	before_action :login_as_teacher, only: [:update_schedules, :update]
+	before_action :routed_from_noti?, only: [:date_time_table]
 
 	def index
 		@sclass = Sclass.find(params[:sclass_id])
