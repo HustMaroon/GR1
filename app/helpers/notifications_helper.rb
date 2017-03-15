@@ -5,7 +5,6 @@ module NotificationsHelper
 	end
 
 	def new_reminder user 
-		byebug
 		if user.get_schedules(Date.tomorrow).count >0 && (user.last_reminded.nil? || user.last_reminded < Date.today)
 			if user.class == Teacher
 				user_type = 1

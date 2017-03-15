@@ -1,6 +1,6 @@
 class Teacher < ActiveRecord::Base
 	validates :email, uniqueness: true
-	validates :password, length: {in: 6..20 }
+	# validates :password, length: {in: 6..20 }
 	has_many :sclasses
 	has_many :tests
 	has_many :notifications

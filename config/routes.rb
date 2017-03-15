@@ -84,7 +84,8 @@ Rails.application.routes.draw do
   resources :students
   resources :teachers
   resources :subjects
-  resources :questions
+  resources :notifications, only:[:index]
+  # resources :questions
   resources :tests do
     resources :questions do
       resources :answers

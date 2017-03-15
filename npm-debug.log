@@ -1,0 +1,183 @@
+0 info it worked if it ends with ok
+1 verbose cli [ '/usr/bin/nodejs', '/usr/bin/npm', 'install', '-g', 'babel' ]
+2 info using npm@2.15.11
+3 info using node@v4.8.0
+4 verbose install initial load of /usr/lib/package.json
+5 verbose readDependencies loading dependencies from /usr/lib/package.json
+6 silly cache add args [ 'babel', null ]
+7 verbose cache add spec babel
+8 silly cache add parsed spec Result {
+8 silly cache add   raw: 'babel',
+8 silly cache add   scope: null,
+8 silly cache add   name: 'babel',
+8 silly cache add   rawSpec: '',
+8 silly cache add   spec: 'latest',
+8 silly cache add   type: 'tag' }
+9 silly addNamed babel@latest
+10 verbose addNamed "latest" is being treated as a dist-tag for babel
+11 info addNameTag [ 'babel', 'latest' ]
+12 silly mapToRegistry name babel
+13 silly mapToRegistry using default registry
+14 silly mapToRegistry registry https://registry.npmjs.org/
+15 silly mapToRegistry data Result {
+15 silly mapToRegistry   raw: 'babel',
+15 silly mapToRegistry   scope: null,
+15 silly mapToRegistry   name: 'babel',
+15 silly mapToRegistry   rawSpec: '',
+15 silly mapToRegistry   spec: 'latest',
+15 silly mapToRegistry   type: 'tag' }
+16 silly mapToRegistry uri https://registry.npmjs.org/babel
+17 verbose addNameTag registry:https://registry.npmjs.org/babel not in flight; fetching
+18 verbose request uri https://registry.npmjs.org/babel
+19 verbose request no auth needed
+20 info attempt registry request try #1 at 3:25:59 PM
+21 verbose request id 18a498276a94a969
+22 http request GET https://registry.npmjs.org/babel
+23 http 200 https://registry.npmjs.org/babel
+24 verbose headers { server: 'nginx/1.10.1',
+24 verbose headers   'content-type': 'application/json',
+24 verbose headers   'last-modified': 'Fri, 10 Mar 2017 06:29:00 GMT',
+24 verbose headers   etag: 'W/"58c247ac-3c73e"',
+24 verbose headers   'content-encoding': 'gzip',
+24 verbose headers   'cache-control': 'max-age=300',
+24 verbose headers   'content-length': '16597',
+24 verbose headers   'accept-ranges': 'bytes',
+24 verbose headers   date: 'Tue, 14 Mar 2017 08:26:00 GMT',
+24 verbose headers   via: '1.1 varnish',
+24 verbose headers   age: '142',
+24 verbose headers   connection: 'keep-alive',
+24 verbose headers   'x-served-by': 'cache-hkg6822-HKG',
+24 verbose headers   'x-cache': 'HIT',
+24 verbose headers   'x-cache-hits': '1',
+24 verbose headers   'x-timer': 'S1489479960.041729,VS0,VE0',
+24 verbose headers   vary: 'Accept-Encoding' }
+25 silly get cb [ 200,
+25 silly get   { server: 'nginx/1.10.1',
+25 silly get     'content-type': 'application/json',
+25 silly get     'last-modified': 'Fri, 10 Mar 2017 06:29:00 GMT',
+25 silly get     etag: 'W/"58c247ac-3c73e"',
+25 silly get     'content-encoding': 'gzip',
+25 silly get     'cache-control': 'max-age=300',
+25 silly get     'content-length': '16597',
+25 silly get     'accept-ranges': 'bytes',
+25 silly get     date: 'Tue, 14 Mar 2017 08:26:00 GMT',
+25 silly get     via: '1.1 varnish',
+25 silly get     age: '142',
+25 silly get     connection: 'keep-alive',
+25 silly get     'x-served-by': 'cache-hkg6822-HKG',
+25 silly get     'x-cache': 'HIT',
+25 silly get     'x-cache-hits': '1',
+25 silly get     'x-timer': 'S1489479960.041729,VS0,VE0',
+25 silly get     vary: 'Accept-Encoding' } ]
+26 verbose get saving babel to /home/hustmaroon/.npm/registry.npmjs.org/babel/.cache.json
+27 verbose correctMkdir /home/hustmaroon/.npm correctMkdir not in flight; initializing
+28 silly addNameTag next cb for babel with tag latest
+29 silly addNamed babel@6.23.0
+30 verbose addNamed "6.23.0" is a plain semver version for babel
+31 silly mapToRegistry name babel
+32 silly mapToRegistry using default registry
+33 silly mapToRegistry registry https://registry.npmjs.org/
+34 silly mapToRegistry data Result {
+34 silly mapToRegistry   raw: 'babel',
+34 silly mapToRegistry   scope: null,
+34 silly mapToRegistry   name: 'babel',
+34 silly mapToRegistry   rawSpec: '',
+34 silly mapToRegistry   spec: 'latest',
+34 silly mapToRegistry   type: 'tag' }
+35 silly mapToRegistry uri https://registry.npmjs.org/babel
+36 verbose addRemoteTarball https://registry.npmjs.org/babel/-/babel-6.23.0.tgz not in flight; adding
+37 verbose addRemoteTarball [ 'https://registry.npmjs.org/babel/-/babel-6.23.0.tgz',
+37 verbose addRemoteTarball   'd0d1e7d803e974765beea3232d4e153c0efb90f4' ]
+38 info retry fetch attempt 1 at 3:26:00 PM
+39 info attempt registry request try #1 at 3:26:00 PM
+40 http fetch GET https://registry.npmjs.org/babel/-/babel-6.23.0.tgz
+41 http fetch 200 https://registry.npmjs.org/babel/-/babel-6.23.0.tgz
+42 silly fetchAndShaCheck shasum d0d1e7d803e974765beea3232d4e153c0efb90f4
+43 verbose addTmpTarball /tmp/npm-7300-36106934/registry.npmjs.org/babel/-/babel-6.23.0.tgz not in flight; adding
+44 verbose addTmpTarball already have metadata; skipping unpack for babel@6.23.0
+45 verbose correctMkdir /home/hustmaroon/.npm correctMkdir not in flight; initializing
+46 silly cache afterAdd babel@6.23.0
+47 verbose afterAdd /home/hustmaroon/.npm/babel/6.23.0/package/package.json not in flight; writing
+48 verbose correctMkdir /home/hustmaroon/.npm correctMkdir not in flight; initializing
+49 verbose afterAdd /home/hustmaroon/.npm/babel/6.23.0/package/package.json written
+50 silly install resolved [ { name: 'babel',
+50 silly install resolved     version: '6.23.0',
+50 silly install resolved     description: 'Turn ES6 code into readable vanilla ES5 with source maps',
+50 silly install resolved     author: { name: 'Sebastian McKenzie', email: 'sebmck@gmail.com' },
+50 silly install resolved     homepage: 'https://babeljs.io/',
+50 silly install resolved     license: 'MIT',
+50 silly install resolved     repository:
+50 silly install resolved      { type: 'git',
+50 silly install resolved        url: 'https://github.com/babel/babel/tree/master/packages/babel' },
+50 silly install resolved     bin:
+50 silly install resolved      { babel: './lib/cli.js',
+50 silly install resolved        'babel-node': './lib/cli.js',
+50 silly install resolved        'babel-external-helpers': './lib/cli.js' },
+50 silly install resolved     _id: 'babel@6.23.0',
+50 silly install resolved     scripts: {},
+50 silly install resolved     _shasum: 'd0d1e7d803e974765beea3232d4e153c0efb90f4',
+50 silly install resolved     _from: 'babel@latest',
+50 silly install resolved     _npmVersion: '3.10.8',
+50 silly install resolved     _nodeVersion: '6.9.1',
+50 silly install resolved     _npmUser: { name: 'loganfsmyth', email: 'loganfsmyth@gmail.com' },
+50 silly install resolved     dist:
+50 silly install resolved      { shasum: 'd0d1e7d803e974765beea3232d4e153c0efb90f4',
+50 silly install resolved        tarball: 'https://registry.npmjs.org/babel/-/babel-6.23.0.tgz' },
+50 silly install resolved     maintainers: [ [Object], [Object], [Object], [Object], [Object], [Object] ],
+50 silly install resolved     _npmOperationalInternal:
+50 silly install resolved      { host: 'packages-18-east.internal.npmjs.com',
+50 silly install resolved        tmp: 'tmp/babel-6.23.0.tgz_1487027070006_0.409561536507681' },
+50 silly install resolved     directories: {},
+50 silly install resolved     _resolved: 'https://registry.npmjs.org/babel/-/babel-6.23.0.tgz' } ]
+51 info install babel@6.23.0 into /usr/lib
+52 info installOne babel@6.23.0
+53 verbose installOne of babel to /usr/lib not in flight; installing
+54 verbose correctMkdir /home/hustmaroon/.npm/_locks correctMkdir not in flight; initializing
+55 verbose lock using /home/hustmaroon/.npm/_locks/babel-2537efa27da541a1.lock for /usr/lib/node_modules/babel
+56 silly install write writing babel 6.23.0 to /usr/lib/node_modules/babel
+57 verbose unbuild lib/node_modules/babel
+58 silly gentlyRm /usr/lib/node_modules/babel is being purged from base /usr
+59 verbose gentlyRm don't care about contents; nuking /usr/lib/node_modules/babel
+60 verbose tar unpack /home/hustmaroon/.npm/babel/6.23.0/package.tgz
+61 verbose tar unpacking to /usr/lib/node_modules/babel
+62 silly gentlyRm /usr/lib/node_modules/babel is being purged
+63 verbose gentlyRm don't care about contents; nuking /usr/lib/node_modules/babel
+64 silly gunzTarPerm modes [ '775', '664' ]
+65 error tar.unpack untar error /home/hustmaroon/.npm/babel/6.23.0/package.tgz
+66 verbose unlock done using /home/hustmaroon/.npm/_locks/babel-2537efa27da541a1.lock for /usr/lib/node_modules/babel
+67 verbose fstream_path /usr/lib/node_modules/babel
+68 verbose fstream_type Directory
+69 verbose fstream_class DirWriter
+70 verbose stack Error: EACCES: permission denied, mkdir '/usr/lib/node_modules/babel'
+70 verbose stack     at Error (native)
+71 verbose fstream_stack /usr/lib/node_modules/npm/node_modules/fstream/lib/dir-writer.js:35:25
+71 verbose fstream_stack /usr/lib/node_modules/npm/node_modules/mkdirp/index.js:47:53
+71 verbose fstream_stack FSReqWrap.oncomplete (fs.js:82:15)
+72 verbose cwd /home/hustmaroon/Ruby/gr3
+73 error Linux 4.4.0-64-generic
+74 error argv "/usr/bin/nodejs" "/usr/bin/npm" "install" "-g" "babel"
+75 error node v4.8.0
+76 error npm  v2.15.11
+77 error path /usr/lib/node_modules/babel
+78 error code EACCES
+79 error errno -13
+80 error syscall mkdir
+81 error Error: EACCES: permission denied, mkdir '/usr/lib/node_modules/babel'
+81 error     at Error (native)
+81 error  { [Error: EACCES: permission denied, mkdir '/usr/lib/node_modules/babel']
+81 error   errno: -13,
+81 error   code: 'EACCES',
+81 error   syscall: 'mkdir',
+81 error   path: '/usr/lib/node_modules/babel',
+81 error   fstream_type: 'Directory',
+81 error   fstream_path: '/usr/lib/node_modules/babel',
+81 error   fstream_class: 'DirWriter',
+81 error   fstream_stack:
+81 error    [ '/usr/lib/node_modules/npm/node_modules/fstream/lib/dir-writer.js:35:25',
+81 error      '/usr/lib/node_modules/npm/node_modules/mkdirp/index.js:47:53',
+81 error      'FSReqWrap.oncomplete (fs.js:82:15)' ] }
+82 error Please try running this command again as root/Administrator.
+83 verbose exit [ -13, true ]
+84 verbose unbuild lib/node_modules/babel
+85 silly gentlyRm /usr/lib/node_modules/babel is being purged from base /usr
+86 verbose gentlyRm don't care about contents; nuking /usr/lib/node_modules/babel

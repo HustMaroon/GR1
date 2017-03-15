@@ -23,10 +23,14 @@
             <span class="badge bg-danger"><%=notifications.count%></span>
           </a>
           <ul class="dropdown-menu notifications">
-          <%notifications.order(created_at: :desc).each do |noti|%>
-            <li><%= link_to noti.content, noti.link+"?noti_id=#{noti.id}"%></li>
+          <%if notifications.empty? %>
+            <li>Không có thông báo mới nào</li>
+          <%else%>
+            <%notifications.order(created_at: :desc).each do |noti|%>
+              <li><%= link_to noti.content, noti.link+"?noti_id=#{noti.id}"%></li>
+            <%end%>
           <%end%>
-            <li><a href="#" class="more">Xem tất cả</a></li>
+            <li><%=link_to 'Xem tất cả', notifications_path%></li>
           </ul>
         </li>
         <li class="dropdown">

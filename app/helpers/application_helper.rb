@@ -50,7 +50,6 @@ module ApplicationHelper
 	end
 
 	def routed_from_noti?
-		byebug
 		unless params[:noti_id].nil?
 			noti = Notification.find(params[:noti_id])
 			noti.update_attributes(read: true)
