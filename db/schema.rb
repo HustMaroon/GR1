@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170302024658) do
+ActiveRecord::Schema.define(version: 20170413035237) do
 
   create_table "admins", force: :cascade do |t|
     t.string   "name"
@@ -45,23 +45,22 @@ ActiveRecord::Schema.define(version: 20170302024658) do
   create_table "groups", force: :cascade do |t|
     t.integer  "sclass_id"
     t.string   "name"
-    t.text     "topic"
-    t.float    "point",      default: 0.0
-    t.date     "deadline"
-    t.string   "report"
-    t.datetime "created_at",               null: false
-    t.datetime "updated_at",               null: false
+    t.integer  "topic_id"
+    t.datetime "created_at",             null: false
+    t.datetime "updated_at",             null: false
+    t.integer  "point",      default: 0
   end
 
   add_index "groups", ["sclass_id"], name: "index_groups_on_sclass_id"
+  add_index "groups", ["topic_id"], name: "index_groups_on_topic_id"
 
   create_table "learnings", force: :cascade do |t|
     t.integer  "student_id"
     t.integer  "sclass_id"
-    t.integer  "attendance", default: 0
-    t.float    "term_point", default: 0.0
     t.datetime "created_at",               null: false
     t.datetime "updated_at",               null: false
+    t.integer  "attendance", default: 0
+    t.float    "term_point", default: 0.0
   end
 
   add_index "learnings", ["sclass_id"], name: "index_learnings_on_sclass_id"
@@ -101,11 +100,16 @@ ActiveRecord::Schema.define(version: 20170302024658) do
 
   create_table "point_components", force: :cascade do |t|
     t.integer  "sclass_id"
+    t.integer  "mid_term_test", default: 0
+    t.integer  "short_test",    default: 0
+    t.integer  "apperance",     default: 0
+    t.datetime "created_at",                null: false
+    t.datetime "updated_at",                null: false
     t.string   "content"
-    t.integer  "ratio",      default: 0
-    t.datetime "created_at",             null: false
-    t.datetime "updated_at",             null: false
+    t.float    "ratio"
   end
+
+  add_index "point_components", ["sclass_id"], name: "index_point_components_on_sclass_id"
 
   create_table "points", force: :cascade do |t|
     t.integer  "score_table_id"
@@ -134,10 +138,12 @@ ActiveRecord::Schema.define(version: 20170302024658) do
     t.integer  "sclass_id"
     t.date     "date"
     t.text     "content"
-    t.integer  "first_lession"
-    t.integer  "last_lession"
-    t.datetime "created_at",    null: false
-    t.datetime "updated_at",    null: false
+    t.datetime "created_at",   null: false
+    t.datetime "updated_at",   null: false
+    t.string   "start_time"
+    t.string   "ending_time"
+    t.integer  "first_lesson"
+    t.integer  "last_lesson"
   end
 
   add_index "schedules", ["sclass_id"], name: "index_schedules_on_sclass_id"
@@ -145,12 +151,12 @@ ActiveRecord::Schema.define(version: 20170302024658) do
   create_table "sclasses", force: :cascade do |t|
     t.integer  "subject_id"
     t.integer  "teacher_id"
-    t.string   "sclass_id"
-    t.string   "room"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string   "sclass_id"
     t.date     "start_date"
     t.date     "end_date"
+    t.string   "room"
   end
 
   add_index "sclasses", ["subject_id"], name: "index_sclasses_on_subject_id"
@@ -189,9 +195,9 @@ ActiveRecord::Schema.define(version: 20170302024658) do
   create_table "subjects", force: :cascade do |t|
     t.string   "name"
     t.string   "sbj_id"
-    t.float    "term_ratio", default: 0.7
     t.datetime "created_at",               null: false
     t.datetime "updated_at",               null: false
+    t.float    "term_ratio", default: 0.7
   end
 
   create_table "teachers", force: :cascade do |t|
@@ -223,5 +229,15 @@ ActiveRecord::Schema.define(version: 20170302024658) do
   end
 
   add_index "tests", ["teacher_id"], name: "index_tests_on_teacher_id"
+
+  create_table "topics", force: :cascade do |t|
+    t.integer  "sclass_id"
+    t.text     "content"
+    t.string   "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  add_index "topics", ["sclass_id"], name: "index_topics_on_sclass_id"
 
 end
