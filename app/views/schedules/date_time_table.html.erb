@@ -19,7 +19,7 @@
 					<tbody>
 					<% @schedules.each do |sc|%>
 						<tr>
-							<td><%= start_lesson_to_time sc.first_lession%> - <%= end_lesson_to_time sc.last_lession%></td>
+							<td><%= start_lesson_to_time sc.first_lesson%> - <%= end_lesson_to_time sc.last_lesson%></td>
 							<td><%= sc.sclass.sclass_id%> - <%= sc.sclass.subject.name%></td>
 							<td>
 								<div id="schedule-cell-<%=sc.id%>">

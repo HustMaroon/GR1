@@ -1,7 +1,7 @@
 <tr class=<%=schedule.date == Date.today ? "today-row" : "" %>>
 	<td><%=schedule.date%></td>
-	<td><%=start_lesson_to_time(schedule.first_lession)%></td>
-	<td><%=end_lesson_to_time(schedule.last_lession)%></td>
+	<td><%=start_lesson_to_time(schedule.first_lesson)%></td>
+	<td><%=end_lesson_to_time(schedule.last_lesson)%></td>
 	<td>
 	<div id="schedule-cell-<%=schedule.id%>">
 		<span id="schedule-content-<%=schedule.id%>"><%=schedule.content%></span>
