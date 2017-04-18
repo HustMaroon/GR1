@@ -4,8 +4,8 @@ class CreateSchedules < ActiveRecord::Migration
       t.references :sclass, index: true, foreign_key: true
       t.date :date
       t.text :content
-      t.integer :first_lession
-      t.integer :last_lession
+      t.integer :first_lesson
+      t.integer :last_lesson
 
       t.timestamps null: false
     end

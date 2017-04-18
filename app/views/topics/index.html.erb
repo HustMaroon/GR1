@@ -1,22 +1,36 @@
-<div class="container-fluid">
-    <div class="row">
-        <div class="col-sm-3 col-md-2 sidebar">
-          <%= render 'teachers/sidebar' %>
-        </div>
-        <div class="col-sm-9 main">
-        <h1>Quản lý đề tài</h1>
-        	<table class="table table-hover" style="width:100%" border="1" margin="center">
-  					<tr>
-  					  <td><b>Tên</b></td>
-  					  <td><b>Nội dung</b></td>
-  			 		  <td><b>Tools</b></td>
-  			 		</tr>
-  			 		<% @topics.each do |topic|%>
-          		<%=render topic %>
-          	<% end %>
-			   </table>
-         <%=render 'form', topic: Group.new%>
-         <button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#topicModal">Thêm đề tài</button>
-        </div>
+<%= render current_user.class == Teacher ? 'teachers/sidebar' : 'students/sidebar' %>
+<div class="main">
+  <%=render 'layouts/header', notifications: current_user.notifications.where(read: false)%>
+  <div class="main-content">
+  <ul class="nav nav-tabs" role="tablist">
+    <li><%= link_to 'Danh sách nhóm', sclass_groups_path(@sclass) %></li>
+    <li class="active"><%= link_to 'Danh sách bài tập nhóm', sclass_topics_path(@sclass) %></li>
+  </ul>
+    <div class="panel">
+      <div class="panel-heading">
+        <h3 class="panel-title"><%= @sclass.subject.name%> - Danh sách bài tập nhóm</h3>
+      </div>
+      <div class="panel-body">
+      <table class="table table-hover" style="width:100%" border="1" margin="center">
+       <tr>
+          <td><b>#</b></td>
+          <td><b>Tiêu đề</b></td>
+          <td><b>Trọng số</b></td>
+          <td><b>Deadline</b></td>
+          <td><b>Tình trạng</b></td>
+          <td><b>Công cụ</b></td>
+        </tr>
+          <%@topics.each_with_index do |topic, index|%>
+            <%=render topic, sclass: @sclass, index: index%>
+          <%end%>
+      </table>
+      <%=render 'form', topic: Topic.new%>
+      <button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#topicModal">Thêm bài tập nhóm</button>
+      <%=will_paginate @topics%>
+      </div>
     </div>
+  </div>
+  <footer>
+    
+  </footer>
 </div>

@@ -17,4 +17,5 @@
  *= require bootstrap.min
  *= require vendor/icon-sets
  *= require main.min
+ *= require datetimepicker
  */

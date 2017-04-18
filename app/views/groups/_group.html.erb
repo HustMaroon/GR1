@@ -1,7 +1,13 @@
 	<tr>
 		<td><%=group.name%></td>
 		<td><%=group.students.count%></td>
-		<td><%= group.topic %></td>
+		<td>
+			<%if(group.reports.empty?)%>
+				0/0
+			<%else%>
+				<%=group.reports.where(:file != nil).count%>/<%=group.reports.count %>
+			<%end%>
+		</td>
 		<td><%= group.point%></td>
 		<td><%=link_to 'chi tiết', sclass_group_path(@sclass, group) %>
 	</tr>

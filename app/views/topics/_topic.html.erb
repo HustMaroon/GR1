@@ -1,5 +1,8 @@
 	<tr>
-		<td><%=topic.name%></td>
-		<td><%=topic.content%></td>
-		<td><%=link_to 'View details', sclass_topic_path(@sclass, topic) %>|| <%=link_to 'delete', '#' %></td>
+		<td><%= index +1%></td>
+		<td><%=topic.title%></td>
+		<td><%=topic.ratio%>%</td>
+		<td><%=topic.deadline %></td>
+		<td><%=topic.reports.count%>/<%=topic.sclass.groups.count %></td>
+		<td><%=link_to 'xóa', sclass_topic_path(@sclass, topic), method: :delete, data: {confirm: 'Bài tập và tất cả các báo cáo sẽ bị xóa?'} %></td>
 	</tr>

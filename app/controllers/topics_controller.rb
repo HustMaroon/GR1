@@ -1,5 +1,5 @@
 class TopicsController < ApplicationController
-	before_action :loggin_as_teacher, only:[:new, :create, :destroy]
+	before_action :login_as_teacher, only:[:new, :create, :destroy]
 
 	def new
 	end
@@ -8,14 +8,14 @@ class TopicsController < ApplicationController
 		sclass = Sclass.find(params[:sclass_id])
 		topic = sclass.topics.build(topic_params)
 		unless topic.save
-			flash[:warning] = "Error creating topic"
+			flash[:warning] = "Không thể thêm chủ đề mới"
 		end
 		redirect_to :back
 	end
 
 	def index
 		@sclass = Sclass.find(params[:sclass_id])
-		@topics = @sclass.topics
+		@topics = @sclass.topics.paginate(page: params[:page], per_page: 10)
 	end
 
 	def show
@@ -32,6 +32,6 @@ class TopicsController < ApplicationController
 
 private
 	def topic_params
-		params.require(:topic).permit(:name, :content )
+		params.require(:topic).permit(:title, :ratio, :deadline)
 	end
 end

@@ -20,3 +20,4 @@
 //= require plugins/chartist/chartist.min
 //= require plugins/jquery-slimscroll/jquery.slimscroll
 //= require klorofil
+//= require datetimepicker

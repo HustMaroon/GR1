@@ -11,233 +11,202 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170413035237) do
+ActiveRecord::Schema.define(version: 20170418062628) do
 
   create_table "admins", force: :cascade do |t|
-    t.string   "name"
-    t.string   "password_digest"
-    t.datetime "created_at",      null: false
-    t.datetime "updated_at",      null: false
-  end
-
-  create_table "answers", force: :cascade do |t|
-    t.integer  "question_id"
-    t.text     "content"
-    t.boolean  "correct",     default: false
-    t.string   "image"
+    t.string   "name",            limit: 255
+    t.string   "password_digest", limit: 255
     t.datetime "created_at",                  null: false
     t.datetime "updated_at",                  null: false
   end
 
-  add_index "answers", ["question_id"], name: "index_answers_on_question_id"
-
   create_table "documents", force: :cascade do |t|
-    t.integer  "sclass_id"
-    t.string   "title"
-    t.string   "file"
-    t.text     "description"
-    t.datetime "created_at",  null: false
-    t.datetime "updated_at",  null: false
+    t.integer  "sclass_id",   limit: 4
+    t.string   "title",       limit: 255
+    t.string   "file",        limit: 255
+    t.text     "description", limit: 65535
+    t.datetime "created_at",                null: false
+    t.datetime "updated_at",                null: false
   end
 
-  add_index "documents", ["sclass_id"], name: "index_documents_on_sclass_id"
+  add_index "documents", ["sclass_id"], name: "index_documents_on_sclass_id", using: :btree
 
   create_table "groups", force: :cascade do |t|
-    t.integer  "sclass_id"
-    t.string   "name"
-    t.integer  "topic_id"
-    t.datetime "created_at",             null: false
-    t.datetime "updated_at",             null: false
-    t.integer  "point",      default: 0
+    t.integer  "sclass_id",  limit: 4
+    t.string   "name",       limit: 255
+    t.text     "topic",      limit: 65535
+    t.float    "point",      limit: 24,    default: 0.0
+    t.date     "deadline"
+    t.string   "report",     limit: 255
+    t.datetime "created_at",                             null: false
+    t.datetime "updated_at",                             null: false
   end
 
-  add_index "groups", ["sclass_id"], name: "index_groups_on_sclass_id"
-  add_index "groups", ["topic_id"], name: "index_groups_on_topic_id"
+  add_index "groups", ["sclass_id"], name: "index_groups_on_sclass_id", using: :btree
 
   create_table "learnings", force: :cascade do |t|
-    t.integer  "student_id"
-    t.integer  "sclass_id"
-    t.datetime "created_at",               null: false
-    t.datetime "updated_at",               null: false
-    t.integer  "attendance", default: 0
-    t.float    "term_point", default: 0.0
+    t.integer  "student_id", limit: 4
+    t.integer  "sclass_id",  limit: 4
+    t.integer  "attendance", limit: 4,  default: 0
+    t.float    "term_point", limit: 24, default: 0.0
+    t.datetime "created_at",                          null: false
+    t.datetime "updated_at",                          null: false
   end
 
-  add_index "learnings", ["sclass_id"], name: "index_learnings_on_sclass_id"
-  add_index "learnings", ["student_id"], name: "index_learnings_on_student_id"
-
-  create_table "mini_works", force: :cascade do |t|
-    t.string   "name"
-    t.float    "ratio"
-    t.integer  "sclass_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.string   "content"
-    t.datetime "deadline"
-  end
-
-  add_index "mini_works", ["sclass_id"], name: "index_mini_works_on_sclass_id"
+  add_index "learnings", ["sclass_id"], name: "index_learnings_on_sclass_id", using: :btree
+  add_index "learnings", ["student_id"], name: "index_learnings_on_student_id", using: :btree
 
   create_table "missed_logs", force: :cascade do |t|
-    t.integer  "learning_id"
-    t.integer  "schedule_id"
-    t.datetime "created_at",  null: false
-    t.datetime "updated_at",  null: false
+    t.integer  "learning_id", limit: 4
+    t.integer  "schedule_id", limit: 4
+    t.datetime "created_at",            null: false
+    t.datetime "updated_at",            null: false
   end
 
-  add_index "missed_logs", ["learning_id"], name: "index_missed_logs_on_learning_id"
-  add_index "missed_logs", ["schedule_id"], name: "index_missed_logs_on_schedule_id"
+  add_index "missed_logs", ["learning_id"], name: "index_missed_logs_on_learning_id", using: :btree
+  add_index "missed_logs", ["schedule_id"], name: "index_missed_logs_on_schedule_id", using: :btree
 
   create_table "notifications", force: :cascade do |t|
-    t.integer  "user_id"
-    t.integer  "user_type"
-    t.string   "content"
-    t.string   "link"
-    t.boolean  "read",       default: false
-    t.datetime "created_at",                 null: false
-    t.datetime "updated_at",                 null: false
+    t.integer  "user_id",    limit: 4
+    t.integer  "user_type",  limit: 4
+    t.string   "content",    limit: 255
+    t.string   "link",       limit: 255
+    t.boolean  "read",                   default: false
+    t.datetime "created_at",                             null: false
+    t.datetime "updated_at",                             null: false
   end
 
   create_table "point_components", force: :cascade do |t|
-    t.integer  "sclass_id"
-    t.integer  "mid_term_test", default: 0
-    t.integer  "short_test",    default: 0
-    t.integer  "apperance",     default: 0
-    t.datetime "created_at",                null: false
-    t.datetime "updated_at",                null: false
-    t.string   "content"
-    t.float    "ratio"
+    t.integer  "sclass_id",  limit: 4
+    t.string   "content",    limit: 255
+    t.integer  "ratio",      limit: 4,   default: 0
+    t.datetime "created_at",                         null: false
+    t.datetime "updated_at",                         null: false
   end
-
-  add_index "point_components", ["sclass_id"], name: "index_point_components_on_sclass_id"
 
   create_table "points", force: :cascade do |t|
-    t.integer  "score_table_id"
-    t.integer  "learning_id"
-    t.float    "value",          default: 0.0
-    t.string   "note"
-    t.datetime "created_at",                   null: false
-    t.datetime "updated_at",                   null: false
+    t.integer  "score_table_id", limit: 4
+    t.integer  "learning_id",    limit: 4
+    t.float    "value",          limit: 24,  default: 0.0
+    t.string   "note",           limit: 255
+    t.datetime "created_at",                               null: false
+    t.datetime "updated_at",                               null: false
   end
 
-  add_index "points", ["learning_id"], name: "index_points_on_learning_id"
-  add_index "points", ["score_table_id"], name: "index_points_on_score_table_id"
+  add_index "points", ["learning_id"], name: "index_points_on_learning_id", using: :btree
+  add_index "points", ["score_table_id"], name: "index_points_on_score_table_id", using: :btree
 
-  create_table "questions", force: :cascade do |t|
-    t.integer  "test_id"
-    t.text     "content"
-    t.integer  "type"
-    t.string   "image"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+  create_table "reports", force: :cascade do |t|
+    t.integer  "topic_id",   limit: 4
+    t.integer  "group_id",   limit: 4
+    t.string   "file",       limit: 255
+    t.datetime "created_at",             null: false
+    t.datetime "updated_at",             null: false
   end
 
-  add_index "questions", ["test_id"], name: "index_questions_on_test_id"
+  add_index "reports", ["group_id"], name: "index_reports_on_group_id", using: :btree
+  add_index "reports", ["topic_id"], name: "index_reports_on_topic_id", using: :btree
 
   create_table "schedules", force: :cascade do |t|
-    t.integer  "sclass_id"
+    t.integer  "sclass_id",    limit: 4
     t.date     "date"
-    t.text     "content"
-    t.datetime "created_at",   null: false
-    t.datetime "updated_at",   null: false
-    t.string   "start_time"
-    t.string   "ending_time"
-    t.integer  "first_lesson"
-    t.integer  "last_lesson"
-  end
-
-  add_index "schedules", ["sclass_id"], name: "index_schedules_on_sclass_id"
-
-  create_table "sclasses", force: :cascade do |t|
-    t.integer  "subject_id"
-    t.integer  "teacher_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.string   "sclass_id"
-    t.date     "start_date"
-    t.date     "end_date"
-    t.string   "room"
-  end
-
-  add_index "sclasses", ["subject_id"], name: "index_sclasses_on_subject_id"
-  add_index "sclasses", ["teacher_id"], name: "index_sclasses_on_teacher_id"
-
-  create_table "score_tables", force: :cascade do |t|
-    t.integer  "sclass_id"
-    t.integer  "point_component_id"
-    t.string   "title"
-    t.datetime "created_at",         null: false
-    t.datetime "updated_at",         null: false
-  end
-
-  add_index "score_tables", ["point_component_id"], name: "index_score_tables_on_point_component_id"
-  add_index "score_tables", ["sclass_id"], name: "index_score_tables_on_sclass_id"
-
-  create_table "student_groups", force: :cascade do |t|
-    t.integer  "student_id"
-    t.integer  "group_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
-
-  add_index "student_groups", ["group_id"], name: "index_student_groups_on_group_id"
-  add_index "student_groups", ["student_id"], name: "index_student_groups_on_student_id"
-
-  create_table "students", force: :cascade do |t|
-    t.string   "std_id"
-    t.string   "name"
-    t.datetime "created_at",      null: false
-    t.datetime "updated_at",      null: false
-    t.string   "password_digest"
-    t.date     "last_reminded"
-  end
-
-  create_table "subjects", force: :cascade do |t|
-    t.string   "name"
-    t.string   "sbj_id"
-    t.datetime "created_at",               null: false
-    t.datetime "updated_at",               null: false
-    t.float    "term_ratio", default: 0.7
-  end
-
-  create_table "teachers", force: :cascade do |t|
-    t.string   "name"
-    t.string   "email"
-    t.datetime "created_at",      null: false
-    t.datetime "updated_at",      null: false
-    t.string   "password_digest"
-    t.date     "last_reminded"
-  end
-
-  create_table "test_sclasses", force: :cascade do |t|
-    t.integer  "test_id"
-    t.integer  "sclass_id"
-    t.boolean  "opened",     default: false
+    t.text     "content",      limit: 65535
+    t.integer  "first_lesson", limit: 4
+    t.integer  "last_lesson",  limit: 4
     t.datetime "created_at",                 null: false
     t.datetime "updated_at",                 null: false
   end
 
-  add_index "test_sclasses", ["sclass_id"], name: "index_test_sclasses_on_sclass_id"
-  add_index "test_sclasses", ["test_id"], name: "index_test_sclasses_on_test_id"
+  add_index "schedules", ["sclass_id"], name: "index_schedules_on_sclass_id", using: :btree
 
-  create_table "tests", force: :cascade do |t|
-    t.integer  "teacher_id"
-    t.string   "name"
-    t.integer  "time"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+  create_table "sclasses", force: :cascade do |t|
+    t.integer  "subject_id", limit: 4
+    t.integer  "teacher_id", limit: 4
+    t.string   "sclass_id",  limit: 255
+    t.string   "room",       limit: 255
+    t.date     "start_date"
+    t.date     "end_date"
+    t.datetime "created_at",             null: false
+    t.datetime "updated_at",             null: false
   end
 
-  add_index "tests", ["teacher_id"], name: "index_tests_on_teacher_id"
+  add_index "sclasses", ["subject_id"], name: "index_sclasses_on_subject_id", using: :btree
+  add_index "sclasses", ["teacher_id"], name: "index_sclasses_on_teacher_id", using: :btree
+
+  create_table "score_tables", force: :cascade do |t|
+    t.integer  "sclass_id",          limit: 4
+    t.integer  "point_component_id", limit: 4
+    t.string   "title",              limit: 255
+    t.datetime "created_at",                     null: false
+    t.datetime "updated_at",                     null: false
+  end
+
+  add_index "score_tables", ["point_component_id"], name: "index_score_tables_on_point_component_id", using: :btree
+  add_index "score_tables", ["sclass_id"], name: "index_score_tables_on_sclass_id", using: :btree
+
+  create_table "student_groups", force: :cascade do |t|
+    t.integer  "student_id", limit: 4
+    t.integer  "group_id",   limit: 4
+    t.datetime "created_at",           null: false
+    t.datetime "updated_at",           null: false
+  end
+
+  add_index "student_groups", ["group_id"], name: "index_student_groups_on_group_id", using: :btree
+  add_index "student_groups", ["student_id"], name: "index_student_groups_on_student_id", using: :btree
+
+  create_table "students", force: :cascade do |t|
+    t.string   "std_id",          limit: 255
+    t.string   "name",            limit: 255
+    t.string   "password_digest", limit: 255
+    t.date     "last_reminded"
+    t.datetime "created_at",                  null: false
+    t.datetime "updated_at",                  null: false
+  end
+
+  create_table "subjects", force: :cascade do |t|
+    t.string   "name",       limit: 255
+    t.string   "sbj_id",     limit: 255
+    t.float    "term_ratio", limit: 24,  default: 0.7
+    t.datetime "created_at",                           null: false
+    t.datetime "updated_at",                           null: false
+  end
+
+  create_table "teachers", force: :cascade do |t|
+    t.string   "name",            limit: 255
+    t.string   "email",           limit: 255
+    t.string   "password_digest", limit: 255
+    t.date     "last_reminded"
+    t.datetime "created_at",                  null: false
+    t.datetime "updated_at",                  null: false
+  end
 
   create_table "topics", force: :cascade do |t|
-    t.integer  "sclass_id"
-    t.text     "content"
-    t.string   "name"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.integer  "sclass_id",  limit: 4
+    t.string   "title",      limit: 255
+    t.datetime "deadline"
+    t.integer  "ratio",      limit: 4
+    t.datetime "created_at",             null: false
+    t.datetime "updated_at",             null: false
   end
 
-  add_index "topics", ["sclass_id"], name: "index_topics_on_sclass_id"
+  add_index "topics", ["sclass_id"], name: "index_topics_on_sclass_id", using: :btree
 
+  add_foreign_key "documents", "sclasses"
+  add_foreign_key "groups", "sclasses"
+  add_foreign_key "learnings", "sclasses"
+  add_foreign_key "learnings", "students"
+  add_foreign_key "missed_logs", "learnings"
+  add_foreign_key "missed_logs", "schedules"
+  add_foreign_key "points", "learnings"
+  add_foreign_key "points", "score_tables"
+  add_foreign_key "reports", "groups"
+  add_foreign_key "reports", "topics"
+  add_foreign_key "schedules", "sclasses"
+  add_foreign_key "sclasses", "subjects"
+  add_foreign_key "sclasses", "teachers"
+  add_foreign_key "score_tables", "point_components"
+  add_foreign_key "score_tables", "sclasses"
+  add_foreign_key "student_groups", "groups"
+  add_foreign_key "student_groups", "students"
+  add_foreign_key "topics", "sclasses"
 end

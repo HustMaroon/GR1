@@ -5,6 +5,8 @@ class CreateSclasses < ActiveRecord::Migration
       t.references :teacher, index: true, foreign_key: true
       t.string :sclass_id
       t.string :room
+      t.date :start_date
+      t.date :end_date
 
       t.timestamps null: false
     end

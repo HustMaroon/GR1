@@ -31,6 +31,10 @@ gem 'jquery-ui-rails'
 gem 'chosen-rails'
 gem 'will_paginate', '~> 3.1.0'
 gem 'rinku'
+gem 'mysql2'
+source 'https://rails-assets.org' do
+  gem 'rails-assets-datetimepicker'
+end
 # bundle exec rake doc:rails generates the API under doc/api.
 gem 'sdoc', '~> 0.4.0', group: :doc
 

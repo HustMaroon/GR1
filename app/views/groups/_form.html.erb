@@ -11,9 +11,6 @@
           <%=f.label :name, "Tên nhóm:"%>
           <%= f.text_field :name, class: 'form-control' %>
 
-          <%=f.label :topic, "Đề tài:"%>
-          <%=f.text_area :topic, class: 'form-control' %>
-
           <%=f.label :students, 'Sinh viên' %>
           <%=f.select(:students, @students.map{|f| "#{f.name}-#{f.std_id}"},
            {}, {multiple: true, class: 'selectpicker'})%>

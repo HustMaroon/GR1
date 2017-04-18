@@ -5,6 +5,10 @@
     <%if @groups.empty? && current_user.class == Student%>
       <h1>Bạn chưa được phân nhóm</h1>
     <%else%>
+    <ul class="nav nav-tabs" role="tablist">
+      <li class="active"><%= link_to 'Danh sách nhóm', sclass_groups_path(@sclass) %></li>
+      <li><%= link_to 'Danh sách bài tập nhóm', sclass_topics_path(@sclass) %></li>
+    </ul>
     <h1>Quản lý nhóm</h1>
       <table class="table table-hover" style="width:100%" border="1" margin="center">
         <tr>

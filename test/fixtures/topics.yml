@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  sclass_id: 
+  title: MyString
+  deadline: 2017-04-18 13:40:54
+  ratio: 1
+
+two:
+  sclass_id: 
+  title: MyString
+  deadline: 2017-04-18 13:40:54
+  ratio: 1
