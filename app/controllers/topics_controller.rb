@@ -1,6 +1,6 @@
 class TopicsController < ApplicationController
 	before_action :login_as_teacher, only:[:new, :create, :destroy]
-
+	protect_from_forgery :except => [:update]
 	def new
 	end
 
@@ -25,9 +25,18 @@ class TopicsController < ApplicationController
 	end
 
 	def update
+		topic = Topic.find(params[:id])
+		topic.update_attributes(topic_params)
+		respond_to do |format|
+			format.html {redirect_to request.referer}
+			format.js {render 'update', locals: {id: "topic-"+topic.id.to_s+"-"+params[:topic][:updated_attr].to_s, value: topic.send(params[:topic][:updated_attr])}}
+		end
 	end
 
 	def destroy
+		topic = Topic.find(params[:id])
+		topic.destroy
+		redirect_to :back
 	end
 
 private

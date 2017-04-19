@@ -15,7 +15,7 @@
           <%=f.number_field :ratio, class: 'form-control' %>
 
           <%=f.label :deadline, "Deadline"%>
-          <%=f.text_field :deadline, class: 'form-control', id: 'datetimepicker'%>
+          <%=f.text_field :deadline, class: 'form-control datetimepicker'%>
           
           <%=f.submit "Thêm đề tài", class:"btn btn-primary"%>
         <%end%>
@@ -26,6 +26,3 @@
     </div>
   </div>
 </div>
-<script type="text/javascript">
-  $('#datetimepicker').datetimepicker();
-</script>

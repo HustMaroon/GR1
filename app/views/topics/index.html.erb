@@ -34,3 +34,18 @@
     
   </footer>
 </div>
+
+<script>
+  $(document).ready(function(){
+    $('.datetimepicker').datetimepicker();
+    $('.editable').on('click', function(){
+      id = $(this).attr('id');
+      $(this).addClass('hidden');
+      $("#"+id+"-container").removeClass('hidden');
+    });
+    $("[id$=-input]").blur(function(){
+      data = $(this).attr('id').split('-');
+      $("#"+data[0]+"-"+data[1]+"-"+data[2]+"-"+"form").submit();
+    })
+  })
+</script>

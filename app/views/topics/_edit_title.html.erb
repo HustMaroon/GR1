@@ -1,0 +1,6 @@
+<td>
+	<%topic = Topic.find(:id) %>
+	<%form_for topic do |f|%>
+		<%=f.text_field :title %>
+	<%end%>
+</td>

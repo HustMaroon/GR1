@@ -1,8 +1,32 @@
 	<tr>
 		<td><%= index +1%></td>
-		<td><%=topic.title%></td>
-		<td><%=topic.ratio%>%</td>
-		<td><%=topic.deadline %></td>
+		<td>
+			<div class="editable" id="topic-<%=topic.id%>-title"><%=topic.title%></div>
+			<div class="hidden" id="topic-<%=topic.id%>-title-container">
+				<%=form_for topic, url: sclass_topic_path(@sclass, topic), html: {id: "topic-#{topic.id}-title-form"}, remote: true do |f|%>
+					<%=f.text_field :title, class: 'form-control', id: "topic-#{topic.id}-title-input"%>
+					<%=f.hidden_field :updated_attr,value: "title" %>
+				<%end%>
+			</div>
+		</td>
+		<td>
+			<span class="editable" id="topic-<%=topic.id%>-ratio"><%=topic.ratio%></span>%
+			<span class="hidden" id="topic-<%=topic.id%>-ratio-container">
+				<%=form_for topic, url: sclass_topic_path(@sclass, topic), remote: true, html: {id: "topic-#{topic.id}-ratio-form"} do |f|%>
+					<%=f.number_field :ratio, class: 'form-control', id: "topic-#{topic.id}-ratio-input" %>
+					<%=f.hidden_field :updated_attr,value: "ratio" %>
+				<%end%>
+			</span>
+		</td>
+		<td>
+			<div class="editable" id="topic-<%=topic.id%>-deadline"><%=topic.deadline %></div>
+			<div class="hidden" id="topic-<%=topic.id%>-deadline-container">
+				<%=form_for topic, url: sclass_topic_path(@sclass, topic), remote: true,html: {id: "topic-#{topic.id}-deadline-form"} do |f|%>
+					<%=f.text_field :deadline, class: 'datetimepicker', id: "topic-#{topic.id}-deadline-input" %>
+					<%=f.hidden_field :updated_attr,value: "deadline" %>
+				<%end%>
+			</div>
+		</td>
 		<td><%=topic.reports.count%>/<%=topic.sclass.groups.count %></td>
 		<td><%=link_to 'xóa', sclass_topic_path(@sclass, topic), method: :delete, data: {confirm: 'Bài tập và tất cả các báo cáo sẽ bị xóa?'} %></td>
-	</tr>
+</tr>

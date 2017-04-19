@@ -32,7 +32,6 @@ $(document).ready(function(){
 		var i;
 	$("i[id^='schedule-content']").on('click', function(){
 		i = $(this).attr('id').split('-')[2];
-		console.log(i);
 		$("#schedule-cell-"+ i).addClass('hidden');
 		$("#schedule-form-"+ i).removeClass('hidden');
 	});
