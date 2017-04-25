@@ -1,4 +1,5 @@
 module NotificationsHelper
+	include ApplicationHelper
 	def new_report_noti teacher, group
 		Notification.create(user_id: teacher.id, user_type: 1, link: sclass_group_path(group.sclass, group),
 												content: "#{group.name}, lớp #{group.sclass.sclass_id}-#{group.sclass.name} đã nộp báo cáo.")
@@ -11,9 +12,11 @@ module NotificationsHelper
 			elsif user.class == Student
 				user_type = 2
 				user.groups.each do |g|
-					if g.days_to_deadline <= 5 && group.report.nil?
-						Notification.create(user_id: user.id, user_type: user_type, link: sclass_group_path(g.sclass, g),
-																content: "Nhắc nhở: thời hạn nộp bài còn #{group.days_to_deadline} ngày")
+					g.sclass.topics.each do |t|
+						if t.days_to_deadline < 3 && !isReported?(g, t)
+							Notification.create(user_id: user.id, user_type: user_type, link: sclass_group_path(g.sclass, g),
+																	content: "Nhắc nhở: thời hạn nộp bài còn #{t.days_to_deadline} ngày")
+						end
 					end
 				end
 			end

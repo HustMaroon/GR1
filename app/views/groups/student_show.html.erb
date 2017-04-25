@@ -6,30 +6,64 @@
     <h1>Bạn chưa được phân nhóm</h1>
   <%else%>
     <h1><%=@group.name%></h1>
-    <table class="table table-hover" style="width:100%" border="1" margin="center">
-      <tr>
-        <td><b>Sinh viên</b></td>
-        <td><b>Đề tài/Bài tập lớn</b></td>
-        <td><b>Báo cáo</b></td>
-        <td><b>Điểm</b></td>
-      </tr>
-      <tr>
-        <td>
-            <%@group.students.each_with_index do |student,index| %>
-              <%= render 'group_member', student: student, index: index %>
-            <%end%>
-        </td>
-        <td><%= @group.topic%></td>
-        <td>
-        <%= link_to File.basename(@group.report.url), @group.report.url unless @group.report.file.nil? %>
-          <%=form_for @group,url: sclass_group_upload_report_path(@sclass, @group), authenticity_token: true, remote: true do |f|%>
-            <%= f.file_field :report%>
-            <%= f.submit 'Tải lên báo cáo', class: 'btn btn-primary' %>
-          <%end%>
-        </td>
-        <td><%= @group.point%></td>
-      </tr>
-   </table>
+    <ul>
+      <%@group.students.each_with_index do |student,index| %>
+        <li><%= render 'group_member', student: student, index: index %></li>
+      <%end%>
+    </ul>
+
+   <div class="panel">
+                <div class="panel-heading">
+                  <h3 class="panel-title">Danh sách bài tập nhóm</h3>
+                </div>
+                <div class="panel-body">
+                  <table class="table">
+                    <thead>
+                      <tr>
+                        <th>#</th>
+                        <th>Tiêu đề</th>
+                        <th>Deadline</th>
+                        <th>Trọng số</th>
+                        <th>Báo cáo</th>
+                        <th>Điểm</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                    <%@topics.each_with_index do |topic, index|%>
+                      <tr>
+                        <td><%=index + 1 %></td>
+                        <td><%=topic.title %></td>
+                        <td>
+                        <div id="deadline"><%=topic.deadline %></div>
+                        </td>
+                        <td><%=topic.ratio%></td>
+                        <td>
+                          <% report = Report.find_by(group: @group, topic: topic) %>
+                          <%if report != nil%>
+                            <%= link_to File.basename(report.file.url), report.file.url if report.file.file != nil %>
+
+                            <%=form_for report, url: sclass_topic_report_path(@sclass, topic, report) do |f|%>
+                              <%= f.hidden_field :group_id, value: @group.id%>
+                              <%= f.file_field :file %>
+                              <%= f.submit "Tải lên"%>
+                            <%end%>
+                          <%else%>
+                            <%=form_for topic.reports.build, url: sclass_topic_reports_path(@sclass, topic) do |f|%>
+                              <%= f.hidden_field :group_id, value: @group.id%>
+                              <%= f.file_field :file %>
+                              <%= f.submit "Tải lên"%>
+                            <%end%>
+                          <%end%>
+                        </td>
+                        <td>
+                            <%= isReported?(@group, topic) ? Report.find_by(group: @group, topic: topic).score : 0 %> 
+                        </td>
+                      </tr>
+                    <%end%>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
   <%end%>
   </div>
   <footer>

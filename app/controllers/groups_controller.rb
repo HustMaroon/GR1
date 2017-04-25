@@ -43,10 +43,11 @@ class GroupsController < ApplicationController
 	def show
 		@sclass = Sclass.find(params[:sclass_id])
 		@group = Group.find(params[:id])
+		@topics = @sclass.topics
 		if current_user.class == Teacher
 			render 'show'
 		elsif current_user.class == Student
-			render 'student_show'
+			render 'student_show', toics: @topics
 		end
 	end
 

@@ -55,4 +55,8 @@ module ApplicationHelper
 			noti.update_attributes(read: true)
 		end
 	end
+
+	def isReported?(group, topic)
+		return Report.find_by(group: group, topic: topic).nil? ? false : true
+	end
 end

@@ -3,30 +3,78 @@
   <%=render 'layouts/header', notifications: current_user.notifications.where(read: false)%>
   <div class="main-content">
     <h1><%=@group.name%></h1>
-      <table class="table table-hover" style="width:100%" border="1" margin="center">
-        <tr>
-          <td><b>Sinh viên</b></td>
-          <td><b>Đề tài/Bài tập lớn</b></td>
-          <td><b>Báo cáo</b></td>
-          <td><b>Điểm</b></td>
-        </tr>
-        <tr>
-          <td>
-              <%@group.students.each_with_index do |student,index| %>
-                <%= render 'group_member', student: student, index: index %>
-              <%end%>
-          </td>
-          <td><%= @group.topic%></td>
-          <td><%= @group.report%></td>
-          <td>
-            <%=form_tag sclass_group_update_group_point_path(@sclass, @group) do %>
-              <%= text_field_tag :point, @group.point %>
-              <%= submit_tag 'Cập nhật', class: 'btn btn-primary' %>
-            <%end%>
-          </td>
-        </tr>
-     </table>
+    <ul>
+      <%@group.students.each_with_index do |student,index| %>
+        <li><%= render 'group_member', student: student, index: index %></li>
+      <%end%>
+    </ul>
+        <div class="panel">
+                <div class="panel-heading">
+                  <h3 class="panel-title">Danh sách bài tập nhóm</h3>
+                </div>
+                <div class="panel-body">
+                  <table class="table">
+                    <thead>
+                      <tr>
+                        <th>#</th>
+                        <th>Tiêu đề</th>
+                        <th>Deadline</th>
+                        <th>Trọng số</th>
+                        <th>Báo cáo</th>
+                        <th>Điểm</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                    <%@topics.each_with_index do |topic, index|%>
+                      <tr>
+                        <td><%=index + 1 %></td>
+                        <td><%=topic.title %></td>
+                        <td>
+                        <div id="deadline"><%=topic.deadline %></div>
+                        </td>
+                        <td><%=topic.ratio%></td>
+                        <td>
+                          <% report = Report.find_by(group: @group, topic: topic) %>
+                          <%if report != nil%>
+                            <%= link_to File.basename(report.file.url), report.file.url if report.file.file != nil %>
+                          <%else%>
+                            Chưa nộp báo cáo.
+                          <%end%>
+                        </td>
+                        <td>
+                          <%if report != nil %>
+                            <div id="report-score-<%=report.id%>"><%=report.score%></div>
+                            <%if current_user.class == Teacher%>
+                              <i class="fa fa-pencil-square-o" id= "report-score-button-<%=topic.id%>" aria-hidden="true" style="float: right;"></i>
+                              <span id="score-form-<%=report.id%>" class="hidden">
+                                <%=form_for report, url: sclass_topic_report_path(@sclass, topic, report), action: 'update_score' do |f|%>
+                                  <%=f.text_field :score%>
+                                  <%=f.submit "Cập nhật", class: 'btn btn-primary' %>
+                                <%end%>
+                              </span>
+                            <%end%>
+                          <%else%>
+                            0
+                          <%end%>
+                        </td>
+                      </tr>
+                    <%end%>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
   </div>
   <footer>
   </footer>
 </div>
+
+<script>
+  $(document).ready(function(){
+    $("i[id^='report-score-button']").on('click', function(){
+      var i = $(this).attr('id').split('-')[3];
+      $("#report-score-"+i).addClass('hidden');
+      $(this).addClass('hidden');
+      $("#score-form-"+i).removeClass('hidden');
+    })
+  })
+</script>

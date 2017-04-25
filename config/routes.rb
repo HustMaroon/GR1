@@ -58,7 +58,9 @@ Rails.application.routes.draw do
   root 'static_pages#home'
   resources :sclasses do
     get 'missed_logs' => 'missed_logs#class_index'
-    resources :topics
+    resources :topics do
+      resources :reports
+    end
     resources :documents
     resources :groups do
       post 'remove_group_member' => 'groups#remove_member'
