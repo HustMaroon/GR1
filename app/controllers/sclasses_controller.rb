@@ -2,6 +2,7 @@ class SclassesController < ApplicationController
 	before_action :ratio_validate, only:[:update_ratio]
 	before_action :logged_in_user
 	before_action :login_as_admin, only: [:destroy, :create]
+	
 	def destroy
 		Sclass.find(params[:id]).destroy
 		flash[:success] = "class removed"
@@ -69,6 +70,22 @@ class SclassesController < ApplicationController
 			learning.update_attributes(term_point: v)
 			learning.save
 			new_point_update_noti learning.student, learning.sclass
+		end
+		redirect_to :back
+	end
+
+	def update_student_list
+		if params[:file].nil?
+			flash[:waring] = 'bạn chưa chọn file'
+		else
+			@sclass = Sclass.find(params[:sclass_id])
+			xlsx = Roo::Spreadsheet.open(params[:file])
+			row_number = xlsx.last_row - xlsx.first_row + 1
+			row_number.times do |i|
+				student = Student.find_by(std_id: xlsx.row(i+2)[1])
+				student = Student.create(std_id: xlsx.row(i+2)[1], name: xlsx.row(i+2)[0], password: '123456', password_confirmation: '123456') if student.nil?
+				learning = @sclass.learnings.create(student: student) if student.learnings.where(sclass: @sclass).empty?
+			end
 		end
 		redirect_to :back
 	end

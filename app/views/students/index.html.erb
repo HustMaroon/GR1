@@ -1,0 +1,42 @@
+<%= render 'teachers/sidebar'%>
+<div class="main">
+  <%=render 'layouts/header', notifications: current_user.notifications.where(read: false)%>
+  <div class="main-content">
+		<div class="panel">
+			<div class="panel-heading">
+				<h3 class="panel-title"><%= @sclass.subject.name%> - <%=@sclass.sclass_id%></h3>
+			</div>
+			<div class="panel-body">
+			<table class="table table-hover" style="width:100%" border="1" margin="center">
+			 <tr>
+				  <td><b>STT</b></td>
+				  <td><b>Họ tên</b></td>
+			  	<td><b>MSSV</b></td>
+				  <td><b>Điểm trung bình</b></td>
+				  <td><b>Xếp loại</b></td>
+				  <td><b>Tùy chọn</b></td>
+				</tr>
+					<%@students.each_with_index do |student, index|%>
+					<tr>
+						<%learning = student.learnings.find_by(sclass: @sclass)%>
+				 		<td><%= index + 1%></td>
+				 		<td><%= student.name%></td>
+				 		<td><%= student.std_id%></td>
+				 		<td><%= learning.get_avg_score%></td>
+				 		<td><%= learning.classify%></td>
+				 		<td><%= link_to('xóa', sclass_learning_path(@sclass, learning), data:{method: 'delete', confirm: 'Tất cả kết quả của sinh viên ở lớp học này sẽ bị xóa?'})%></td>
+					<%end%>
+					</tr>
+			</table>
+					<%=will_paginate @students%>
+					<%=form_tag sclass_update_student_list_path(@sclass), multipart: true do %>
+						<%=file_field_tag :file, class:'btn btn-primary'%>
+						<%=submit_tag 'Cập nhật danh sách sinh viên', class: 'btn btn-primary' %>
+					<%end%>
+			</div>
+		</div>
+  </div>
+  <footer>
+    
+  </footer>
+</div>

@@ -44,4 +44,15 @@ class Sclass < ActiveRecord::Base
     end
     return remaining_lessons
   end
+
+  def ungrouped_students
+    groups = self.groups
+    grouped_students = []
+    groups.each do |g|
+      g.students.each do |s|
+          grouped_students << s
+      end
+    end
+    @students = self.students - grouped_students
+  end
 end

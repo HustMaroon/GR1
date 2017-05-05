@@ -8,28 +8,35 @@ class ApplicationController < ActionController::Base
   def logged_in_user
   	unless logged_in?
   		redirect_to root_path
-  		flash[:danger] = "Please log in first"
+  		flash[:danger] = "Vui lòng đăng nhập"
   	end
   end
 
   def login_as_teacher
   	unless current_user.class == Teacher
   		redirect_to :back
-  		flash[:danger] = "You don't have permission to access this"
+  		flash[:danger] = "Bạn không có quyền truy nhập trang này"
   	end
   end
 
   def login_as_student
   	unless current_user.class == Student
 			redirect_to :back
-			flash[:danger] = "You don't have permission to access this"
+			flash[:danger] = "Bạn không có quyền truy nhập trang này"
   	end
   end
 
   def login_as_admin
     unless current_user.class == Admin
       redirect_to admin_sign_in_path
-      flash[:danger] = "You don't have permission to access this"
+      flash[:danger] = "Bạn không có quyền truy nhập trang này"
+    end
+  end
+
+  def login_as_admin_or_teacher
+    unless (current_user.class == Admin || current_user.class == Teacher)
+      redirect_to root_path
+      flash[:denager] = "Bạn không có quyền truy nhập trang này"
     end
   end
 end

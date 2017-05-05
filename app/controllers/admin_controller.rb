@@ -63,9 +63,10 @@ class AdminController < ApplicationController
 
 	def upload_students
 		if params[:file].nil?
-			flash[:waring] = 'no file chosen'
+			flash[:waring] = 'bạn chưa chọn file'
 		else
 			xlsx = Roo::Spreadsheet.open(params[:file])
+			byebug
 			row_number = xlsx.last_row - xlsx.first_row + 1
 			row_number.times do |i|
 				student = Student.new(std_id: xlsx.row(i+1)[0], name: xlsx.row(i+1)[1], password: '123456', password_confirmation: '123456')

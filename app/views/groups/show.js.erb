@@ -1,0 +1,9 @@
+var studentList = [];
+var i =0;
+<%@ungrouped_students.each do |s|%>
+	studentList[i] = {'name': "<%=s.name%>", 'id': "<%=s.id%>"}
+	i++
+<%end%>
+$("#student_form").autocomplete({
+	source: studentList
+});

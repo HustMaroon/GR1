@@ -57,13 +57,16 @@ Rails.application.routes.draw do
   #   end
   root 'static_pages#home'
   resources :sclasses do
+    post 'update_student_list' => 'sclasses#update_student_list'
     get 'missed_logs' => 'missed_logs#class_index'
     resources :topics do
       resources :reports
     end
+    resources :students, only: [:index]
     resources :documents
     resources :groups do
       post 'remove_group_member' => 'groups#remove_member'
+      post 'add_member' => 'groups#add_member'
       post 'update_group_point' => 'groups#update_group_point'
       patch 'upload_report' => 'groups#upload_report'
     end
@@ -83,6 +86,7 @@ Rails.application.routes.draw do
     post 'update_ratio' => 'sclasses#update_ratio'
     post '/update_score_table' => 'score_tables#update_score_table'
   end
+  resources :learnings
   resources :mini_works
   resources :students
   resources :teachers

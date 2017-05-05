@@ -1,5 +1,6 @@
 class StudentsController < ApplicationController
-	before_action :login_as_admin
+	before_action :login_as_admin_or_teacher, only: [:index, :new, :create]
+	before_action :login_as_admin, only: [:destroy]
 	def destroy
 		Student.find(params[:id]).destroy
 		flash[:success] = "student removed"
@@ -34,6 +35,11 @@ class StudentsController < ApplicationController
 			flash[:warning] = "Vui lòng kiểm tra lại!"
 		end
 		redirect_to student_path @student
+	end
+
+	def index
+		@sclass = Sclass.find(params[:sclass_id])
+		@students = @sclass.students.paginate(page: params[:page], per_page: 10)
 	end
 
 	private

@@ -13,6 +13,7 @@
 						<%end%>
 					</li>
 					<li><%=link_to 'Tổng quan', @sclass %></li>
+					<li><%=link_to 'Danh sách sinh viên', sclass_students_path(@sclass)%></li>
 				  <li><%=link_to 'Lịch dạy', sclass_schedules_path(@sclass) %></li>
 				  <li><%=link_to 'Tài liệu', sclass_documents_path(@sclass) %></li>
 				  <li><%=link_to 'Nhóm', sclass_groups_path(@sclass) %></li>

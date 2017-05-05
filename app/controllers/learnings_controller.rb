@@ -20,6 +20,12 @@ class LearningsController < ApplicationController
 			redirect_to request.referer
 		end
 	end
+
+	def destroy
+		learning = Learning.find(params[:id])
+		learning.destroy
+		redirect_to :back
+	end
 	private
 	def new_learning_params
 		params.require(:learning).permit(:student_id, :sclass_id)

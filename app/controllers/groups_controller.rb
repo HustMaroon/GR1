@@ -30,13 +30,7 @@ class GroupsController < ApplicationController
 			end
 		else
 			@groups = @sclass.groups
-			grouped_students = []
-			@sclass.groups.each do |g|
-				g.students.each do |s|
-					grouped_students << s
-				end
-			end
-			@students = @sclass.students - grouped_students
+			@students = @sclass.ungrouped_students
 		end
 	end
 
@@ -45,7 +39,7 @@ class GroupsController < ApplicationController
 		@group = Group.find(params[:id])
 		@topics = @sclass.topics
 		if current_user.class == Teacher
-			render 'show'
+			@ungrouped_students = @sclass.ungrouped_students
 		elsif current_user.class == Student
 			render 'student_show', toics: @topics
 		end
@@ -58,6 +52,11 @@ class GroupsController < ApplicationController
 	end
 
 	def destroy
+	end
+
+	def add_member
+		group = Group.find(params[:id])
+
 	end
 
 	def remove_member

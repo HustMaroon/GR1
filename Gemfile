@@ -32,6 +32,7 @@ gem 'chosen-rails'
 gem 'will_paginate', '~> 3.1.0'
 gem 'rinku'
 gem 'mysql2'
+gem 'rails4-autocomplete'
 source 'https://rails-assets.org' do
   gem 'rails-assets-datetimepicker'
 end
