@@ -1,8 +1,10 @@
-<div id="student-<%=student.id%>">
-	<%=index+1%>. <%=link_to student.name, student %> - <%= student.std_id%>
-	<%if current_user.class == Teacher %>
-		<%=link_to sclass_group_remove_group_member_path(@sclass, @group, student),method: 'post' do%>
-			<i class="fa fa-times" aria-hidden="true"></i>
+<li>
+	<div id="student-<%=student.id%>">
+		<%=index+1%>. <%=link_to student.name, student %> - <%= student.std_id%>
+		<%if current_user.class == Teacher %>
+			<%=link_to sclass_group_remove_group_member_path(@sclass, @group, student),method: 'post' do%>
+				<i class="fa fa-times" aria-hidden="true"></i>
+			<%end%>
 		<%end%>
-	<%end%>
-</div>
+	</div>
+</li>

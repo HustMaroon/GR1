@@ -1,6 +1,7 @@
 class GroupsController < ApplicationController
 	before_action :logged_in_user
 	before_action :login_as_teacher, only:[:new, :create, :destroy, :remove_member, :update_group_point]
+	autocomplete :student, :name, :display_value => :name_and_id
 
 	def new
 	end
@@ -55,8 +56,14 @@ class GroupsController < ApplicationController
 	end
 
 	def add_member
-		group = Group.find(params[:id])
-
+		@sclass = Sclass.find(params[:sclass_id])
+		@group = Group.find(params[:group_id])
+		@student = Student.find_by(std_id: params[:student_name].split('-')[1])
+		@group.add_member(@student) if !(@student.nil?)
+		respond_to do |format|
+			format.html{redirect_to :back}
+			format.js
+		end
 	end
 
 	def remove_member

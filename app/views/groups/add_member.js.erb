@@ -1,0 +1,2 @@
+$('#group-student-list').append("<%= escape_javascript(render 'group_member', student: @student, index: @group.students.count - 1 )%>");
+$('#student_name').val('');

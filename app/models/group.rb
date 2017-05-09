@@ -10,5 +10,8 @@ class Group < ActiveRecord::Base
   # def days_to_deadline
   # 	(self.deadline - Date.today).to_i
   # end
+  def add_member(student)
+    self.students << student unless self.students.exists?(student.id)
+  end
 
 end

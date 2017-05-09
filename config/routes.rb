@@ -69,6 +69,7 @@ Rails.application.routes.draw do
       post 'add_member' => 'groups#add_member'
       post 'update_group_point' => 'groups#update_group_point'
       patch 'upload_report' => 'groups#upload_report'
+      get :autocomplete_student_name, :on => :collection
     end
     resources :learnings
     resources :point_components

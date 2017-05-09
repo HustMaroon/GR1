@@ -5,15 +5,15 @@
     <h1><%=@group.name%></h1>
     <ul id="group-student-list">
       <%@group.students.each_with_index do |student,index| %>
-        <li><%= render 'group_member', student: student, index: index %></li>
+        <%= render 'group_member', student: student, index: index %>
       <%end%>
     </ul>
-    <!-- add member form -->
-    <%=form_tag sclass_group_add_member_path(@sclass, @group) do%>
-      <%=select_tag 'student_form', options_from_collection_for_select(@ungrouped_students, "id", "name")%>
+<!-- add member form -->
+    <%=form_tag sclass_group_add_member_path(@sclass, @group), remote: true do%>
+      <%=autocomplete_field_tag :student_name,'', autocomplete_student_name_sclass_groups_path(@sclass), placeholder: 'Họ tên' %>
       <%=submit_tag 'Thêm thành viên', class: 'btn btn-primary' %>
     <%end%>
-    <!-- end add member form -->
+<!-- end add member form -->
         <div class="panel">
                 <div class="panel-heading">
                   <h3 class="panel-title">Danh sách bài tập nhóm</h3>

@@ -13,7 +13,6 @@
 //= require jquery
 //= require jquery_ujs
 //= require_tree .
-//= require chosen-jquery
 //= require jquery/jquery-2.1.0.min
 //= require bootstrap/bootstrap.min
 //= require plugins/jquery-easypiechart/jquery.easypiechart.min
@@ -21,3 +20,5 @@
 //= require plugins/jquery-slimscroll/jquery.slimscroll
 //= require klorofil
 //= require datetimepicker
+//= require jquery-ui
+//= require autocomplete-rails

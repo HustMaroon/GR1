@@ -54,5 +54,14 @@ class Student < ActiveRecord::Base
 		learning = Learning.find_by(student: self, sclass: sclass)
 		learning.missed_logs.count
 	end
+
+	def name_and_id
+		std = Student.find(self.id)
+		if std.std_id.nil?
+			"#{std.name}"
+		else
+			"#{std.name}-#{std.std_id}"
+		end
+	end
 	
 end
