@@ -92,7 +92,7 @@ class SclassesController < ApplicationController
 
 	private
 	def sclass_params
-		params.require(:sclass).permit(:subject_id,:teacher_id, :sclass_id)
+		params.require(:sclass).permit(:course_id,:teacher_id, :sclass_id)
 	end
 
 	def ratio_validate

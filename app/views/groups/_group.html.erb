@@ -4,6 +4,6 @@
 		<td>
 				<%=group.reports.where!(file: nil).count%>/<%=group.sclass.topics.count %>
 		</td>
-		<td><%= group.point%></td>
+		<td><%= group.group_score%></td>
 		<td><%=link_to 'chi tiết', sclass_group_path(@sclass, group) %>
 	</tr>

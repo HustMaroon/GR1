@@ -2,8 +2,7 @@ class Learning < ActiveRecord::Base
   validates :sclass_id, uniqueness: {scope: :student_id}
   belongs_to :student
   belongs_to :sclass
-  has_many :points, dependent: :destroy
-  has_many :missed_logs, dependent: :destroy
+  belongs_to :group
 
   # def self.to_csv(options = {})
   #   CSV.generate(options) do |csv|
@@ -19,5 +18,9 @@ class Learning < ActiveRecord::Base
 
   def classify
     'F'
+  end
+
+  def points
+    self.sclass.points.where(student: self.student)
   end
 end

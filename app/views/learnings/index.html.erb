@@ -2,7 +2,10 @@
 <div class="main">
   <%=render 'layouts/header', notifications: current_user.notifications.where(read: false)%>
   <div class="main-content">
-    <%= render 'score_tables/nav_bar' %>
+    <ul class="nav nav-tabs" role="tablist">
+      <li class="active"><%= link_to 'Bảng điểm cuối kì', sclass_learnings_path(@sclass) %></li>
+      <li><%= link_to 'Bảng điểm thành phần', sclass_score_tables_path(@sclass) %></li>
+    </ul>
 		<h1>Nhập điểm
 		<%= link_to sclass_learnings_path(@sclass, format: "xls"), title: "Xuất ra file excel" do%>
 			<i class="fa fa-file-excel-o" aria-hidden="true"></i>

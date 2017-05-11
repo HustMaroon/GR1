@@ -72,7 +72,7 @@ Rails.application.routes.draw do
       get :autocomplete_student_name, :on => :collection
     end
     resources :learnings
-    resources :point_components
+    resources :score_components
     resources :schedules do
       get 'missed_logs' => 'missed_logs#index'
       get '/rollup' => 'rollup#new'
@@ -91,7 +91,7 @@ Rails.application.routes.draw do
   resources :mini_works
   resources :students
   resources :teachers
-  resources :subjects
+  resources :courses
   resources :notifications, only:[:index]
   # resources :questions
   resources :tests do

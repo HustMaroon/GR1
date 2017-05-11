@@ -12,7 +12,7 @@ class RollupController < ApplicationController
 
 	def logging
 		sclass = Sclass.find(params[:sclass_id])
-		schedule = Schedule.find(params[:schedule])
+		schedule = Schedule.find(params[:schedule_id])
 		schedule.missed_logs.destroy_all
 		params[:missed].each do |k,v|
 			student = Student.find(k)

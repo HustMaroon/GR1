@@ -3,31 +3,31 @@ module ApplicationHelper
 	AFTERNOON_CLASSES_START_TIME = "12:30"
 
 	def get_process_point(learning)
-		group = learning.student.groups.find_by(sclass_id: learning.sclass.id)
-		group_pc = learning.sclass.point_components.find_by(content: 'Điểm nhóm')
+		group = learning.group
+		group_pc = learning.sclass.score_components.find_by(content: 'Điểm nhóm')
 		group_ratio = group_pc.nil? ? 0 : group_pc.ratio
-		process_point = group.nil? ? 0 : group.point * group_ratio /100
+		process_point = group.nil? ? 0 : group.group_score * group_ratio /100
 		learning.points.each do |p|
 			freq = get_freq p
-			process_point += (p.value * p.score_table.point_component.ratio/freq) /100
+			process_point += (p.value * p.score_table.score_component.ratio/freq) /100
 		end
 		return process_point
 	end
 
 	def get_freq point
 		freq = 0
-		point.score_table.point_component.score_tables.count
+		point.score_table.score_component.score_tables.count
 	end
 
 	def get_avg_point(learning)
-		ratio = learning.sclass.subject.term_ratio
+		ratio = learning.sclass.course.term_ratio
 		avg = learning.term_point * ratio + get_process_point(learning) * (1- ratio)
 		avg.round(2)
 	end
 
 	def get_ratio_sum(sclass)
 		sum = 0
-		sclass.point_components.each do |pc|
+		sclass.score_components.each do |pc|
 			sum += pc.ratio
 		end
 		return sum

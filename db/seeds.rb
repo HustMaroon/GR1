@@ -1,4 +1,4 @@
-# master_klass = [Student, Teacher, Sclass, Subject, Learning]
+# master_klass = [Student, Teacher, Sclass, course, Learning]
 master_klass = [Student]
 
 master_klass.each do |klass|
@@ -37,25 +37,25 @@ end
   puts "created female student #{std_id} with name #{name}"
 end
 
-# subject_hash = Hash["MathI" => "MI1012", "PhisicalI" => "PH1017",
+# course_hash = Hash["MathI" => "MI1012", "PhisicalI" => "PH1017",
 #                     "Computer knowledge" => "IT2120",
 #                     "C programing" => "IT3210", "Electrical engine" => "ET2111" ]
-# subject_hash.each do |k,v|
-#     Subject.create(name: k, sbj_id: v)
-#     puts "Created subject #{k} with id #{v}"
+# course_hash.each do |k,v|
+#     course.create(name: k, course_id: v)
+#     puts "Created course #{k} with id #{v}"
 # end
 
-# Subject.all.each do |s|
+# course.all.each do |s|
 #   rand(10).times do |n|
 #     s.sclasses.create(teacher: Teacher.all[rand(10)],
 #                       sclass_id: n)
 #   end
 # end
 
-MAX_STUDENTS_OF_CLASS = 40
-Sclass.all.each do |sc|
-  rand(MAX_STUDENTS_OF_CLASS).times do |n|
-    learning = sc.learnings.create(student: Student.all[rand(100)] )
-    puts "student #{learning.student.name} joined #{learning.sclass.sclass_id}"
-  end
-end
+# MAX_STUDENTS_OF_CLASS = 40
+# Sclass.all.each do |sc|
+#   rand(MAX_STUDENTS_OF_CLASS).times do |n|
+#     learning = sc.learnings.create(student: Student.all[rand(100)] )
+#     puts "student #{learning.student.name} joined #{learning.sclass.sclass_id}"
+#   end
+# end

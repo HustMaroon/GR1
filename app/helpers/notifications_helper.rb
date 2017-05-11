@@ -42,12 +42,12 @@ module NotificationsHelper
 
 	def new_point_update_noti student, sclass
 		Notification.create(user_id: student.id, user_type: 2, link: sclass_points_path(sclass),
-												content: "Điểm môn #{sclass.subject.name} đã được cập nhật")
+												content: "Điểm môn #{sclass.course.name} đã được cập nhật")
 	end
 
 	def new_class_missed_noti student, schedule
 		Notification.create(user_id: student.id, user_type: 2, link: "#{Rails.application.config.root_path}/date_time_table/#{schedule.date}",
-												content: "Bạn đã vắng mặt lớp #{schedule.sclass.subject.name} vào ngày schedule.date")
+												content: "Bạn đã vắng mặt lớp #{schedule.sclass.course.name} vào ngày schedule.date")
 	end
 
 	# def check_for_notifications user

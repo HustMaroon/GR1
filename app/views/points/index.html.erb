@@ -2,7 +2,7 @@
 <div class="main">
   <%=render 'layouts/header', notifications: current_user.notifications.where(read: false)%>
   <div class="main-content">
-  	<h1>Bảng điểm môn <%=@sclass.subject.name%></h1>
+  	<h1>Bảng điểm môn <%=@sclass.course.name%></h1>
 	<table class="table table-hover" style="width:100%" border="1" margin="center">
 	<tr>
 		<td>Loại điểm</td>

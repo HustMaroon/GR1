@@ -2,7 +2,7 @@
 	<%=link_to "date_time_table/#{date}" do%>
 		<%= date%></br>
 		<% schedules.each do |schedule|%>
-			<%=start_lesson_to_time schedule.first_lesson%>-<%=end_lesson_to_time schedule.last_lesson%>  <%= schedule.sclass.subject.name%></br>
+			<%=start_lesson_to_time schedule.first_lesson%>-<%=end_lesson_to_time schedule.last_lesson%>  <%= schedule.sclass.course.name%></br>
 		<%end%>
 	<%end%>
 <% end %>

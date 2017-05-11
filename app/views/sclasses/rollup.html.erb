@@ -2,7 +2,7 @@
 <div class="main">
   <%=render 'layouts/header', notifications: current_user.notifications.where(read: false)%>
   <div class="main-content">
-    <h1><%=@sclass.subject.name%>-<%=@sclass.sclass_id%></h1>
+    <h1><%=@sclass.course.name%>-<%=@sclass.sclass_id%></h1>
     <table class="table table-hover" style="width:100%" border="1" margin="center">
       <tr>
         <td><b>Name</b></td>

@@ -11,8 +11,8 @@
           <%=f.label :title, "Tiêu đề"%>
           <%= f.text_field :title, class: 'form-control'%>
 
-          <%=f.label :point_component, "Loại bảng điểm"%>
-          <%=f.collection_select :point_component, point_components,:id,:content, {include_blank: false}, {class: 'form-control'} %>
+          <%=f.label :score_component, "Loại bảng điểm"%>
+          <%=f.collection_select :score_component, score_components,:id,:content, {include_blank: false}, {class: 'form-control'} %>
 
           <%=f.submit "Tạo bảng điểm", class:"btn btn-primary"%>
         <%end%>

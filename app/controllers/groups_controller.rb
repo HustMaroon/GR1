@@ -10,13 +10,16 @@ class GroupsController < ApplicationController
 		sclass = Sclass.find(params[:sclass_id])
 		group = sclass.groups.build(group_params)
 		if group.save
-			params[:group][:students].each do |st|
-				student = Student.find_by(std_id: st.split('-')[1]) unless st.empty?
-				group.student_groups.create(student: student)
+			unless params[:group][:students].empty?
+				params[:group][:students].each do |st|
+					student = Student.find_by(std_id: st.split('-')[1]) unless st.empty?
+					learning = Learning.find_by(sclass: sclass, student: student)
+					learning.update_attributes(group: group) unless learning.nil?
+				end
+				new_group_assign_noti group				
 			end
-			new_group_assign_noti group
 		else
-			flash[:warning] = "can't create new group"
+			flash[:warning] = "Không thể tạo nhóm mới"
 		end
 		redirect_to :back
 	end

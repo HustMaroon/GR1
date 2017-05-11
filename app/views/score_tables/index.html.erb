@@ -2,7 +2,10 @@
 <div class="main">
   <%=render 'layouts/header', notifications: current_user.notifications.where(read: false)%>
   <div class="main-content">
-    <%=render 'nav_bar' %>
+    <ul class="nav nav-tabs" role="tablist">
+      <li><%= link_to 'Bảng điểm cuối kì', sclass_learnings_path(@sclass) %></li>
+      <li class="active"><%= link_to 'Bảng điểm thành phần', sclass_score_tables_path(@sclass) %></li>
+    </ul>
     <h1>Bảng điểm</h1>
     <%if @score_tables.empty? %>
       <p>Chưa có bảng điểm nào</p>
@@ -18,7 +21,7 @@
           <% end %>
         </table>
     <%end%>
-    <%=render 'form', point_components: @point_components %>
+    <%=render 'form', score_components: @score_components %>
     <button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#scoreModal">Tạo bảng điểm</button>
   </div>
   <footer>

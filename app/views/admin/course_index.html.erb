@@ -19,7 +19,7 @@
       <td><b>Trọng số</b></td>
  		  <td><b>Tools</b></td>
  		</tr>
-	<%@subjects.each do |s|%>
+	<%@courses.each do |s|%>
 	 <%=render s%>
 	<%end%>
 		</table>
@@ -28,4 +28,4 @@
     </button> hoặc
     <%=render 'sheet_form', path: admin_upload_courses_path%>
 </div>
-<%= render 'subjects/form'%>
+<%= render 'courses/form'%>

@@ -2,8 +2,8 @@
 
 one:
   sclass_id: 
-  point_component_id: 
+  score_component_id: 
 
 two:
   sclass_id: 
-  point_component_id: 
+  score_component_id: 

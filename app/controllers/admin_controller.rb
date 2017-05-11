@@ -14,8 +14,8 @@ class AdminController < ApplicationController
 	end
 
 	def course_index
-		@subjects = Subject.search(params[:search])
-		@subject = Subject.new
+		@courses = Course.search(params[:search])
+		@course = Course.new
 	end
 
 	def class_index
@@ -33,8 +33,8 @@ class AdminController < ApplicationController
 			xlsx = Roo::Spreadsheet.open(params[:file]) unless params[:file].nil?
 			row_number = xlsx.last_row - xlsx.first_row
 			row_number.times do |i|
-				subject = Subject.new(sbj_id: xlsx.row(i+2)[0], name: xlsx.row(i+2)[1], term_ratio: xlsx.row(i+2)[2])
-				subject.save
+				course = Course.new(course_id: xlsx.row(i+2)[0], name: xlsx.row(i+2)[1], term_ratio: xlsx.row(i+2)[2])
+				course.save
 			end
 		end
 		redirect_to admin_courses_path
@@ -48,13 +48,13 @@ class AdminController < ApplicationController
 			row_number = xlsx.last_row - xlsx.first_row
 			row_number.times do |i|
 				#create new sclass
-				course = Subject.find_by(sbj_id: xlsx.row(i+2)[1])
+				course = Course.find_by(course_id: xlsx.row(i+2)[1])
 				sclass = course.sclasses.build(sclass_id: xlsx.row(i+2)[0], teacher: Teacher.find_by(email: xlsx.row(i+2)[2]), room: xlsx.row(i+2)[3], 
 												start_date: xlsx.row(i+2)[7], end_date: xlsx.row(i+2)[8]) unless course.nil?
 				if !(sclass.nil?) && sclass.save
 				#cretae new schedule
 				sclass.make_schedules(xlsx.row(i+2)[4], xlsx.row(i+2)[5], xlsx.row(i+2)[6], xlsx.row(i+2)[7], xlsx.row(i+2)[8])
-				sclass.point_components.create(content: 'Điểm nhóm', ratio: 0)
+				sclass.score_components.create(content: 'Điểm nhóm', ratio: 0)
 				end
 			end
 		end

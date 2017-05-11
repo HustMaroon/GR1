@@ -1,19 +1,18 @@
 class Sclass < ActiveRecord::Base
   validates :sclass_id, uniqueness: true
   
-  belongs_to :subject
+  belongs_to :course
   belongs_to :teacher
   has_many :learnings
   has_many :students, through: :learnings
-  has_many :mini_works
-  has_many :tests, through: :test_sclasses
   has_many :documents
-  has_many :groups
+  has_many :groups, through: :learnings
   has_many :schedules
-  has_many :point_components
-  has_many :score_tables
-  has_many :missed_logs, through: :learnings
+  has_many :score_components
+  has_many :score_tables, through: :score_components
   has_many :topics
+  has_many :missed_logs, through: :schedules
+  has_many :points, through: :score_tables
   scope :opening_classes, -> {where("start_date <= ? AND end_date >= ?", Date.today, Date.today)}
 
 	def self.search(search)

@@ -1,17 +1,26 @@
 class Group < ActiveRecord::Base
 	mount_uploader :report, ReportUploader
 	
-  has_many :student_groups
-  has_many :students, through: :student_groups
-  belongs_to :sclass
+  has_many :learnings
+  has_many :students, through: :learnings
   has_many :reports
-  has_many :topics
-
   # def days_to_deadline
   # 	(self.deadline - Date.today).to_i
   # end
   def add_member(student)
     self.students << student unless self.students.exists?(student.id)
+  end
+
+  def sclass
+    self.learnings.first.sclass
+  end
+
+  def group_score
+    group_score = 0
+    self.reports.each do |report|
+      group_score += report.score * report.ratio/100
+    end
+    return group_score
   end
 
 end

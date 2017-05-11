@@ -8,8 +8,8 @@
       </div>
       <div class="modal-body">
         <%=form_for(@sclass,:url => {:controller => :sclasses, :action => :create}) do |f|%>
-          <%=f.label :subject_id, "Course"%>
-          <%= f.collection_select :subject_id, Subject.all,:id,:name, {include_blank: false}, {class: 'form-control'} %>
+          <%=f.label :course_id, "Course"%>
+          <%= f.collection_select :course_id, Course.all,:id,:name, {include_blank: false}, {class: 'form-control'} %>
 
           <%=f.label :teacher_id, "Teacher"%>
           <%=f.collection_select :teacher_id, Teacher.all,:id,:name, {include_blank: false}, {class: 'form-control'} %>

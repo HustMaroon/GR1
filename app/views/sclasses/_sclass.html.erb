@@ -1,14 +1,14 @@
 <%if current_user.class == Teacher %>
 	<tr>
 		<td><%=sclass.sclass_id%></td>
-		<td><%=sclass.subject.name%></td>
+		<td><%=sclass.course.name%></td>
 		<td><%=sclass.get_remaining_lessons%>/<%=sclass.schedules.count%></td>
 		<td><%=link_to 'Chi tiết', sclass %>
 	</tr>
 <% else %>
 	<tr>
 		<td><%=sclass.sclass_id%></td>
-		<td><%=sclass.subject.name%></td>
+		<td><%=sclass.course.name%></td>
 		<td><%=sclass.teacher.name%></td>
 		<td><%=link_to "Chi tiết", sclass%></td>
 	<tr>

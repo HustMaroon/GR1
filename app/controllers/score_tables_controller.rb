@@ -4,17 +4,17 @@ class ScoreTablesController < ApplicationController
 	def index
 		@sclass = Sclass.find(params[:sclass_id])
 		@score_tables = @sclass.score_tables
-		@point_components = @sclass.point_components - @sclass.point_components.where(content: 'Điểm nhóm')
+		@score_components = @sclass.score_components - @sclass.score_components.where(content: 'Điểm nhóm')
 	end
 
 	def create
 		sclass = Sclass.find(params[:sclass_id])
 		score_table = sclass.score_tables.build(title: params[:score_table][:title],
-																						point_component: PointComponent.find(
-																							params[:score_table][:point_component]))
+																						score_component: ScoreComponent.find(
+																							params[:score_table][:score_component]))
 		if score_table.save
-			sclass.learnings.each do |l|
-				point = score_table.points.build(learning: l)
+			sclass.students.each do |s|
+				point = score_table.points.build(student: s)
 				point.save
 			end
 			redirect_to :back
@@ -43,7 +43,7 @@ class ScoreTablesController < ApplicationController
 		params[:point].each do |k,v|
 			point = Point.find(k)
 			point.update_attributes(value: v[:val], note: v[:note])
-			new_point_update_noti point.learning.student, point.learning.sclass
+			new_point_update_noti point.student, point.score_table.score_component.sclass
 		end
 		redirect_to :back
 	end

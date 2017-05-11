@@ -3,7 +3,7 @@ class CreateLearnings < ActiveRecord::Migration
   	create_table :learnings do |t|
   		t.references :student, index: true, foreign_key: true
   		t.references :sclass, index: true, foreign_key: true
-  		t.integer :attendance, default: 0
+  		t.references :group, index: true
   		t.float :term_point, default: 0
   		t.timestamps null: false
   	end
