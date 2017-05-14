@@ -1,0 +1,6 @@
+<tr id="bonu-<%=bonu.id%>">
+  <td><%= index + 1 %></td>
+  <td><%= bonu.condition%> </td>
+  <td><%= bonu.bonus%> </td>
+  <td><%= link_to('xóa', sclass_bonu_path(@sclass, bonu), data:{method: 'delete', confirm: 'xóa điều kiện này?'})%></td>
+</tr>

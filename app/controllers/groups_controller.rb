@@ -70,8 +70,10 @@ class GroupsController < ApplicationController
 	end
 
 	def remove_member
-		sg = StudentGroup.find_by(student_id: params[:format], group_id: params[:group_id])
-		sg.destroy unless sg.nil?
+		sclass = Sclass.find(params[:sclass_id])
+		student = Student.find(params[:format])
+		learning = Learning.find_by(sclass: sclass, student: student)
+		learning.update_attributes(group: nil)
 		redirect_to :back
 	end
 

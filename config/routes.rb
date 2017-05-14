@@ -62,6 +62,7 @@ Rails.application.routes.draw do
     resources :topics do
       resources :reports
     end
+    resources :bonus, only: [:index, :create, :destroy]
     resources :students, only: [:index]
     resources :documents
     resources :groups do

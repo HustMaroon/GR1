@@ -1,0 +1,25 @@
+<%=render 'teachers/sidebar'%>
+<div class="main">
+  <%=render 'layouts/header', notifications: current_user.notifications.where(read: false)%>
+  <div class="main-content">
+    <ul class="nav nav-tabs" role="tablist">
+      <li><%= link_to 'Trọng số điểm quá trình', sclass_score_components_path(@sclass) %></li>
+      <li class="active"><%= link_to 'Điểm thưởng', sclass_bonus_path(@sclass) %></li>
+    </ul>
+    <h1>Điểm thưởng</h1>
+    <table id="bonus-list" class="table table-hover" style="width:100%" border="1" margin="center">
+    <tr>
+      <td><b>#</b></td>
+      <td><b>Số buổi nghỉ</b></td>
+      <td><b>Số điểm thưởng</b></td>
+      <td><b>Công cụ</b></td>
+    </tr>
+    <%@bonus.each_with_index do |bonu, index|%>
+      <%= render bonu, index: index%>
+    <%end%>
+    </table>
+    <%=render 'form'%>
+  </div>
+  <footer>
+  </footer>
+</div>

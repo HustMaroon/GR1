@@ -1,4 +1,4 @@
 class MissedLog < ActiveRecord::Base
-  belongs_to :learning
+  belongs_to :student
   belongs_to :schedule
 end

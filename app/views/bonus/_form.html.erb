@@ -1,0 +1,9 @@
+<%=form_for @bonu, url: sclass_bonus_path(@sclass) do |f|%>
+	<%= f.label :condition, 'Số buổi nghỉ:' %>
+	<%= f.text_field :condition, placeholder: '>3, <3, =3 ...', class: 'bonu-input' %>
+
+	<%= f.label :bonus, "Điểm thưởng:" %>
+	<%= f.number_field :bonus, min: -10, max: 10, class: 'bonu-input'%>
+
+	<%= f.submit 'Thêm' %>
+<%end%>

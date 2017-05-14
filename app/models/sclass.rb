@@ -5,14 +5,15 @@ class Sclass < ActiveRecord::Base
   belongs_to :teacher
   has_many :learnings
   has_many :students, through: :learnings
+  has_many :groups, -> { distinct }, through: :learnings
   has_many :documents
-  has_many :groups, through: :learnings
   has_many :schedules
   has_many :score_components
   has_many :score_tables, through: :score_components
   has_many :topics
   has_many :missed_logs, through: :schedules
   has_many :points, through: :score_tables
+  has_many :bonus
   scope :opening_classes, -> {where("start_date <= ? AND end_date >= ?", Date.today, Date.today)}
 
 	def self.search(search)
@@ -47,11 +48,25 @@ class Sclass < ActiveRecord::Base
   def ungrouped_students
     groups = self.groups
     grouped_students = []
-    groups.each do |g|
-      g.students.each do |s|
-          grouped_students << s
+    if groups.empty?
+      @students = self.students
+    else
+      groups.each do |g|
+        g.students.each do |s|
+            grouped_students << s
+        end
       end
+      @students = self.students - grouped_students
     end
-    @students = self.students - grouped_students
+    return @students
   end
+
+  # def groups
+  #   groups = []
+  #   groups << self.learnings.first.group
+  #   self.learnings.each do |learning|
+  #     groups << learning.group unless learning.group.in? groups
+  #   end
+  #   return groups
+  # end
 end

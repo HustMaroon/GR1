@@ -49,8 +49,7 @@ class Student < ActiveRecord::Base
 	end
 
 	def get_missed_lessons sclass
-		learning = Learning.find_by(student: self, sclass: sclass)
-		learning.missed_logs.count
+		sclass.missed_logs.where(student: self).count
 	end
 
 	def name_and_id
@@ -61,5 +60,4 @@ class Student < ActiveRecord::Base
 			"#{std.name}-#{std.std_id}"
 		end
 	end
-	
 end

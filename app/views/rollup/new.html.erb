@@ -12,7 +12,7 @@
   <%=form_tag sclass_schedule_rollup_path(@sclass, @schedule) do%>
     <%@students.each do |student|%>
     		<%learning = @sclass.learnings.find_by(student: student)%>
-        <%=render 'student', student: student, check: @schedule.missed_logs.find_by(learning: learning).nil? ? false : true%>
+        <%=render 'student', student: student, check: @schedule.missed_logs.find_by(student: student).nil? ? false : true%>
     <%end%>
   </table>
   <%=submit_tag "Submit", class: "btn btn-primary"%>

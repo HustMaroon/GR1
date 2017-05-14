@@ -58,7 +58,7 @@ class SclassesController < ApplicationController
 
 	def update_ratio
 		params[:pc].each do |k,v|
-			pc = PointComponent.find(k)
+			pc = ScoreComponent.find(k)
 			pc.update_attributes(content: v[:content], ratio: v[:ratio])
 		end
 		redirect_to :back

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170418062628) do
+ActiveRecord::Schema.define(version: 20170513194005) do
 
   create_table "admins", force: :cascade do |t|
     t.string   "name",            limit: 255
@@ -19,6 +19,16 @@ ActiveRecord::Schema.define(version: 20170418062628) do
     t.datetime "created_at",                  null: false
     t.datetime "updated_at",                  null: false
   end
+
+  create_table "bonus", force: :cascade do |t|
+    t.integer  "sclass_id",  limit: 4
+    t.string   "condition",  limit: 255
+    t.integer  "bonus",      limit: 4
+    t.datetime "created_at",             null: false
+    t.datetime "updated_at",             null: false
+  end
+
+  add_index "bonus", ["sclass_id"], name: "index_bonus_on_sclass_id", using: :btree
 
   create_table "courses", force: :cascade do |t|
     t.string   "name",       limit: 255
@@ -59,14 +69,14 @@ ActiveRecord::Schema.define(version: 20170418062628) do
   add_index "learnings", ["student_id"], name: "index_learnings_on_student_id", using: :btree
 
   create_table "missed_logs", force: :cascade do |t|
-    t.integer  "learning_id", limit: 4
+    t.integer  "student_id",  limit: 4
     t.integer  "schedule_id", limit: 4
     t.datetime "created_at",            null: false
     t.datetime "updated_at",            null: false
   end
 
-  add_index "missed_logs", ["learning_id"], name: "index_missed_logs_on_learning_id", using: :btree
   add_index "missed_logs", ["schedule_id"], name: "index_missed_logs_on_schedule_id", using: :btree
+  add_index "missed_logs", ["student_id"], name: "index_missed_logs_on_student_id", using: :btree
 
   create_table "notifications", force: :cascade do |t|
     t.integer  "user_id",    limit: 4
@@ -174,11 +184,12 @@ ActiveRecord::Schema.define(version: 20170418062628) do
 
   add_index "topics", ["sclass_id"], name: "index_topics_on_sclass_id", using: :btree
 
+  add_foreign_key "bonus", "sclasses"
   add_foreign_key "documents", "sclasses"
   add_foreign_key "learnings", "sclasses"
   add_foreign_key "learnings", "students"
-  add_foreign_key "missed_logs", "learnings"
   add_foreign_key "missed_logs", "schedules"
+  add_foreign_key "missed_logs", "students"
   add_foreign_key "points", "score_tables"
   add_foreign_key "points", "students"
   add_foreign_key "reports", "groups"
