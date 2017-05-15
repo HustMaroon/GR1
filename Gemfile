@@ -61,7 +61,8 @@ group :development do
   gem 'spring'
 
  group :production do
- 	gem 'sqlite3', '~>1.3.11'
+ 	gem 'pgsql'
+ 	gem 'puma'
  end
 end
 
