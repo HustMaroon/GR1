@@ -62,8 +62,5 @@ group :development do
 
  group :production do
  	gem 'pg'
- 	gem 'puma'
- 	gem 'thin'
- end
 end
 
