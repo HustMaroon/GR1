@@ -61,7 +61,7 @@ group :development do
   gem 'spring'
 
  group :production do
- 	gem 'pgsql'
+ 	gem 'pg'
  	gem 'puma'
  end
 end
