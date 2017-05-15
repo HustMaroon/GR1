@@ -44,7 +44,7 @@ class Learning < ActiveRecord::Base
 
   def classify
     avg_score = self.get_avg_score
-    if avg_score < 4
+    if avg_score < 4 || self.get_process_score <3
       'F'
     elsif avg_score >= 4 && avg_score <= 5
       'D'

@@ -18,7 +18,7 @@ class Group < ActiveRecord::Base
   def group_score
     group_score = 0
     self.reports.each do |report|
-      group_score += report.score * report.ratio/100
+      group_score += report.score * report.topic.ratio/100 unless report.score.nil?
     end
     return group_score
   end

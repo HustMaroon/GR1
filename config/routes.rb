@@ -119,6 +119,8 @@ Rails.application.routes.draw do
   post 'admin/upload_sclasses' => 'admin#upload_sclasses'
   post 'admin/upload_students' => 'admin#upload_students'
   post 'admin/upload_teachers' => 'admin#upload_teachers'
+  get 'admin/change_password' => 'admin#change_password'
+  post 'admin/change_password' => 'admin#change_password'
   #--admin--
 
   get    'login'   => 'sessions#new'

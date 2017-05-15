@@ -90,4 +90,19 @@ class AdminController < ApplicationController
 		redirect_to admin_teachers_path
 	end
 
+	def change_password
+		if request.method == "GET"
+
+		elsif request.method == "POST"
+			admin = current_user
+			if admin.authenticate(params[:old_password]) && params[:new_password] == params[:new_password_confirmation]
+				admin.update_attributes(password: params[:new_password], password_confirmation: params[:new_password_confirmation])
+				flash[:success] = "Cập nhật mật khẩu thành công!"
+			else
+				flash[:warning] = "Vui lòng kiểm tra lại!"
+			end
+			redirect_to admin_classes_path
+		end			
+	end
+
 end

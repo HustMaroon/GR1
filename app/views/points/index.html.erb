@@ -14,7 +14,7 @@
 	<%end%>
 	<tr>
 		<td><b>Điểm quá trình</b></td>
-		<td><%= get_process_point(@learning)%></td>
+		<td><%= @learning.get_process_score%></td>
 		<td></td>
 	</tr>
 
@@ -26,7 +26,13 @@
 
 	<tr>
 		<td><b>Điểm trung bình</b></td>
-		<td><%= get_avg_point(@learning)%></td>
+		<td><%= @learning.get_avg_score%></td>
+		<td></td>
+	</tr>
+
+	<tr>
+		<td><b>Xếp loại hiện tại</b></td>
+		<td><%= @learning.classify %></td>
 		<td></td>
 	</tr>
 	</table>

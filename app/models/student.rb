@@ -2,7 +2,7 @@ class Student < ActiveRecord::Base
 	validates :std_id, uniqueness: true
 	has_many :learnings
 	has_many :sclasses, through: :learnings
-	has_many :groups, through: :learnings
+	has_many :groups, -> { distinct }, through: :learnings
 	has_secure_password
 
 	def self.search(search)

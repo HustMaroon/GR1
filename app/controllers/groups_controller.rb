@@ -27,10 +27,11 @@ class GroupsController < ApplicationController
 	def index
 		@sclass = Sclass.find(params[:sclass_id])
 		if current_user.class == Student
-			if current_user.groups.find_by(sclass_id: @sclass.id).nil?
+			learning = Learning.find_by(sclass: @sclass, student: current_user)
+			if learning.group.nil?
 				@groups = []
 			else
-				redirect_to sclass_group_path(@sclass, current_user.groups.find_by(sclass_id: @sclass.id))
+				redirect_to sclass_group_path(@sclass, learning.group)
 			end
 		else
 			@groups = @sclass.groups

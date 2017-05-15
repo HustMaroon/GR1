@@ -1,9 +1,24 @@
-<%= form_tag login_path do %>
-	<%= label_tag 'Name',nil %>
-	<%= text_field_tag "session[name]",nil,  class: 'form-control' %>
+<div class="container">	
+	<div class="row" style="padding-top: 50px">
+	  <div class="col-md-3"></div>
+	  <div class="col-md-6">
+	    <div class="panel panel-headline">
+	                <div class="panel-heading">
+	                  <h3 class="panel-title">Vui lòng đăng nhập</h3>
+	                  <p class="panel-subtitle"><%= DateTime.now%></p>
+	                </div>
+	                <div class="panel-body">
+										<%= form_tag login_path do %>
+											<%= label_tag 'Name',nil %>
+											<%= text_field_tag "session[name]",nil,  class: 'form-control' %>
 
-	<%= label_tag 'Password'%>
-	<%= password_field_tag "session[password]", nil,  class: 'form-control' %>
+											<%= label_tag 'Password'%>
+											<%= password_field_tag "session[password]", nil,  class: 'form-control' %>
 
-	<%= submit_tag 'Submit', class: 'btn btn-primary' %>
-<%end%>
+											<%= submit_tag 'Submit', class: 'btn btn-primary' %>
+										<%end%>
+	                </div>
+	              </div>
+	    </div>
+	  </div>
+</div>
