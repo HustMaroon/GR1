@@ -4,22 +4,22 @@ class AdminController < ApplicationController
 	before_action :login_as_admin, except:[:sign_in]
 
 	def student_index
-		@students = Student.search(params[:search])
+		@students = Student.search(params[:search]).paginate(page: params[:page], per_page: 10)
 		@student = Student.new
 	end
 
 	def teacher_index
-		@teachers = Teacher.search(params[:search])
+		@teachers = Teacher.search(params[:search]).paginate(page: params[:page], per_page: 10)
 		@teacher = Teacher.new
 	end
 
 	def course_index
-		@courses = Course.search(params[:search])
+		@courses = Course.search(params[:search]).paginate(page: params[:page], per_page: 10)
 		@course = Course.new
 	end
 
 	def class_index
-		@classes = Sclass.search(params[:search])
+		@classes = Sclass.search(params[:search]).paginate(page: params[:page], per_page: 10)
 		@sclass = Sclass.new
 	end
 
@@ -53,8 +53,8 @@ class AdminController < ApplicationController
 												start_date: xlsx.row(i+2)[7], end_date: xlsx.row(i+2)[8]) unless course.nil?
 				if !(sclass.nil?) && sclass.save
 				#cretae new schedule
-				sclass.make_schedules(xlsx.row(i+2)[4], xlsx.row(i+2)[5], xlsx.row(i+2)[6], xlsx.row(i+2)[7], xlsx.row(i+2)[8])
-				sclass.score_components.create(content: 'Điểm nhóm', ratio: 0)
+					sclass.make_schedules(xlsx.row(i+2)[4], xlsx.row(i+2)[5], xlsx.row(i+2)[6], xlsx.row(i+2)[7], xlsx.row(i+2)[8])
+					sclass.score_components.create(content: 'Điểm nhóm', ratio: 0)
 				end
 			end
 		end

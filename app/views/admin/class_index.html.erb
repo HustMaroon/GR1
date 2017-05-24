@@ -1,30 +1,30 @@
 <div class="container">
 <%= render 'header' %>
 <ul class="nav nav-tabs" role="tablist">
-  <li><%= link_to 'Students', admin_students_path %></li>
-  <li><%= link_to 'Teacher', admin_teachers_path %></li>
-  <li><%= link_to "Courses", admin_courses_path%></li>
-  <li class="active"><%= link_to "Classes", admin_classes_path%></li>
+  <li><%= link_to 'Sinh viên', admin_students_path %></li>
+  <li><%= link_to 'Giảng viên', admin_teachers_path %></li>
+  <li><%= link_to "Học phần", admin_courses_path%></li>
+  <li class="active"><%= link_to "Lớp học", admin_classes_path%></li>
   </ul>
-  	<h1>Admin management panel</h1><span class="glyphicon glyphicon-heart"></span>
+  	<h1>Quản lý lớp học</h1>
   	<%= form_tag admin_classes_path, :method => 'get' do %>
   		<p>
     	<%= text_field_tag :search, params[:search] %>
-    	<%= submit_tag "Search", :name => nil, class:'btn btn-primary' %>
+    	<%= submit_tag "Tìm kiếm", :name => nil, class:'btn btn-primary' %>
   		</p>
 	<% end %>
 		<table class="table table-hover" style="width:100%" border="1" margin="center">
 		<tr>
-		  <td><b>Class_id</b></td>
-		  <td><b>Course</b></td>
- 		  <td><b>Teacher</b></td>
- 		  <td><b>Students</b></td>
- 		  <td><b>Tools</b></td>
+		  <td><b>Mã lớp</b></td>
+		  <td><b>Học phần</b></td>
+ 		  <td><b>Giảng viên</b></td>
+ 		  <td><b>Công cụ</b></td>
  		</tr>
 	<%@classes.each do |s|%>
-	 <%=render s%>
+	 <%=render 'admin_sclass', sclass: s%>
 	<%end%>
 		</table>
+    <%=will_paginate @classes%><br>
 		<button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal">
   Thêm lớp học
 </button>   hoặc   <%=render 'sheet_form', path: admin_upload_sclasses_path%>

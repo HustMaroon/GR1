@@ -4,14 +4,14 @@
     <div class="modal-content">
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-        <h4 class="modal-title" id="myModalLabel">Create class</h4>
+        <h4 class="modal-title" id="myModalLabel">Thêm học phần</h4>
       </div>
       <div class="modal-body">
         <%=form_for(@course,:url => {:controller => :courses, :action => :create}) do |f|%>
-          <%=f.label :course_id, "Course_id"%>
+          <%=f.label :course_id, "Mã học phần"%>
           <%= f.text_field :course_id, {class: 'form-control'} %>
 
-          <%=f.label :name, "Course name"%>
+          <%=f.label :name, "Tên học phần"%>
           <%=f.text_field :name, {class: 'form-control'} %>
 
           <%=f.submit "Submit", class:"btn btn-primary"%>
@@ -19,7 +19,6 @@
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary">Save changes</button>
       </div>
     </div>
   </div>

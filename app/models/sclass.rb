@@ -3,17 +3,17 @@ class Sclass < ActiveRecord::Base
   
   belongs_to :course
   belongs_to :teacher
-  has_many :learnings
+  has_many :learnings, dependent: :destroy
   has_many :students, through: :learnings
   has_many :groups, -> { distinct }, through: :learnings
-  has_many :documents
-  has_many :schedules
-  has_many :score_components
+  has_many :documents, dependent: :destroy
+  has_many :schedules, dependent: :destroy
+  has_many :score_components, dependent: :destroy
   has_many :score_tables, through: :score_components
-  has_many :topics
+  has_many :topics, dependent: :destroy
   has_many :missed_logs, through: :schedules
   has_many :points, through: :score_tables
-  has_many :bonus
+  has_many :bonus, dependent: :destroy
   scope :opening_classes, -> {where("start_date <= ? AND end_date >= ?", Date.today, Date.today)}
 
 	def self.search(search)

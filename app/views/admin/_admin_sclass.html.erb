@@ -1,0 +1,6 @@
+	<tr>
+		<td><%=sclass.sclass_id%></td>
+		<td><%=sclass.course.course_id%>-<%=sclass.course.name%></td>
+		<td><%=sclass.teacher.name%> | <%=sclass.teacher.email%></td>
+		<td><%=link_to 'xóa', sclass, method: :delete, confirm: 'Bạn chắc chắn muốn xóa lớp học này?' %></td>
+	</tr>

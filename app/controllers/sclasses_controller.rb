@@ -5,7 +5,7 @@ class SclassesController < ApplicationController
 	
 	def destroy
 		Sclass.find(params[:id]).destroy
-		flash[:success] = "class removed"
+		flash[:success] = "đã xóa lớp học!"
 		redirect_to request.referer
 	end
 

@@ -1,13 +1,13 @@
 class Student < ActiveRecord::Base
 	validates :std_id, uniqueness: true
-	has_many :learnings
+	has_many :learnings, dependent: :destroy
 	has_many :sclasses, through: :learnings
 	has_many :groups, -> { distinct }, through: :learnings
 	has_secure_password
 
 	def self.search(search)
   		if search
-    	where("name LIKE ?", "%#{search}%")
+    	where("name LIKE ? OR std_id LIKE ?", "%#{search}%", "%#{search}%")
   		else
     	Student.all
   		end
