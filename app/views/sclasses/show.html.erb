@@ -17,7 +17,7 @@
                 <div class="panel-body">
                   <ul class="list-unstyled task-list">
                     <li>
-                      <p>Số buổi đã học <span class="label-percent"><%=@sclass.get_remaining_lessons%>/<%=@sclass.schedules.count%></span></p>
+                      <p>Số buổi đã học <span class="label-percent"><%=@sclass.get_learned_lessons%>/<%=@sclass.schedules.count%></span></p>
                       <div class="progress progress-xs">
                         <div class="progress-bar progress-bar-danger" role="progressbar" aria-valuenow="<%=@lessons_in_percentage%>" aria-valuemin="0" aria-valuemax="100" style="width: <%=@lessons_in_percentage%>%">
                           <span class="sr-only"><%=@lessons_in_percentage%> Complete</span>
@@ -25,24 +25,36 @@
                       </div>
                     </li>
                     <li>
-                      <p>Tỉ lệ sinh viên đến lớp <span class="label-percent">95%</span></p>
+                      <p>Tỉ lệ sinh viên đến lớp <span class="label-percent"><%=@attendant_scale%>%</span></p>
                       <div class="progress progress-xs">
-                        <div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="95" aria-valuemin="0" aria-valuemax="100" style="width: 95%">
-                          <span class="sr-only">95% Complete</span>
+                        <div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="95" aria-valuemin="0" aria-valuemax="100" style="width: <%= @attendant_scale%>%">
+                          <span class="sr-only"><%=@attendant_scale%>% Complete</span>
                         </div>
                       </div>
                     </li>
                     <li>
-                      <p>Số bài tập lớn đã nhận <span class="label-percent">4/6</span></p>
+                      <p>Số báo cáo đã nhận <span class="label-percent"><%= @received_reports%>/<%= @total_reports%></span></p>
                       <div class="progress progress-xs">
-                        <div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="66" aria-valuemin="0" aria-valuemax="100" style="width: 66%">
-                          <span class="sr-only">66% complete</span>
+                        <div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="66" aria-valuemin="0" aria-valuemax="100" style="width: <%= @received_reports / @total_reports.to_f * 100 %>%">
+                          <span class="sr-only"><%= @total_reports == 0 ? 0 : @received_reports / @total_reports.to_f * 100 %>% complete</span>
                         </div>
                       </div>
                     </li>
                   </ul>
                 </div>
               </div>
+          </div>
+          <div class="col-md-6">
+            <%if (@sclass.get_sum_process_score_ratio < 100 || @sclass.get_sum_group_score_ratio < 100) %>
+              <ul class="wraning" style="color: red">Chú ý:
+                <%if @sclass.get_sum_process_score_ratio < 100 %>
+                  <li>Chưa thiết lập đủ trọng số điểm quá trình. <%= link_to 'Thiết lập ngay',sclass_score_components_path(@sclass)%></li>
+                <%end%>
+                <%if @sclass.get_sum_group_score_ratio < 100 %>
+                  <li>Chưa thiết lập đủ trọng số điểm nhóm. <%= link_to 'Thiết lập ngay', sclass_topics_path(@sclass)%></li>
+                <%end%>
+              </ul>
+            <%end%>
           </div>
         </div>
       </div>

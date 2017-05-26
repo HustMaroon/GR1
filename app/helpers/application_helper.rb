@@ -33,6 +33,14 @@ module ApplicationHelper
 		return sum
 	end
 
+	def get_topic_ratio_sum(sclass)
+		sum = 0
+		sclass.topics.each do |topic|
+			sum += topic.ratio
+		end
+		return sum
+	end
+
 	def start_lesson_to_time(lesson)
 		if lesson <= 6
 			return (Time.parse(MORNING_CLASSES_START_TIME) + (lesson -1)*55*60).to_formatted_s(:time)

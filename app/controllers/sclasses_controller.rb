@@ -26,7 +26,14 @@ class SclassesController < ApplicationController
 
 	def show
 		@sclass = Sclass.find(params[:id])
-		@lessons_in_percentage = @sclass.get_remaining_lessons / @sclass.schedules.count.to_f * 100
+		if @sclass.get_learned_lessons == 0 || @sclass.students.count == 0
+			@attendant_scale = 0
+		else
+			@attendant_scale = 100 - @sclass.missed_logs.count / (@sclass.get_learned_lessons * @sclass.students.count.to_f) * 100 
+		end
+		@received_reports = @sclass.get_received_reports
+		@total_reports = @sclass.topics.count * @sclass.groups.count
+		@lessons_in_percentage = @sclass.get_learned_lessons / @sclass.schedules.count.to_f * 100
 		if current_user.class == Student
 			@missed_lessons_in_percentage = current_user.get_missed_lessons(@sclass) / @sclass.schedules.count.to_f * 100
 		end

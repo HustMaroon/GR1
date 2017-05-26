@@ -1,6 +1,8 @@
 class TopicsController < ApplicationController
 	before_action :login_as_teacher, only:[:new, :create, :destroy]
 	protect_from_forgery :except => [:update]
+	before_action :ratio_validate, only:[:create]
+
 	def new
 	end
 
@@ -37,6 +39,14 @@ class TopicsController < ApplicationController
 		topic = Topic.find(params[:id])
 		topic.destroy
 		redirect_to :back
+	end
+
+	def ratio_validate
+		sclass = Sclass.find(params[:sclass_id])
+		unless get_topic_ratio_sum(sclass) + params[:topic][:ratio].to_i <= 100
+			flash[:warning] = "tổng các trọng số không được > 100%"
+			redirect_to :back
+		end
 	end
 
 private

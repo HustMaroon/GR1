@@ -35,16 +35,31 @@ class Sclass < ActiveRecord::Base
     end
   end
 
+  # def get_remaining_lessons
+  #   remaining_lessons = 0;
+  #   self.schedules.each do |sc|
+  #     if (Date.today <=> sc.date) == 1
+  #       remaining_lessons += 1
+  #     end        
+  #   end
+  #   return remaining_lessons
+  # end
   def get_remaining_lessons
-    remaining_lessons = 0;
-    self.schedules.each do |sc|
-      if (Date.today <=> sc.date) == 1
-        remaining_lessons += 1
-      end        
-    end
-    return remaining_lessons
+    # return self.schedules.where(:date >= Date.today).count
+    self.schedules.where('date >= ? ', Date.today).count
   end
 
+  def get_learned_lessons
+    self.schedules.where('date <= ?', Date.today).count
+  end
+
+  def get_received_reports
+    received_reports = 0
+    self.topics.each do |topic|
+      received_reports += topic.reports.count
+    end
+    return received_reports
+  end
   def ungrouped_students
     groups = self.groups
     grouped_students = []
@@ -59,6 +74,22 @@ class Sclass < ActiveRecord::Base
       @students = self.students - grouped_students
     end
     return @students
+  end
+
+  def get_sum_process_score_ratio
+    sum = 0
+    self.score_components.each do |sc|
+      sum += sc.ratio
+    end
+    return sum
+  end
+
+  def get_sum_group_score_ratio
+    sum = 0
+    self.topics.each do |topic|
+      sum += topic.ratio
+    end
+    return sum
   end
 
   # def groups
