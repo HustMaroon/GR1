@@ -1,0 +1,38 @@
+<div class="container">	
+<%= render 'admin/header' %>
+	<div class="row" style="padding-top: 50px">
+	  <div class="col-md-3"></div>
+	  <div class="col-md-6">
+	    <div class="panel panel-headline">
+	                <div class="panel-heading">
+	                  <h3 class="panel-title">Cập nhật thông tin lớp học</h3>
+	                  <p class="panel-subtitle"><%= @sclass.sclass_id %>-<%= @sclass.course.name %></p>
+	                </div>
+	                <div class="panel-body">
+										<%= form_for @sclass do |f| %>
+
+											<%= f.label :sclass_id, "Mã lớp" %>
+											<%= f.text_field :sclass_id, value: @sclass.sclass_id, class: 'form-control' %>
+
+											<%= f.label :course, "Mã học phần" %>
+											<%= f.text_field :course, value: @sclass.course.course_id, class: 'form-control' %>
+
+											<%= f.label :teacher, "Giảng viên" %>
+											<%= f.text_field :teacher, value: @sclass.teacher.email, class: 'form-control' %>
+
+											<%= f.label :room, "Phòng học" %>
+											<%= f.text_field :room, value: @sclass.room, class: 'form-control' %>
+
+											<%= f.label :start_date, "Ngày bắt đầu" %>
+											<%= f.text_field :start_date, value: @sclass.start_date, class: 'form-control' %>
+
+											<%= f.label :end_date, "Ngày kết thúc" %>
+											<%= f.text_field :end_date, value: @sclass.end_date, class: 'form-control' %>
+																						
+											<%= f.submit 'Cập nhật', class: 'btn btn-primary'%>
+										<%end%>
+	                </div>
+	              </div>
+	    </div>
+	  </div>
+</div>

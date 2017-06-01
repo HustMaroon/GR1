@@ -4,6 +4,6 @@
 	<td><%=document.description%></td>
 	<td><%= link_to File.basename(document.file.url), document.file.url unless document.file.file.nil? %></td>
 	<%if current_user.class == Teacher%>
-		<td><%=link_to 'Xóa', '#'%></td>
+		<td><%=link_to 'Xóa', sclass_document_path(@sclass, document), method: 'delete'%></td>
 	<%end%>
 <tr>

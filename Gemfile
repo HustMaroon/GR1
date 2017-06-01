@@ -32,12 +32,14 @@ gem 'chosen-rails'
 gem 'will_paginate', '~> 3.1.0'
 gem 'rinku'
 gem 'mysql2'
-gem 'rails4-autocomplete'
+# gem 'rails4-autocomplete'
+gem 'awesomplete'
 source 'https://rails-assets.org' do
   gem 'rails-assets-datetimepicker'
 end
 # bundle exec rake doc:rails generates the API under doc/api.
 gem 'sdoc', '~> 0.4.0', group: :doc
+gem 'activerecord-import'
 
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'

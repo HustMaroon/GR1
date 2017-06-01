@@ -3,7 +3,9 @@ class Student < ActiveRecord::Base
 	has_many :learnings, dependent: :destroy
 	has_many :sclasses, through: :learnings
 	has_many :groups, -> { distinct }, through: :learnings
+
 	has_secure_password
+
 
 	def self.search(search)
   		if search

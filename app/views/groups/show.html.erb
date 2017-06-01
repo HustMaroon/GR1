@@ -10,7 +10,7 @@
     </ul>
 <!-- add member form -->
     <%=form_tag sclass_group_add_member_path(@sclass, @group), remote: true do%>
-      <%=autocomplete_field_tag :student_name,'', autocomplete_student_name_sclass_groups_path(@sclass), placeholder: 'Họ tên' %>
+      <%=text_field_tag :student_name,'', placeholder: 'Họ tên, mssv...' %>
       <%=submit_tag 'Thêm thành viên', class: 'btn btn-primary' %>
     <%end%>
 <!-- end add member form -->
@@ -69,7 +69,13 @@
                   </table>
                 </div>
               </div>
+              <ul id = 'student-list' class="hidden">
+                <%@ungrouped_students.each do |student|%>
+                  <li><%= student.name%>-<%= student.std_id%>
+                <%end%>
+              </ul>
   </div>
+
   <footer>
   </footer>
 </div>
@@ -83,4 +89,28 @@
       $("#score-form-"+i).removeClass('hidden');
     })
   })
+</script>
+
+<script type="text/javascript">
+  var listItems = document.getElementById('student-list').getElementsByTagName('li');
+
+  var myArray = map(listItems, getText);
+  $( "#student_name" ).autocomplete({
+      source: myArray
+    });
+
+  function map(arrayLike, fn) {
+      var ret = [], i = -1, len = arrayLike.length;
+      while (++i < len) ret[i] = fn(arrayLike[i]);
+      return ret;
+  }
+
+  function getText(node) {
+      if (node.nodeType === 3) return node.data;
+      var txt = '';
+      if (node = node.firstChild) do {
+          txt += getText(node);
+      } while (node = node.nextSibling);
+      return txt;
+  }
 </script>

@@ -14,7 +14,7 @@ class Sclass < ActiveRecord::Base
   has_many :missed_logs, through: :schedules
   has_many :points, through: :score_tables
   has_many :bonus, dependent: :destroy
-  scope :opening_classes, -> {where("start_date <= ? AND end_date >= ?", Date.today, Date.today)}
+  scope :opening_classes, -> {where("end_date >= ?", Date.today)}
 
 	def self.search(search)
   		if search
@@ -27,11 +27,13 @@ class Sclass < ActiveRecord::Base
   def make_schedules(weekday, first_lesson,last_lesson, start_date, end_date)
     start_date = Date.strptime(start_date, '%d/%m/%Y')
     end_date = Date.strptime(end_date, '%d/%m/%Y')
-    wdays = weekday.split(',').map{|i| i.to_i}
+    wdays = weekday.split(',').map{|i| i.to_i-1 }
     days = (start_date..end_date).to_a.select{|k| wdays.include?(k.wday)}
     days.each do |day|
-      schedule = self.schedules.build(date: day, first_lesson: first_lesson.to_i, last_lesson: last_lesson.to_i) 
-      schedule.save
+      # schedule = self.schedules.build(date: day, first_lesson: first_lesson.to_i, last_lesson: last_lesson.to_i) 
+      # schedule.save
+      sql = "INSERT INTO schedules (sclass_id, date, first_lesson, last_lesson, created_at, updated_at) VALUES ('#{self.id}', '#{day}', '#{first_lesson.to_i}', '#{last_lesson.to_i}', '#{Time.now.to_s(:db)}', '#{Time.now.to_s(:db)}')"
+      records_array = ActiveRecord::Base.connection.execute(sql)
     end
   end
 

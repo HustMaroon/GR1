@@ -14,7 +14,7 @@ class DocumentsController < ApplicationController
 	end
 
 	def destroy
-		doc = Document.find(parmam[:id])
+		doc = Document.find(params[:id])
 		doc.destroy
 		redirect_to :back
 	end

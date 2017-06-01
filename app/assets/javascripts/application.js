@@ -21,4 +21,4 @@
 //= require klorofil
 //= require datetimepicker
 //= require jquery-ui
-//= require autocomplete-rails
+//= require awesomplete

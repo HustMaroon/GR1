@@ -18,4 +18,5 @@
  *= require vendor/icon-sets
  *= require main.min
  *= require datetimepicker
+ *= require awesomplete
  */

@@ -4,11 +4,12 @@ class Group < ActiveRecord::Base
   has_many :learnings
   has_many :students, through: :learnings
   has_many :reports
+  # has_one :sclass, through: :learnings
   # def days_to_deadline
   # 	(self.deadline - Date.today).to_i
   # end
-  def add_member(student)
-    self.students << student unless self.students.exists?(student.id)
+  def add_member(learning)
+    learning.update_attributes(group: self) unless self.students.exists?(learning.student.id)
   end
 
   def sclass

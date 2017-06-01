@@ -1,32 +1,73 @@
-  <!-- Modal -->
-<div class="modal fade" id="groupModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-        <h4 class="modal-title" >Tạo nhóm</h4>
-      </div>
-      <div class="modal-body">
-        <%=form_for :group do |f|%>
-          <%=f.label :name, "Tên nhóm:"%>
-          <%= f.text_field :name, class: 'form-control' %>
+<%=form_for :group do |f|%>
+  <%=f.label :name, "Tên nhóm:"%>
+  <%= f.text_field :name, required: true, class: 'form-control' %>
+	
+	<%= f.label :students, "Sinh viên:"%>
+  <%= f.text_field :students, required: true, class: 'form-control' %>
 
-          <%=f.label :students, 'Sinh viên' %>
-          <%=f.select(:students, @students.map{|f| "#{f.name}-#{f.std_id}"},
-           {}, {multiple: true, class: 'selectpicker'})%>
+  <%=f.submit "Tạo nhóm", class:"btn btn-primary"%>
+<%end%>
+<ul id = 'student-list' class="hidden">
+  <%@students.each do |student|%>
+    <li><%= student.name%>-<%= student.std_id%>
+  <%end%>
+</ul>
 
-          <%=f.submit "Tạo nhóm", class:"btn btn-primary"%>
-        <%end%>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-      </div>
-    </div>
-  </div>
-</div>
+<script type="text/javascript">
+	function split( val ) {
+      return val.split( /,\s*/ );
+    }
+  function extractLast( term ) {
+      return split( term ).pop();
+    }
+  var listItems = document.getElementById('student-list').getElementsByTagName('li');
 
-  <script>
-    $('.selectpicker').chosen({
-      width: '100%',
-      allow_multiple_select: 'true'})
-  </script>
+  var myArray = map(listItems, getText);
+
+  function map(arrayLike, fn) {
+      var ret = [], i = -1, len = arrayLike.length;
+      while (++i < len) ret[i] = fn(arrayLike[i]);
+      return ret;
+  }
+
+  function getText(node) {
+      if (node.nodeType === 3) return node.data;
+      var txt = '';
+      if (node = node.firstChild) do {
+          txt += getText(node);
+      } while (node = node.nextSibling);
+      return txt;
+  }
+ 
+    $( "#group_students" )
+      // don't navigate away from the field on tab when selecting an item
+      .on( "keydown", function( event ) {
+        if ( event.keyCode === $.ui.keyCode.TAB &&
+            $( this ).autocomplete( "instance" ).menu.active ) {
+          event.preventDefault();
+        }
+      })
+      .autocomplete({
+        minLength: 0,
+        source: function( request, response ) {
+          // delegate back to autocomplete, but extract the last term
+          response( $.ui.autocomplete.filter(
+           myArray, extractLast( request.term ) ) );
+        },
+        focus: function() {
+          // prevent value inserted on focus
+          return false;
+        },
+        select: function( event, ui ) {
+          var terms = split( this.value );
+          // remove the current input
+          terms.pop();
+          // add the selected item
+          terms.push( ui.item.value );
+          // add placeholder to get the comma-and-space at the end
+          terms.push( "" );
+          this.value = terms.join( ", " );
+          return false;
+        }
+      });
+</script>

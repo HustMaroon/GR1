@@ -1,7 +1,6 @@
 class GroupsController < ApplicationController
 	before_action :logged_in_user
 	before_action :login_as_teacher, only:[:new, :create, :destroy, :remove_member, :update_group_point]
-	autocomplete :student, :name, :display_value => :name_and_id
 
 	def new
 	end
@@ -10,18 +9,22 @@ class GroupsController < ApplicationController
 		sclass = Sclass.find(params[:sclass_id])
 		group = sclass.groups.build(group_params)
 		if group.save
-			unless params[:group][:students].empty?
-				params[:group][:students].each do |st|
-					student = Student.find_by(std_id: st.split('-')[1]) unless st.empty?
-					learning = Learning.find_by(sclass: sclass, student: student)
-					learning.update_attributes(group: group) unless learning.nil?
+			student_arr = params[:group][:students].split(',')
+			student_arr.pop
+			student_arr.each do |student|
+				student_id = student.delete(' ').split('-')[1] #get student id
+				student = Student.find_by(std_id: student_id)
+				unless student.nil?
+					learning = sclass.learnings.find_by(student: student)
+					group.add_member(learning)
 				end
-				new_group_assign_noti group				
 			end
+			flash[:success] = "Tạo nhóm thành công"
+			redirect_to sclass_group_path(sclass, group)
 		else
 			flash[:warning] = "Không thể tạo nhóm mới"
+			redirect_to :back
 		end
-		redirect_to :back
 	end
 
 	def index
@@ -63,7 +66,8 @@ class GroupsController < ApplicationController
 		@sclass = Sclass.find(params[:sclass_id])
 		@group = Group.find(params[:group_id])
 		@student = Student.find_by(std_id: params[:student_name].split('-')[1])
-		@group.add_member(@student) if !(@student.nil?)
+		learning = @sclass.learnings.find_by(student: @student)
+		@group.add_member(learning) unless learning.nil?
 		respond_to do |format|
 			format.html{redirect_to :back}
 			format.js
@@ -93,7 +97,7 @@ class GroupsController < ApplicationController
 
 private
 	def group_params
-		params.require(:group).permit(:name, :topic)
+		params.require(:group).permit(:name, :sclass_id)
 	end
 
 end

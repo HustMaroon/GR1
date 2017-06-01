@@ -79,7 +79,7 @@
                 <div class="panel-body">
                   <ul class="list-unstyled task-list">
                     <li>
-                      <p>Số buổi đã học <span class="label-percent"><%=@sclass.get_remaining_lessons%>/<%=@sclass.schedules.count%></span></p>
+                      <p>Số buổi đã học <span class="label-percent"><%=@sclass.get_learned_lessons%>/<%=@sclass.schedules.count%></span></p>
                       <div class="progress progress-xs">
                         <div class="progress-bar progress-bar-danger" role="progressbar" aria-valuenow="<%=@lessons_in_percentage%>" aria-valuemin="0" aria-valuemax="100" style="width: <%=@lessons_in_percentage%>%">
                           <span class="sr-only"><%=@lessons_in_percentage%> Complete</span>
